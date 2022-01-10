@@ -1,0 +1,161 @@
+@charset "utf-8";
+/* navigation module */
+
+// button image
+.prev-btn {
+  background-image: url(/icon/icon-arrow-left.png);
+  width: 22px;
+  height: 22px;
+}
+
+.more-btn {
+  background-image: url(/icon/icon-more-vertical.png);
+  width: 24px;
+  height: 24px;
+}
+
+.search-btn {
+  background-image: url(/icon/icon-search.png);
+  width: 24px;
+  height: 24px;
+}
+
+[class^="top-"] {
+  background-color: #fff;
+}
+
+.top-basic-nav,
+.top-upload-nav,
+.top-chat-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $line-color;
+  padding: 1.2rem 1.2rem 1.2rem 1.6rem;
+}
+
+.top-search-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $line-color;
+  padding: 1.2rem 1.9rem .8rem;
+  .prev-btn { margin-right: 20px; }
+  form {
+    width: 100%;
+    input {
+      font-size: 1.4rem;
+      width: 100%;
+      border-radius: 15px;
+      border: none;
+      background-color: $white-gray-color;
+      padding: .7rem 0 .7rem 1.6rem;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+.top-main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $line-color;
+  padding: 1.2rem 1.6rem;
+  .top-nav-text {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+}
+
+.top-chat-nav {
+  div {
+    display: flex;
+    align-items: center;
+    .top-nav-text {
+      font-size: 1.4rem;
+      font-weight: 500;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.tab-menu {
+  background-color: #fff;
+  border-top: 1px solid $line-color;
+  padding: 12px 6px 6px;
+  ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    li {
+      width: 84px;
+      text-align: center;
+      // 공통 속성
+      a { color: $gray-color; }
+      a.on, a:hover { color: $base-color; }
+      a::before { margin: 0 auto 4px; }
+      // 개별 속성
+      .home-tab::before {
+        @include create_visual_class(
+          "/icon/icon-home.svg",
+          24px, 24px
+        );
+      }
+      .chat-tab::before {
+        @include create_visual_class(
+          "/icon/icon-message-circle.svg",
+          24px, 24px
+        );
+      }
+      .post-tab::before {
+        @include create_visual_class(
+          "/icon/icon-edit.svg",
+          24px, 24px
+        );
+      }
+      .profile-tab::before {
+        @include create_visual_class(
+          "/icon/icon-user.svg",
+          24px, 24px
+        );
+      }
+      
+      .home-tab.on::before { background-image: url(/icon/icon-home-fill.svg); }
+      .chat-tab.on::before { background-image: url(/icon/icon-message-circle-fill.png) }
+      .post-tab.on::before { background-image: url(/icon/icon-edit-fill.svg); }
+      .profile-tab.on::before { background-image: url(/icon/icon-user-fill.png); }
+      
+      .home-tab:hover::before { background-image: url(/icon/icon-home-fill.svg); }
+      .chat-tab:hover::before { background-image: url(/icon/icon-message-circle-fill.png) }
+      .post-tab:hover::before { background-image: url(/icon/icon-edit-fill.svg); }
+      .profile-tab:hover::before { background-image: url(/icon/icon-user-fill.png); }
+    }
+  }
+}
+
+.comment {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid $line-color;
+  padding: 1.3rem 2rem 1.2rem 1.6rem;
+  form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    input {
+      width: 79%;
+      font-size: 1.4rem;
+      border: none;
+      padding: 1rem 1.8rem;
+      &:focus { outline: none; }
+      &::placeholder { color: $light-gray-color; }
+    }
+    button {
+      color: $light-gray-color;
+      font-size: 1.4rem;
+    }
+  }
+}
