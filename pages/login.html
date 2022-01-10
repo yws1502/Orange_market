@@ -9,13 +9,13 @@
 </head>
 <body>
   <!-- Splash Screen start -->
-  <section class="splash hidden">
+  <section class="splash">
     <h1><img src="/images/full-logo.png" alt="감귤마켓"></h1>
   </section>
   <!-- Splash Screen end -->
 
   <!-- login select start -->
-  <section class="select-login">
+  <section class="select-login hidden">
     <h2 class="text-hide">로그인 방식 선택 혹은 회원가입 바로가기 화면</h2>
     <div class="sns-btn-container">
       <ul>
@@ -31,7 +31,7 @@
       </ul>
       <div class="btn-wrap">
         <button type="button" class="login-btn">이메일로 로그인</button>
-        <button type="button" class="join-btn">회원가입 로그인</button>
+        <button type="button" class="join-btn">회원가입</button>
       </div>
     </div>
   </section>
@@ -47,7 +47,6 @@
         type="email"
         id="Email"
         name="email"
-        pattern=".+@globex\.com"
         required
         >
         <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
@@ -57,11 +56,11 @@
         <input type="password" id="Pwd" name="password" required>
         <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
       </fieldset>
+      <button type="submit" class="l-disabled-button">로그인</button>
     </form>
-    <button type="submit" class="l-disabled-button">다음</button>
     <button type="button" class="link-btn-join">이메일로 회원가입</button>
   </section>
-
   <!-- login page end -->
+  <script src="/js/login.js"></script>
 </body>
 </html>
