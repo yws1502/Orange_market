@@ -21,3 +21,34 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin input_module {
+  fieldset {
+    label {
+      @include font_module(1.2rem, 500);
+      display: block;
+      color: $gray-color;
+      margin-bottom: 10px;
+    }
+    input {
+      border: none;
+      border-bottom: 1px solid $line-color;
+      font-size: 1.4rem;
+      width: 100%;
+      padding: 8px 0;
+      &:focus {
+        outline: none;
+        border-color: $base-color;
+      }
+    }
+  }
+  fieldset + fieldset { margin-top: 16px;}
+  fieldset.err input { border-color: red; }
+  fieldset.err .err-msg { display: block; }
+  .err-msg {
+    display: none;
+    border-color:  red;
+    color: red;
+    margin-top: 6px;
+  }
+}
