@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>peach market module manual</title>
+  <link rel="stylesheet" href="/css/module_sample.css">
+</head>
+<body>
+  <!-- container width ->  -->
+  <div class="module-container">
+    <!-- 바로가기 start -->
+    <section class="category">
+      <h2 class="module-title">모듈 바로가기</h2>
+      <nav>
+        <ul>
+          <li><a href="#buttonModule">button-module</a></li>
+          <li><a href="#navModule">nav-module</a></li>
+          <li><a href="#userModule">user-module</a></li>
+          <li><a href="#postModule">post-module</a></li>
+        </ul>
+      </nav>
+    </section>
+    <!-- 바로가기 end -->
+
+    <!-- button-module start -->
+    <!-- button-module start -->
+    <section id="buttonModule">
+      <article class="large-btn-wrap">
+        <h2 class="module-title">Large</h2>
+        <h3>l-button : </h3>
+        <button type="button" class="l-button">다음</button>
+
+        <h3>l-disabled-button : </h3>
+        <button type="button" class="l-disabled-button">다음</button>
+
+        <p>322 x 44</p>
+      </article>
+      <article class="medium-large-btn-wrap">
+        <h2 class="module-title">Mideum Large</h2>
+        <h3>ml-button : </h3>
+        <button type="button" class="ml-button">검색하기</button>
+        <button type="button" class="ml-button">이전 페이지</button>
+
+        <p>120 x 44</p>
+      </article>
+
+      <article class="medium-btn-wrap">
+        <h2 class="module-title">Mideum</h2>
+        <h3>m-button :</h3>
+        <button type="button" class="m-button">팔로우</button>
+        
+        <h3>m-disabled-button :</h3>
+        <button type="button" class="m-disabled-button">팔로우</button>
+        
+        <h3>m-activ-button :</h3>
+        <button type="button" class="m-activ-button">언팔로우</button>
+
+        <p><ins>120 x 34</ins> <del>100 x 34 친구도 있는데 width: 25.65%로 덮어서 사용하시면 됩니다!</del></p>
+      </article>
+
+      <article class="medium-small-btn-wrap">
+        <h2 class="module-title">Mideum Small</h2>
+        <h3>ms-button :</h3>
+        <button type="button" class="ms-button">저장</button>
+        
+        <h3>ms-disabled-button :</h3>
+        <button type="button" class="ms-disabled-button">저장</button>
+
+        <p>90 x 32</p>
+      </article>
+      
+      <article class="small-btn-wrap">
+        <h2 class="module-title">Small</h2>
+        <h3>s-button :</h3>
+        <button type="button" class="s-button">팔로우</button>
+        
+        <h3>s-activ-button :</h3>
+        <button type="button" class="s-disabled-button">취소</button>
+
+        <p>56 x 28</p>
+      </article>
+    </section>
+    <!-- button-module end -->
+
+    <!-- nav-module start -->
+    <!-- nav-module start -->
+    <section id="navModule">
+      <h2 class="module-title"  style="font-size: 20px; font-weight: 700; text-align: center; margin: 20px;">Top Nav</h2>
+      <h3>top-basic-nav :</h3>
+      <header class="top-basic-nav">
+        <button type="button" class="prev-btn">
+          <span class="text-hide">이전으로 가기 버튼</span>
+        </button>
+        <button type="button" class="more-btn">
+          <span class="text-hide">설정 더보기 버튼</span>
+        </button>
+      </header>
+
+      <h3>top-search-nav :</h3>
+      <header class="top-search-nav">
+        <button type="button" class="prev-btn">
+          <span class="text-hide">이전으로 가기 버튼</span>
+        </button>
+        <form action="" method="get">
+          <label for="searchInput" class="text-hide">계정 검색 하기</label>
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="계정 검색"
+          >
+        </form>
+      </header>
+
+      <h3>top-main-nav :</h3>
+      <header class="top-main-nav">
+        <h2 class="top-nav-text">감귤마켓 피드</h2>
+        <a href="#none" class="search-btn">
+          <span class="text-hide">검색 버튼</span>
+        </a>
+      </header>
+
+      <h3>top-upload-nav :</h3>
+      <header class="top-upload-nav">
+        <button type="button" class="prev-btn">
+          <span class="text-hide">이전으로 가기 버튼</span>
+        </button>
+        <button type="button" class="ms-disabled-button">저장</button>
+      </header>
+
+      <h3>top-chat-nav :</h3>
+      <header class="top-chat-nav">
+        <div>
+          <button type="button" class="prev-btn">
+            <span class="text-hide">이전으로 가기 버튼</span>
+          </button>
+          <h2 class="top-nav-text">애월읍 위니브 감귤농장</h2>
+        </div>
+        <button type="button" class="more-btn">
+          <span class="text-hide">설정 더보기 버튼</span>
+        </button>
+      </header>
+
+      <h2 class="module-title">Bottom tab</h2>
+      <h3>tab-menu :</h3>
+      <nav class="tab-menu">
+        <ul>
+          <li><a href="#none" class="home-tab">홈</a></li>
+          <li><a href="#none" class="chat-tab">채팅</a></li>
+          <li><a href="#none" class="post-tab">게시물 작성</a></li>
+          <li><a href="#none" class="profile-tab">프로필</a></li>
+        </ul>
+      </nav>
+      <p>해당 tab에 <strong style="font-weight: 800;">on</strong> class를 붙이면 색이 바뀝니다</p>
+
+      <h3>comment : </h3>
+      <div class="comment">
+        <a href="#none"><img src="/images/Ellipse_mid.png" alt="프로필 사진"></a>
+        <form action="" method="get">
+          <label for="commentInput" class="text-hide">댓글 입력창</label>
+          <input
+            id="commentInput"
+            type="text"
+            placeholder="댓글 입력하기..."
+          >
+          <button type="submit">게시</button>
+        </form>
+      </div>
+    </section>
+    <!-- nav-module end -->
+
+    <!-- user-module start -->
+    <!-- user-module start -->
+    <section id="userModule">
+      <h2 class="module-title" style="font-size: 20px; font-weight: 700; text-align: center; margin: 20px;">User module</h2>
+      <ul>
+        <h3>user-search :</h3>
+        <li class="user-search">
+          <a href="#none">
+            <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+            <p>
+              <strong>애월읍 위니브 감귤농장</strong>
+              <span>@ weniv_Mandarin</span>
+            </p>
+          </a>
+        </li>
+      </ul>
+
+      <ul>
+        <h3>user-follow :</h3>
+        <li class="user-follow">
+          <a href="#none">
+            <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+            <p>
+              <strong>애월읍 위니브 감귤농장</strong>
+              <span>@ weniv_Mandarin</span>
+            </p>
+          </a>
+          <button type="button" class="s-button">팔로우</button>
+        </li>
+      </ul>
+    </section>
+    <!-- user-module end -->
+
+    <!-- post-module start -->
+    <!-- post-module start -->
+    <section id="postModule">
+      <h2 class="module-title" style="font-size: 20px; font-weight: 700; text-align: center; margin: 20px;">POST module</h2>
+      <h3>home-post :</h3>
+      <article class="home-post">
+        <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
+        <div>
+          <p class="content-wrap">
+            <a href="#none">
+              <strong>애월읍 위니브 감귤농장</strong>
+              <span>@ weniv_Mandarin</span>
+            </a>
+            <button type="button" class="more-btn">
+              <span class="text-hide">설정 더보기 버트</span>
+            </button>
+          </p>
+          <p class="post-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati beatae ipsam quaerat aperiam, dolor sapiente alias nihil dignissimos asperiores ex ipsa esse cum distinctio nostrum illum voluptatem ratione, earum ad?</p>
+          <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
+          <button 
+            type="button"
+            class="heart-btn"
+            data-count="58"
+          >58</button>
+          <button
+            type="button"
+            class="comment-btn"
+            data-count="12"
+          >12</button>
+          <span class="upload-date">2020년 10월 21일</span>
+        </div>
+      </article>
+      <p>해당 하트, 커멘트 버튼에 <strong style="font-weight: 700;">on</strong> class를 붙이면 색이 바뀝니다</p>
+      <p>일부러 width값을 안줘서 피그마에 있는 친구랑 조금 다를 수 있습니다! 원하는 위치에 모듈 사용했는데 원하는 모양이 안나오면 말씀해주세요! </p>
+
+      <h3>home-post-onlytext :</h3>
+      <article class="home-post-onlytext">
+        <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
+        <div>
+          <p class="content-wrap">
+            <a href="#none">
+              <strong>애월읍 위니브 감귤농장</strong>
+              <span>@ weniv_Mandarin</span>
+            </a>
+            <button type="button" class="more-btn">
+              <span class="text-hide">설정 더보기 버트</span>
+            </button>
+          </p>
+          <p class="post-content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati beatae ipsam quaerat aperiam, dolor sapiente alias nihil dignissimos asperiores ex ipsa esse cum distinctio nostrum illum voluptatem ratione, earum ad?</p>
+          <button 
+            type="button"
+            class="heart-btn"
+            data-count="58"
+          >58</button>
+          <button
+            type="button"
+            class="comment-btn"
+            data-count="12"
+          >12</button>
+          <span class="upload-date">2020년 10월 21일</span>
+        </div>
+      </article>
+      <p>해당 하트, 커멘트 버튼에 <strong style="font-weight: 700;">on</strong> class를 붙이면 색이 바뀝니다</p>
+      <p>일부러 width값을 안줘서 피그마에 있는 친구랑 조금 다를 수 있습니다! 원하는 위치에 모듈 사용했는데 원하는 모양이 안나오면 말씀해주세요! </p>
+
+      <h3>product :</h3>
+      <article class="product">
+        <a href="#none">
+          <img src="/images/product-img-example.png" alt="상품 이미지">
+          <strong>애월읍 노지 감귤</strong>
+          <span>35,000원</span>
+        </a>
+      </article>
+    </section>
+    <!-- post-module end -->
+  </div>
+</body>
+</html>
