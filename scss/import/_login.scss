@@ -116,7 +116,7 @@
     }
     fieldset + fieldset { margin-top: 16px;}
     fieldset.err input { border-color: red; }
-    fieldset.err + .err-msg { display: block; }
+    fieldset.err .err-msg { display: block; }
     .err-msg {
       display: none;
       border-color:  red;
