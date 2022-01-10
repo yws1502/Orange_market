@@ -15,7 +15,7 @@
   <!-- Splash Screen end -->
 
   <!-- login select start -->
-  <section class="select-login hidden">
+  <section class="select-login">
     <h2 class="text-hide">로그인 방식 선택 혹은 회원가입 바로가기 화면</h2>
     <div class="sns-btn-container">
       <ul>
@@ -38,12 +38,18 @@
   <!-- login select end -->
 
   <!-- login page start -->
-  <section class="login">
+  <section class="login hidden">
     <h2>로그인</h2>
     <form action="" method="post">
       <fieldset class="email-input">
         <label for="Email">이메일</label>
-        <input type="text" id="Email" name="email" required>
+        <input
+        type="email"
+        id="Email"
+        name="email"
+        pattern=".+@globex\.com"
+        required
+        >
         <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
       </fieldset>
       <fieldset class="pwd-input">
