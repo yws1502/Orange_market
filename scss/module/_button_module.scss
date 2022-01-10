@@ -1,0 +1,68 @@
+@charset "utf-8";
+/* button module */
+
+// 공통속성
+[class$=button] {
+  border: none;
+  border-radius: 30px;
+  color: $gray-color;
+  transition: .2s linear;
+}
+
+// button color 설정
+.l-button,
+.ml-button,
+.m-button,
+.ms-button,
+.s-button {
+  background-color: $base-color;
+  color: #fff;
+  &:active {
+    background-color: $disable-color;  
+  }
+}
+
+.l-disabled-button,
+.m-disabled-button,
+.ms-disabled-button {
+  background-color: $disable-color;
+  color: #fff;
+  pointer-events: none;
+}
+
+
+// button size
+// large
+[class^="l-"] {
+  font-size: 1.4rem;
+  height: 4.4rem;
+  width: 100%;
+}
+
+// mideum large
+[class^="ml-"] {
+  font-size: 1.4rem;
+  height: 4.4rem;
+  width: 30.76%;
+}
+
+// mideum
+[class^="m-"] {
+  font-size: 1.4rem;
+  height: 3.4rem;
+  width: 30.76%;
+}
+
+// mideun small
+[class^="ms-"] {
+  font-size: 1.4rem;
+  height: 3.2rem;
+  width: 23%;
+}
+
+// small
+[class^="s-"] {
+  font-size: 1.2rem;
+  height: 2.8rem;
+  width: 14.4%;
+}
