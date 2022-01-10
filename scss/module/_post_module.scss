@@ -1,0 +1,109 @@
+@charset "utf-8";
+/* post module */
+
+.home-post,
+.home-post-onlytext {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  .avatar-img {
+    width: 4.2rem;
+    height: 4.2rem;
+    margin-right: 1.2rem;
+  }
+  div {
+    .content-wrap {
+      display: flex;
+      justify-content: space-between;
+      margin: 4px 0 16px;
+      a {
+        display: flex;
+        flex-direction: column;
+        gap: .4rem;
+        strong {
+          font-size: 1.4rem;
+          font-weight: 500;
+          color: #000;
+        }
+        span {
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: $gray-color;
+        }
+        &:active { color: $base-color; }
+        &:active strong { color: inherit; }
+      }
+    }
+    .post-content {
+      font-size: 1.4rem;
+      line-height: 17px;
+      margin-bottom: 1.6rem;
+    }
+    .post-img {
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .heart-btn{
+      @include font_module(1.2rem, 400);
+      color: $gray-color;
+      margin-bottom: 2rem;
+      &::before {
+        @include create_visual_class(
+          "/icon/icon-heart.png",
+          19px, 17px, inline-block);
+        vertical-align: sub;
+        margin-right: 6px;
+      }
+      &.on:before { background-image: url("/icon/icon-heart-active.png"); }
+    }
+    .comment-btn{
+      @include font_module(1.2rem, 400);
+      color: $gray-color;
+      margin-bottom: 2rem;
+      &::before {
+        @include create_visual_class(
+          "/icon/icon-message-circle.png",
+          19px, 17px, inline-block);
+        vertical-align: sub;
+        margin-right: 6px;
+      }
+      &.on:before { background-image: url("/icon/icon-message-circle-fill.png"); }
+    }
+    button + button {
+      margin-left: 1.8rem;
+    }
+    .upload-date {
+      display: block;
+      font-size: 1rem;
+      color: $gray-color;
+      margin-bottom: .4rem;
+    }
+  }
+}
+
+
+.product {
+  background-color: #fff;
+  width: fit-content;
+  a {
+    color: #000;
+    &:active {
+      color: $base-color;
+    }
+    img {
+      display: block;
+      border-radius: 5px;
+      margin-bottom: .6rem;
+    }
+    strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: .4rem;
+    }
+    span {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: $base-color;
+    }
+  }
+}
