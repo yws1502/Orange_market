@@ -21,6 +21,11 @@ time, mark, audio, video {
 	font: inherit;
 	vertical-align: baseline;
 }
+
+html {
+	font-size: 10px;
+}
+
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
@@ -44,6 +49,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a {
+	text-decoration: none;
+}
 .text-hide {
     overflow: hidden;
     position: absolute;
@@ -55,7 +63,7 @@ table {
     padding: 0;
 }
 button {
-	background: none;
+	background: #FFF;
 	color: inherit;
 	border: none;
 	padding: 0;

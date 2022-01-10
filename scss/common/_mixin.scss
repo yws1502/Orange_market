@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* mixin */
+
+@mixin create_visual_class($image_path, $x, $y, $display:block) {
+  content: "";
+  display: $display;
+  background-image: url($image_path);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: $x;
+  height: $y;
+}
+
+@mixin font_module($font-size, $font-weight:500) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin sl-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
