@@ -1,0 +1,29 @@
+@charset "utf-8";
+/* user module */
+
+.user-search,
+.user-follow {
+  background-color: #FFF;
+  a {
+    display: flex;
+    color: #000;
+    &:active { color: $base-color; }
+    img { margin-right: 12px; }
+    p {
+      display: flex; 
+      flex-direction: column;
+      justify-content: space-around;
+      strong { @include font_module(1.4rem); }
+      span {
+        @include font_module(1.2rem, 400);
+        color: $gray-color;
+      }
+    }
+  }
+}
+
+.user-follow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
