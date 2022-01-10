@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* login page */
+
+// 초기 화면
+.splash {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// login 선택 화면
+.select-login {
+  position: relative;
+  height: 100vh;
+  background-color: $light-base-color;
+  background-image: url(/images/symbol-logo-W.png);
+  background-repeat: no-repeat;
+  background-position: 50% 30%;
+}
+.sns-btn-container {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #FFF;
+  padding: 5em 3.4em 10em;
+  li {
+    button {
+      @include font_module(1.4rem, 400);
+      position: relative;
+      color: $gray-color;
+      width: 100%;
+      padding: 1.3em 0;
+      border: 1.5px solid #000;
+      border-radius: 25px;
+    }
+    .kakao_login {
+      border-color: #F2C94C;
+      &:hover { color: #F2C94C}
+      &::before {
+        @include create_visual_class("/icon/kakao.png", 25px, 25px);
+        position: absolute;
+        left: 17px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    .google_login {
+      border-color: $gray-color;
+      &:hover { color: $gray-color}
+      &::before {
+        @include create_visual_class("/icon/google.png", 25px, 25px);
+        position: absolute;
+        left: 17px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+    .facebook_login {
+      border-color: #2D9CDB;
+      &:hover { color: #2D9CDB}
+      &::before {
+        @include create_visual_class("/icon/facebook.png", 25px, 25px);
+        position: absolute;
+        left: 17px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+  li + li { margin-top: 1em; }
+  .btn-wrap {
+    @include font_module(1.2rem, 400);
+    color: $gray-color;
+    text-align: center;
+    margin-top: 2em;
+    .login-btn::after {
+      content: "";
+      display: inline-block;
+      width: 1px;
+      height: 15px;
+      background-color: $light-gray-color;
+      vertical-align: -3px;
+      margin: 0 1.2em;
+    }
+  }
+}
+
+// login input 부분
+.login {
+  padding: 0 3.4em;  
+  h2 {
+    @include font_module(2.8rem, 600);
+    text-align: center;
+    margin-top: 50px;
+  }
+  form {
+    margin: 40px 0 30px;
+    fieldset {
+      label {
+        @include font_module(1.2rem, 500);
+        display: block;
+        color: $gray-color;
+        margin-bottom: 10px;
+      }
+      input {
+        border: none;
+        border-bottom: 1px solid $line-color;
+        font-size: 1.4rem;
+        width: 100%;
+        padding: 8px 0;
+        &:focus { outline: none; }
+      }
+    }
+    fieldset + fieldset { margin-top: 16px;}
+    fieldset.err input { border-color: red; }
+    fieldset.err + .err-msg { display: block; }
+    .err-msg {
+      display: none;
+      border-color:  red;
+      color: red;
+      margin-top: 6px;
+    }
+  }
+  .link-btn-join {
+    display: block;
+    font-size: 12px;
+    color: $gray-color;
+    margin: 20px auto 0;
+  }
+}
