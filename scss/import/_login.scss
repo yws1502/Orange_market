@@ -76,6 +76,9 @@
     color: $gray-color;
     text-align: center;
     margin-top: 2em;
+    *:hover {
+      color: $base-color;
+    }
     .login-btn::after {
       content: "";
       display: inline-block;
