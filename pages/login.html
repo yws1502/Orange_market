@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange market | login</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Splash Screen start -->
+  <section class="splash hidden">
+    <h1><img src="/images/full-logo.png" alt="감귤마켓"></h1>
+  </section>
+  <!-- Splash Screen end -->
+
+  <!-- login select start -->
+  <section class="select-login hidden">
+    <h2 class="text-hide">로그인 방식 선택 혹은 회원가입 바로가기 화면</h2>
+    <div class="sns-btn-container">
+      <ul>
+        <li>
+          <button type="button" class="kakao_login">카카오톡 계정으로 로그인</button>
+        </li>
+        <li>
+          <button type="button" class="google_login">구글 계정으로 로그인</button>
+        </li>
+        <li>
+          <button type="button" class="facebook_login">페이스북 계정으로 로그인</button>
+        </li>
+      </ul>
+      <div class="btn-wrap">
+        <button type="button" class="login-btn">이메일로 로그인</button>
+        <button type="button" class="join-btn">회원가입 로그인</button>
+      </div>
+    </div>
+  </section>
+  <!-- login select end -->
+
+  <!-- login page start -->
+  <section class="login">
+    <h2>로그인</h2>
+    <form action="" method="post">
+      <fieldset class="email-input">
+        <label for="Email">이메일</label>
+        <input type="text" id="Email" name="email" required>
+      </fieldset>
+      <fieldset class="pwd-input">
+        <label for="Pwd">비밀번호</label>
+        <input type="password" id="Pwd" name="password" required>
+      </fieldset>
+      <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
+    </form>
+    <button type="submit" class="l-disabled-button">다음</button>
+    <button type="button" class="link-btn-join">이메일로 회원가입</button>
+  </section>
+
+  <!-- login page end -->
+</body>
+</html>
