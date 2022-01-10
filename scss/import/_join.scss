@@ -3,58 +3,60 @@
 
 // common
 input::placeholder { color: $line-color }
-
+.form-container {
+  padding: 50px 34px;
+}
 // login input 부분
 .join {
-  padding: 0 3.4em;  
   h2 {
     @include font_module(2.8rem, 600);
     text-align: center;
-    margin-top: 50px;
+    margin-bottom: 40px;
   }
-  form {
-    margin: 40px 0 30px;
-    @include input_module();
+  @include input_module();
+  margin: 40px 0;
+  button {
+    margin-top: 30px;
   }
 }
 
-.create-profile {
-  padding: 0 3.4em;  
+.set-profile {
   h2 {
     @include font_module(2.8rem, 600);
     text-align: center;
-    margin-top: 50px;
+    margin-bottom: 12px;
   }
   p {
     @include font_module(1.4rem, 400);
     color: $gray-color;
     text-align: center;
-    margin-top: 12px;
+    margin-bottom: 30px;
   }
-  form {
-    margin: 40px 0 30px;
-    @include input_module();
-    .img-input-wrap {
-      input { display: none; }
-      label {
-        position: relative;
-        width: fit-content;
-        margin: 0 auto;
-        cursor: pointer;
-        &::before {
-          @include create_visual_class(
-            "/icon/upload-file.png",
-            36px, 36px
-          );
-          position: absolute;
-          bottom: 6px;
-          right: 0;
-        }
-        img { border-radius: 100%;}
+  @include input_module();
+  .img-input-wrap {
+    input { display: none; }
+    label {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto;
+      cursor: pointer;
+      &::before {
+        @include create_visual_class(
+          "/icon/upload-file.png",
+          36px, 36px
+        );
+        position: absolute;
+        bottom: 6px;
+        right: 0;
+      }
+      img {
+        width: 110px;
+        height: 110px;
+        border-radius: 100%;
       }
     }
-    button {
-      margin-top: 30px;
-    }
+  }
+  button {
+    margin-top: 30px;
   }
 }

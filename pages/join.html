@@ -10,83 +10,83 @@
 <body>
   <h1 class="text-hide">회원가입 및 프로필 설정 페이지</h1>
   <!-- join page start -->
-  <section class="join">
-    <h2>이메일로 회원가입</h2>
+  <main role="main" class="form-container">
     <form action="" method="post">
-      <fieldset class="email-input">
-        <label for="Email">이메일</label>
-        <input
-          type="email"
-          id="Email"
-          name="email"
-          placeholder="이메일 주소를 입력해 주세요."
-          required>
-          <strong class="err-msg">*이메일 형식이 맞지 않습니다.</strong>
-        </fieldset>
-        <fieldset class="pwd-input">
-          <label for="Pwd">비밀번호</label>
-          <input 
-          type="password"
-          id="Pwd"
-          name="password"
-          minlength="6"
-          placeholder="비밀번호를 설정해주세요."
-          required>
-        <strong class="err-msg">*비밀번호는 6자 이상이어야 합니다..</strong>
-      </fieldset>
-    </form>
-    <button type="submit" class="l-disabled-button">다음</button>
-  </section>
-  <!-- join page end -->
+      <section class="join">
+        <h2>이메일로 회원가입</h2>
+          <fieldset class="email-input">
+            <label for="Email">이메일</label>
+            <input
+              type="email"
+              id="Email"
+              name="email"
+              placeholder="이메일 주소를 입력해 주세요."
+              required>
+              <strong class="err-msg">*이메일 형식이 맞지 않습니다.</strong>
+            </fieldset>
+            <fieldset class="pwd-input">
+              <label for="Pwd">비밀번호</label>
+              <input 
+              type="password"
+              id="Pwd"
+              name="password"
+              minlength="6"
+              placeholder="비밀번호를 설정해주세요."
+              required>
+            <strong class="err-msg">*비밀번호는 6자 이상이어야 합니다..</strong>
+          </fieldset>
+          <button type="button" class="l-disabled-button">다음</button>
+      </section>
+      <!-- join page end -->
 
-  <!-- profile 설정 page start -->
-  <section class="create-profile hidden">
-    <h2>프로필 설정</h2>
-    <p>나중에 언제든지 변경할 수 있습니다.</p>
-    <form action="" method="post">
-      <fieldset class="img-input-wrap">
-        <label for="imgInput">
-          <img src="/images/basic-profile-img.png" alt="프로필 설정하기">
-        </label>
-        <input type="file" id="imgInput" name="profile-img">
-      </fieldset>
-      <fieldset class="username-input-wrap">
-        <label for="userName">사용자 이름</label>
-        <input
-          type="text"
-          id="userName"
-          name="username"
-          minlength="2"
-          maxlength="10"
-          placeholder="2~10자 이내여야 합니다."
-          required
-        >
-        <strong class="err-msg">글자 수를 확인해 주세요.</strong>
-      </fieldset>
-      <fieldset class="account-input-wrap">
-        <label for="accountId">계정 ID</label>
-        <input
-          type="text"
-          id="accountId"
-          name="account"
-          placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
-          required
-        >
-        <strong class="err-msg">영문,숫자,밑줄 및 마침표만 사용할 수 있습니다.</strong>
-      </fieldset>
-      <fieldset class="intro-input-wrap">
-        <label for="introID">소개</label>
-        <input
-          type="text"
-          id="introID"
-          name="intro"
-          maxlength="200"
-          placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
-        >
-      </fieldset>
-      <button type="submit" class="l-disabled-button">감귤마켓 시작하기</button>
+      <!-- profile 설정 page start -->
+      <section class="set-profile hidden">
+        <h2>프로필 설정</h2>
+        <p>나중에 언제든지 변경할 수 있습니다.</p>
+        <fieldset class="img-input-wrap">
+          <label for="imgInput">
+            <img src="/images/basic-profile-img.png" alt="프로필 설정하기">
+          </label>
+          <input type="file" id="imgInput" name="profile-img">
+        </fieldset>
+        <fieldset class="username-input-wrap">
+          <label for="userNameInput">사용자 이름</label>
+          <input
+            type="text"
+            id="userNameInput"
+            name="username"
+            minlength="2"
+            maxlength="10"
+            placeholder="2~10자 이내여야 합니다."
+            required
+          >
+          <strong class="err-msg">글자 수를 확인해 주세요.</strong>
+        </fieldset>
+        <fieldset class="account-input-wrap">
+          <label for="accountInput">계정 ID</label>
+          <input
+            type="text"
+            id="accountInput"
+            name="account"
+            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            required
+          >
+          <strong class="err-msg">영문,숫자,밑줄 및 마침표만 사용할 수 있습니다.</strong>
+        </fieldset>
+        <fieldset class="intro-input-wrap">
+          <label for="introInput">소개</label>
+          <input
+            type="text"
+            id="introInput"
+            name="intro"
+            maxlength="200"
+            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+          >
+        </fieldset>
+        <button type="submit" class="l-disabled-button">감귤마켓 시작하기</button>
+      </section>
     </form>
-  </section>
+  </main>
   <!-- profile 설정 page end -->
   <script src="/js/join.js"></script>
 </body>

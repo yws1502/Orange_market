@@ -34,10 +34,12 @@ joinLinkBtn.addEventListener("click", () => {
 
 // 로그인 input에 값 입력하면 btn 활성화
 const loginForm = loginSection.querySelector("form");
+const emailInput = loginSection.querySelector("#Email");
+const pwdInput = loginSection.querySelector("#Pwd")
 const loginBtn = loginSection.querySelector("form button");
 
-function stateHandle(event) {
-  if (event.target.value === "") {
+function stateHandle() {
+  if (emailInput.value === "" || pwdInput.value === "") {
     loginBtn.disabled = true;
     loginBtn.classList = "l-disabled-button";
   } else {
