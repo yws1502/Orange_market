@@ -9,13 +9,13 @@
 </head>
 <body>
   <!-- Splash Screen start -->
-  <section class="splash">
+  <section class="splash blur-effect">
     <h1><img src="/images/full-logo.png" alt="감귤마켓"></h1>
   </section>
   <!-- Splash Screen end -->
 
   <!-- login select start -->
-  <section class="select-login hidden">
+  <section class="select-login show-effect">
     <h2 class="text-hide">로그인 방식 선택 혹은 회원가입 바로가기 화면</h2>
     <div class="sns-btn-container">
       <ul>
@@ -40,8 +40,8 @@
   <!-- login page start -->
   <section class="login hidden">
     <h2>로그인</h2>
-    <form action="" method="post">
-      <fieldset class="email-input">
+    <form>
+      <fieldset class="email-wrap">
         <label for="Email">이메일</label>
         <input
         type="email"
@@ -49,12 +49,10 @@
         name="email"
         required
         >
-        <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
       </fieldset>
-      <fieldset class="pwd-input">
+      <fieldset class="pwd-wrap">
         <label for="Pwd">비밀번호</label>
         <input type="password" id="Pwd" name="password" required>
-        <strong class="err-msg">*이메일 또는 비밀번호가 일치하지 않습니다.</strong>
       </fieldset>
       <button type="submit" class="l-disabled-button">로그인</button>
     </form>
