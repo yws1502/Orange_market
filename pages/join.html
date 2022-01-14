@@ -11,7 +11,7 @@
   <h1 class="text-hide">회원가입 및 프로필 설정 페이지</h1>
   <!-- join page start -->
   <main role="main" class="form-container">
-    <form action="" method="post">
+    <form>
       <section class="join">
         <h2>이메일로 회원가입</h2>
           <fieldset class="email-input">
@@ -22,18 +22,29 @@
               name="email"
               placeholder="이메일 주소를 입력해 주세요."
               required>
-              <strong class="err-msg">*이메일 형식이 맞지 않습니다.</strong>
-            </fieldset>
-            <fieldset class="pwd-input">
-              <label for="Pwd">비밀번호</label>
-              <input 
-              type="password"
-              id="Pwd"
-              name="password"
-              minlength="6"
-              placeholder="비밀번호를 설정해주세요."
-              required>
+            <strong class="err-msg">*이메일 형식이 맞지 않습니다.</strong>
+          </fieldset>
+          <fieldset class="pwd-input">
+            <label for="Pwd">비밀번호</label>
+            <input 
+            type="password"
+            id="Pwd"
+            name="password"
+            minlength="6"
+            placeholder="비밀번호를 설정해주세요."
+            required>
             <strong class="err-msg">*비밀번호는 6자 이상이어야 합니다..</strong>
+          </fieldset>
+          <fieldset class="pwd-confirm-input">
+            <label for="PwdConfirm">비밀번호 확인</label>
+            <input 
+            type="password"
+            id="PwdConfirm"
+            name="passwordConfirm"
+            minlength="6"
+            placeholder="비밀번호 재확인입니다.."
+            required>
+            <strong class="err-msg">*설정한 비밀번호와 다름니다.</strong>
           </fieldset>
           <button type="button" class="l-disabled-button">다음</button>
       </section>
@@ -43,11 +54,20 @@
       <section class="set-profile hidden">
         <h2>프로필 설정</h2>
         <p>나중에 언제든지 변경할 수 있습니다.</p>
-        <fieldset class="img-input-wrap">
-          <label for="imgInput">
-            <img src="/images/basic-profile-img.png" alt="프로필 설정하기">
+        <fieldset class="image-input-wrap">
+          <label for="imageInput">
+            <img
+              class="previewImage"
+              src="/images/basic-profile-img.png"
+              alt="프로필 설정하기"
+            >
           </label>
-          <input type="file" id="imgInput" name="profile-img">
+          <input 
+            type="file"
+            id="imageInput"
+            name="image"
+            accept="image/png, image/jpeg"
+          >
         </fieldset>
         <fieldset class="username-input-wrap">
           <label for="userNameInput">사용자 이름</label>
@@ -67,7 +87,7 @@
           <input
             type="text"
             id="accountInput"
-            name="account"
+            name="accountname"
             placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
             required
           >

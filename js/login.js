@@ -56,8 +56,8 @@ loginForm.addEventListener("keyup", stateHandle)
 
 
 // 로그인 통신
-async function loginApi(e) {
-  e.preventDefault();
+async function loginApi(event) {
+  event.preventDefault();
   const user = {};
   loginInputs.forEach((el) => {user[el.name] = el.value});
   

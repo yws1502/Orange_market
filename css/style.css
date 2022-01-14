@@ -823,16 +823,16 @@ input::placeholder {
   color: #EB5757;
   margin-top: 6px;
 }
-.set-profile .img-input-wrap input {
+.set-profile .image-input-wrap input {
   display: none;
 }
-.set-profile .img-input-wrap label {
+.set-profile .image-input-wrap label {
   position: relative;
   width: fit-content;
   margin: 0 auto;
   cursor: pointer;
 }
-.set-profile .img-input-wrap label::before {
+.set-profile .image-input-wrap label::before {
   content: "";
   display: block;
   background-image: url("/icon/upload-file.png");
@@ -844,10 +844,9 @@ input::placeholder {
   bottom: 6px;
   right: 0;
 }
-.set-profile .img-input-wrap label img {
+.set-profile .image-input-wrap label img {
   width: 110px;
   height: 110px;
-  border-radius: 100%;
 }
 .set-profile button {
   margin-top: 30px;

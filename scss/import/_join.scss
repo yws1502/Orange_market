@@ -33,7 +33,7 @@ input::placeholder { color: $line-color }
     margin-bottom: 30px;
   }
   @include input_module();
-  .img-input-wrap {
+  .image-input-wrap {
     input { display: none; }
     label {
       position: relative;
@@ -52,7 +52,6 @@ input::placeholder { color: $line-color }
       img {
         width: 110px;
         height: 110px;
-        border-radius: 100%;
       }
     }
   }
