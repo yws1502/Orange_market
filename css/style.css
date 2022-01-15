@@ -84,6 +84,10 @@ button {
   display: none;
 }
 
+#tbm-main {
+  margin: 55px 0 60px;
+}
+
 /* button module */
 [class$=button] {
   border: none;
@@ -172,6 +176,10 @@ button {
 .top-basic-nav,
 .top-upload-nav,
 .top-chat-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -180,6 +188,10 @@ button {
 }
 
 .top-search-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -205,6 +217,10 @@ button {
 }
 
 .top-main-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -216,6 +232,12 @@ button {
   font-weight: 500;
 }
 
+.top-chat-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+}
 .top-chat-nav div {
   display: flex;
   align-items: center;
@@ -227,6 +249,10 @@ button {
 }
 
 .tab-menu {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #fff;
   border-top: 1px solid #DBDBDB;
   padding: 12px 6px 6px;
@@ -311,6 +337,10 @@ button {
 }
 
 .comment {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #fff;
   display: flex;
   align-items: center;
@@ -850,6 +880,32 @@ input::placeholder {
 }
 .set-profile button {
   margin-top: 30px;
+}
+
+.hasnt-feed-section {
+  text-align: center;
+  margin-top: 50%;
+}
+.hasnt-feed-section::before {
+  content: "";
+  display: block;
+  background-image: url("/images/symbol-logo-gray.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+}
+.hasnt-feed-section p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #767676;
+  margin: 20px 0;
+}
+
+.has-feed-section .feed-list {
+  min-width: 390px;
+  margin: 0 auto;
 }
 
 /*# sourceMappingURL=style.css.map */

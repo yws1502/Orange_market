@@ -1,0 +1,23 @@
+.hasnt-feed-section {
+  text-align: center;
+  margin-top: 50%;
+  &::before {
+    @include create_visual_class(
+      "/images/symbol-logo-gray.png",
+      100px, 100px
+    );
+    margin: 0 auto;
+  }
+  p {
+    @include font_module(1.4rem, 400);
+    color: $gray-color;
+    margin: 20px 0;
+  }
+}
+
+.has-feed-section {
+  .feed-list {
+    min-width: 390px;
+    margin: 0 auto;
+  }
+}
