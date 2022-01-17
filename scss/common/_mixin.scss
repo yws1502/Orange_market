@@ -56,6 +56,7 @@
 @mixin fixed_position($direction) {
   position: fixed;
   left: 0; right: 0;
+  z-index: 30;
   @if $direction == top {
     top: 0;
   } @else if $direction == bottom {
