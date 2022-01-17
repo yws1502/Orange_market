@@ -1,3 +1,4 @@
+// 피드가 없는 경우
 .hasnt-feed-section {
   text-align: center;
   margin-top: 50%;
@@ -15,13 +16,50 @@
   }
 }
 
+// 피드가 있는 경우
 .has-feed-section {
-  padding: 20px 16px;
+  padding-top: 20px;
   .feed-list {
     min-width: 390px;
-    margin: 0 auto;
-    li + li {
+    .avatar-img {
+      border: 1px solid $line-color;
+      border-radius: 50%;
+    }
+    & > li + li {
       margin-top: 20px;
+    }
+  }
+}
+
+// 이미지 슬라이드
+.slide-wrapper {
+  position: relative;
+  width: 304px;
+  height: 228px;
+  margin: 0 auto;
+  overflow: hidden;
+  .slide-list {
+    position: absolute;
+    left: 0; right: 0;
+    width: 1000px;
+    transition: 0.5s ease-out;
+    .slide:not(:last-child) {
+      float: left;
+      margin-right: 20px;
+    }
+  }
+  .control-btns {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    button {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #fff;
+      &.on { background-color: $light-base-color; }
     }
   }
 }

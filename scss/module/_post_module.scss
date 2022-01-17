@@ -5,14 +5,15 @@
 .home-post-onlytext {
   background-color: #fff;
   display: flex;
+  justify-content: center;
   .avatar-img {
     width: 4.2rem;
     height: 4.2rem;
     margin-right: 1.2rem;
   }
-  div {
+  .content-wrap {
     width: 304px;
-    .content-wrap {
+    .text-wrap {
       display: flex;
       justify-content: space-between;
       margin: 4px 0 16px;
@@ -41,14 +42,13 @@
     }
     .post-img {
       display: block;
-      margin-bottom: 1.5rem;
       width: 304px;
       height: 228px;
     }
     .heart-btn{
       @include font_module(1.2rem, 400);
       color: $gray-color;
-      margin-bottom: 2rem;
+      margin: 15px 0 20px;
       &::before {
         @include create_visual_class(
           "/icon/icon-heart.png",
