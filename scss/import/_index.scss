@@ -16,8 +16,12 @@
 }
 
 .has-feed-section {
+  padding: 20px 16px;
   .feed-list {
     min-width: 390px;
     margin: 0 auto;
+    li + li {
+      margin-top: 20px;
+    }
   }
 }

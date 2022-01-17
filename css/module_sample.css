@@ -417,13 +417,16 @@ button {
 .home-post-onlytext {
   background-color: #fff;
   display: flex;
-  justify-content: space-between;
 }
 .home-post .avatar-img,
 .home-post-onlytext .avatar-img {
   width: 4.2rem;
   height: 4.2rem;
   margin-right: 1.2rem;
+}
+.home-post div,
+.home-post-onlytext div {
+  width: 304px;
 }
 .home-post div .content-wrap,
 .home-post-onlytext div .content-wrap {
@@ -467,6 +470,8 @@ button {
 .home-post-onlytext div .post-img {
   display: block;
   margin-bottom: 1.5rem;
+  width: 304px;
+  height: 228px;
 }
 .home-post div .heart-btn,
 .home-post-onlytext div .heart-btn {

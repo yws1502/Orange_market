@@ -5,13 +5,13 @@
 .home-post-onlytext {
   background-color: #fff;
   display: flex;
-  justify-content: space-between;
   .avatar-img {
     width: 4.2rem;
     height: 4.2rem;
     margin-right: 1.2rem;
   }
   div {
+    width: 304px;
     .content-wrap {
       display: flex;
       justify-content: space-between;
@@ -42,6 +42,8 @@
     .post-img {
       display: block;
       margin-bottom: 1.5rem;
+      width: 304px;
+      height: 228px;
     }
     .heart-btn{
       @include font_module(1.2rem, 400);
