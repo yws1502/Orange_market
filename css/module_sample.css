@@ -180,6 +180,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -192,6 +193,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -221,6 +223,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   top: 0;
   display: flex;
   justify-content: space-between;
@@ -237,6 +240,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   top: 0;
 }
 .top-chat-nav div {
@@ -253,6 +257,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   bottom: 0;
   background-color: #fff;
   border-top: 1px solid #DBDBDB;
@@ -341,6 +346,7 @@ button {
   position: fixed;
   left: 0;
   right: 0;
+  z-index: 30;
   bottom: 0;
   background-color: #fff;
   display: flex;
