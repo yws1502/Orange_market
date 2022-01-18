@@ -36,7 +36,6 @@ window.onload = async () => {
       const userImage = author.image;
       
       const heartBtnClass = (hearted) ? "heart-btn on" : "heart-btn";
-
       // 잘못된 이미지 경로 기본 이미지로 바꿔주기
       const profileImageUrl = (userImage.match(/https*:\/\/[0-9.]*:5050/) !== null)
         ? userImage
@@ -56,26 +55,10 @@ window.onload = async () => {
               </button>
             </p>
             <p class="post-content">${ content }</p>
+            
             <div class="slide-wrapper">
-
-              <ul class="slide-list">
-                <li class="slide">
-                  <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-                </li>
-                <li class="slide">
-                  <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-                </li>
-                <li class="slide">
-                  <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-                </li>
-              </ul>
-              <div class="control-btns">
-                <button name="one" class="on"></button>
-                <button name="two"></button>
-                <button name="three"></button>
-              </div>
-
             </div>
+
             <button 
               type="button"
               class="${heartBtnClass}"
@@ -91,13 +74,57 @@ window.onload = async () => {
         </li>
       `;
 
-      // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
-      const slideList = document.querySelector(`#post${postId} .slide-list`);
-      const slideAll = slideList.querySelectorAll(".slide");
+      // 이미지가 있을 때만 그려주기
+      if (postImage) {
+        const postImageList = postImage.split(",");
+        paintPostImage(postImageList, postId);
 
-      let slideCount = slideAll.length;
-      slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
+        // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
+        const slideList = document.querySelector(`#post${postId} .slide-list`);
+        const slideAll = slideList.querySelectorAll(".slide");
+  
+        let slideCount = slideAll.length;
+        slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
+      }
+
     });
+  }
+}
+
+// 포스트 이미지 생성 함수
+function paintPostImage(postImageList, postId) {
+  const slideWrapper = document.querySelector(`#post${postId} .slide-wrapper`);
+  const slideList = document.createElement("ul");
+  const controlBtns = document.createElement("div");
+  slideList.className = "slide-list";
+  controlBtns.className = "control-btns";
+
+  const btnIdList = ["one", "two", "three"];
+
+  slideList.innerHTML += `
+  <li class="slide">
+    <img src=${postImageList[0]} alt="포스트 사진" class="post-img"> 
+  </li>
+  `;
+  controlBtns.innerHTML += `
+    <button class="on" name=${btnIdList[0]}></button>
+  `;
+
+  if (postImageList.length === 1) {
+    slideWrapper.appendChild(slideList);
+  } else {
+    for (let i = 1; i < postImageList.length; i++) {
+      slideList.innerHTML += `
+      <li class="slide">
+        <img src=${postImageList[i]} alt="포스트 사진" class="post-img"> 
+      </li>
+      `;
+      controlBtns.innerHTML += `
+        <button name=${btnIdList[i]}></button>
+      `;
+    };
+    slideWrapper.appendChild(slideList);
+    slideWrapper.appendChild(controlBtns);
   }
 }
 
@@ -111,7 +138,6 @@ function moveSlide(num, slideList) {
 const feedList = document.querySelector(".feed-list");
 feedList.addEventListener("click", (event) => {
   const currentNode = event.target;
-  
   // 이미지 슬라이드 버튼 이벤트 찾기
   if (currentNode.parentElement.className === "control-btns") {
     const ControlList = currentNode.parentElement; // .control-btns div
