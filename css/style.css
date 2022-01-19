@@ -208,11 +208,11 @@ button {
 }
 .top-search-nav form input {
   font-size: 1.4rem;
-  width: 100%;
+  width: 90%;
   border-radius: 15px;
   border: none;
   background-color: #F2F2F2;
-  padding: 0.7rem 0 0.7rem 1.6rem;
+  padding: 7px 16px;
 }
 .top-search-nav form input:focus {
   outline: none;
@@ -942,6 +942,18 @@ input::placeholder {
 }
 .slide-wrapper .control-btns button.on {
   background-color: #EA7F42;
+}
+
+/* search scss */
+.search-user-container {
+  padding: 16px;
+}
+.search-user-container li + li {
+  margin-top: 16px;
+}
+.search-user-container .highlight {
+  font-size: inherit;
+  color: #F26E22;
 }
 
 /*# sourceMappingURL=style.css.map */

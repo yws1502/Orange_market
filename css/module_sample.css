@@ -209,11 +209,11 @@ button {
 }
 .top-search-nav form input {
   font-size: 1.4rem;
-  width: 100%;
+  width: 90%;
   border-radius: 15px;
   border: none;
   background-color: #F2F2F2;
-  padding: 0.7rem 0 0.7rem 1.6rem;
+  padding: 7px 16px;
 }
 .top-search-nav form input:focus {
   outline: none;
