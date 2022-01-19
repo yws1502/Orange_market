@@ -925,7 +925,7 @@ input::placeholder {
   border-radius: 50%;
 }
 .has-feed-section .feed-list > li + li {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 
 .slide-wrapper {
@@ -957,7 +957,7 @@ input::placeholder {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #DBDBDB;
 }
 .slide-wrapper .control-btns button.on {
   background-color: #EA7F42;
