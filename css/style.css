@@ -955,6 +955,16 @@ input::placeholder {
 .search-user-container li + li {
   margin-top: 16px;
 }
+.search-user-container .empty-user {
+  font-size: 2rem;
+  font-weight: 550;
+  color: #EA7F42;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translateX(-50%);
+  width: 265px;
+}
 .search-user-container .highlight {
   font-size: inherit;
   color: #F26E22;

@@ -6,6 +6,15 @@
   li + li {
     margin-top: 16px;
   }
+  .empty-user {
+    @include font_module(2rem, 550);
+    color: $light-base-color;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translateX(-50%);
+    width: 265px;
+  }
   .highlight {
     font-size: inherit;
     color: $base-color;

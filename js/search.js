@@ -18,7 +18,9 @@ function removeAllChilden(parentNode) {
 // 검색 결과 유저 정보 화면에 보여주기
 async function paintUserList(event) {
   const userList = document.querySelector(".search-user-list");
+  const emptyUser = document.querySelector(".empty-user");
   removeAllChilden(userList);
+
   const reqOption = {
     method: "GET",
     headers: HEADERS
@@ -28,6 +30,8 @@ async function paintUserList(event) {
   const json = await res.json();
 
   if (json[0]) {
+    // 검색 유저가 있는 경우
+    emptyUser.classList.add("hidden");
     const frag = document.createDocumentFragment("ul");
       json.forEach((user) => {
         const { accountname, image, username, _id } = user;
@@ -58,6 +62,9 @@ async function paintUserList(event) {
         frag.appendChild(li);
       });
     userList.appendChild(frag);
+  } else {
+    // 검색한 유저가 없는 경우
+    emptyUser.classList.remove("hidden");
   }
 };
 
