@@ -32,7 +32,6 @@ window.onload = async () => {
       const postId = post.id;
       const postImage = post.image;
       const { accountname, username } = author;
-      const userId = author._id;
       const userImage = author.image;
 
       // 포스트에 이미지가 없다면 hidden하기
@@ -55,7 +54,7 @@ window.onload = async () => {
           <img src=${profileImageUrl} alt="프로필 사진" class="avatar-img">
           <div class="content-wrap">
             <p class="text-wrap">
-              <a href="/pages/profile.html?=id${userId}">
+              <a href="/pages/profile_detail.html?id=${accountname}">
                 <strong>${username}</strong>
                 <span>@ ${accountname}</span>
               </a>

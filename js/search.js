@@ -34,7 +34,7 @@ async function paintUserList(event) {
     emptyUser.classList.add("hidden");
     const frag = document.createDocumentFragment("ul");
       json.forEach((user) => {
-        const { accountname, image, username, _id } = user;
+        const { accountname, image, username } = user;
 
         // 검색 키워드 하이라이트
         const userName = username.replace(
@@ -51,7 +51,7 @@ async function paintUserList(event) {
         const li = document.createElement("li");
         li.className = "user-search";
         li.innerHTML = `
-          <a href="/views/your_profile.html?id=${_id}">
+          <a href="/views/profile_detail.html?id=${accountname}">
             <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
             <p class="user-info">
               <strong>${userName}</strong>
