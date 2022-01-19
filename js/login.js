@@ -73,15 +73,15 @@ async function loginApi(event) {
   if (json.status === 422) {
     // 화면에 에러 메세지 동적 생성
     const pwdWrap = document.querySelector(".pwd-wrap");
+    const errorMsg = pwdWrap.querySelector(".err-msg");
     pwdWrap.classList.add("err");
-    const errorMsg = document.createElement("strong");
-    errorMsg.className = "err-msg";
+    errorMsg.classList.remove("hidden");
     errorMsg.textContent = `*${json.message}`;
-    pwdWrap.appendChild(errorMsg);
     alert(json.message);
   } else {
     // 토큰 저장 후 메인 피드 화면으로 이동
     localStorage.setItem("TOKEN", json.user.token);
+    localStorage.setItem("ACCOUNTNAME", json.user.accountname);
     location.href = "/index.html";
   }
 };
