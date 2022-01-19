@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <title>Orange market | 유저 검색</title>
+</head>
+<body>
+  <h1 class="text-hide">유저 검색 페이지</h1>
+  <header class="top-search-nav">
+    <h2 class="text-hide">검색 네비게이션</h2>
+    <button type="button" class="prev-btn">
+      <span class="text-hide">이전으로 가기 버튼</span>
+    </button>
+    <form method="get">
+      <label for="searchInput" class="text-hide">계정 검색 하기</label>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="계정 검색"
+      >
+    </form>
+    <nav class="tab-menu">
+      <ul>
+        <li><a href="/" class="home-tab on">홈</a></li>
+        <li><a href="/pages/chatting_list.html" class="chat-tab">채팅</a></li>
+        <li><a href="/pages/post_upload.html" class="post-tab">게시물 작성</a></li>
+        <li><a href="/pages/profile.html" class="profile-tab">프로필</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div role="main" id="tbm-main" class="search-user-container">
+    <h2 class="text-hide">유저 리스트</h2>
+    <ul class="search-user-list">
+      <!-- 유저 리스트 아이템 동적 생성 -->
+      <li class="user-search">
+        <a href="/views/profile_detail.html">
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
+          <p>
+            <strong>userName</strong>
+            <span>@ accountname</span>
+          </p>
+        </a>
+      </li>
+      <li class="user-search">
+        <a href="/views/profile_detail.html">
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
+          <p>
+            <strong>userName</strong>
+            <span class="user-name">@ accountname</span>
+          </p>
+        </a>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>
