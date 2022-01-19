@@ -1,6 +1,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,sass
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,sass
 
+### prettierrc ###
+.prettierrc
+
 ### Sass ###
 .sass-cache/
 *.css.map
