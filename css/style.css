@@ -34,7 +34,7 @@ body {
   line-height: 1;
 }
 
-ol, ul {
+ol, ul, li {
   list-style: none;
 }
 
@@ -391,6 +391,10 @@ button {
 }
 .user-search a img,
 .user-follow a img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #DBDBDB;
+  border-radius: 50%;
   margin-right: 12px;
 }
 .user-search a p,
