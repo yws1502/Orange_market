@@ -418,75 +418,62 @@ button {
 }
 
 /* post module */
-.home-post,
-.home-post-onlytext {
+.home-post {
   background-color: #fff;
   display: flex;
   justify-content: center;
 }
-.home-post .avatar-img,
-.home-post-onlytext .avatar-img {
+.home-post .avatar-img {
   width: 4.2rem;
   height: 4.2rem;
   margin-right: 1.2rem;
 }
-.home-post .content-wrap,
-.home-post-onlytext .content-wrap {
+.home-post .content-wrap {
   width: 304px;
 }
-.home-post .content-wrap .text-wrap,
-.home-post-onlytext .content-wrap .text-wrap {
+.home-post .content-wrap .text-wrap {
   display: flex;
   justify-content: space-between;
   margin: 4px 0 16px;
 }
-.home-post .content-wrap .text-wrap a,
-.home-post-onlytext .content-wrap .text-wrap a {
+.home-post .content-wrap .text-wrap a {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
-.home-post .content-wrap .text-wrap a strong,
-.home-post-onlytext .content-wrap .text-wrap a strong {
+.home-post .content-wrap .text-wrap a strong {
   font-size: 1.4rem;
   font-weight: 500;
   color: #000;
 }
-.home-post .content-wrap .text-wrap a span,
-.home-post-onlytext .content-wrap .text-wrap a span {
+.home-post .content-wrap .text-wrap a span {
   font-size: 1.2rem;
   font-weight: 400;
   color: #767676;
 }
-.home-post .content-wrap .text-wrap a:active,
-.home-post-onlytext .content-wrap .text-wrap a:active {
+.home-post .content-wrap .text-wrap a:active {
   color: #F26E22;
 }
-.home-post .content-wrap .text-wrap a:active strong,
-.home-post-onlytext .content-wrap .text-wrap a:active strong {
+.home-post .content-wrap .text-wrap a:active strong {
   color: inherit;
 }
-.home-post .content-wrap .post-content,
-.home-post-onlytext .content-wrap .post-content {
+.home-post .content-wrap .post-content {
   font-size: 1.4rem;
   line-height: 17px;
   margin-bottom: 1.6rem;
 }
-.home-post .content-wrap .post-img,
-.home-post-onlytext .content-wrap .post-img {
+.home-post .content-wrap .post-img {
   display: block;
   width: 304px;
   height: 228px;
 }
-.home-post .content-wrap .heart-btn,
-.home-post-onlytext .content-wrap .heart-btn {
+.home-post .content-wrap .heart-btn {
   font-size: 1.2rem;
   font-weight: 400;
   color: #767676;
   margin: 15px 0 20px;
 }
-.home-post .content-wrap .heart-btn::before,
-.home-post-onlytext .content-wrap .heart-btn::before {
+.home-post .content-wrap .heart-btn::before {
   content: "";
   display: inline-block;
   background-image: url("/icon/icon-heart.png");
@@ -497,19 +484,16 @@ button {
   vertical-align: sub;
   margin-right: 6px;
 }
-.home-post .content-wrap .heart-btn.on:before,
-.home-post-onlytext .content-wrap .heart-btn.on:before {
+.home-post .content-wrap .heart-btn.on:before {
   background-image: url("/icon/icon-heart-active.png");
 }
-.home-post .content-wrap .comment-btn,
-.home-post-onlytext .content-wrap .comment-btn {
+.home-post .content-wrap .comment-btn {
   font-size: 1.2rem;
   font-weight: 400;
   color: #767676;
   margin-bottom: 2rem;
 }
-.home-post .content-wrap .comment-btn::before,
-.home-post-onlytext .content-wrap .comment-btn::before {
+.home-post .content-wrap .comment-btn::before {
   content: "";
   display: inline-block;
   background-image: url("/icon/icon-message-circle.png");
@@ -520,16 +504,13 @@ button {
   vertical-align: sub;
   margin-right: 6px;
 }
-.home-post .content-wrap .comment-btn.on:before,
-.home-post-onlytext .content-wrap .comment-btn.on:before {
+.home-post .content-wrap .comment-btn.on:before {
   background-image: url("/icon/icon-message-circle-fill.png");
 }
-.home-post .content-wrap button + button,
-.home-post-onlytext .content-wrap button + button {
+.home-post .content-wrap button + button {
   margin-left: 1.8rem;
 }
-.home-post .content-wrap .upload-date,
-.home-post-onlytext .content-wrap .upload-date {
+.home-post .content-wrap .upload-date {
   display: block;
   font-size: 1rem;
   color: #767676;
