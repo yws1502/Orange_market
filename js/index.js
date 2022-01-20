@@ -10,6 +10,102 @@ const hasntFeed = document.querySelector(".hasnt-feed-section");
 const slideWidth = 304;
 const slideMargin = 20;
 
+// 페이지 접근 시 상황에 맞게 처리
+window.onload = async () => {
+  const reqOption = {
+    method: "GET",
+    headers: HEADERS,
+  };
+  const res = await fetch(`${ENDPOINT}/post/feed`, reqOption);
+  if (!res.ok) { location.href = "/pages/404.html"; }
+  const json = await res.json();
+
+  if (json.posts.length === 0) {
+    // follow가 없는 경우
+    hasFeed.classList.add("hidden");
+    hasntFeed.classList.remove("hidden");
+  } else {
+    // follow가 있는 경우
+    paintPost(json.posts);
+  }
+};
+
+// 포스트 컴포넌트
+function paintPost(posts) {
+  // follow가 있는 경우
+  const feedList = document.querySelector(".feed-list");
+
+  posts.forEach((post) => {
+    const { author, commentCount, content, createdAt, heartCount, hearted } = post;
+    const postId = post.id;
+    const postImage = post.image;
+    const { accountname, username } = author;
+    const userImage = author.image;
+
+    // 포스트에 이미지가 없다면 hidden하기
+    const slideWrapperClassName = (postImage)
+      ? "slide-wrapper"
+      : "slide-wrapper hidden";
+
+    // 좋아요 버튼 확인하기
+    const heartBtnClass = (hearted)
+      ? "heart-btn on"
+      : "heart-btn";
+
+    // 잘못된 이미지 경로 기본 이미지로 바꿔주기
+    const userImageUrl = (userImage.match(/https*:\/\/[0-9.]*:5050/) !== null)
+      ? userImage
+      : "http://146.56.183.55:5050/Ellipse.png";
+
+    // 날짜 변환
+    const createDate = transDateFormat(createdAt);
+
+    feedList.innerHTML += `
+      <li id=post-${post.id} class="home-post">
+        <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
+        <div class="content-wrap">
+          <p class="text-wrap">
+            <a href="/pages/profile_detail.html?id=${accountname}">
+              <strong>${username}</strong>
+              <span>@ ${accountname}</span>
+            </a>
+            <button type="button" class="more-btn">
+              <span class="text-hide">설정 더보기 버트</span>
+            </button>
+          </p>
+          <p class="post-content">${content}</p>
+
+          <div class=${slideWrapperClassName}>
+          </div>
+
+          <button 
+            type="button"
+            class="${heartBtnClass}"
+          >${heartCount}</button>
+          <button
+            type="button"
+            class="comment-btn"
+          >${commentCount}</button>
+          <span class="upload-date">${createDate}</span>
+        </div>
+      </li>
+    `;
+
+    // 이미지가 있을 때만 그려주기
+    if (postImage) {
+      const postImageList = postImage.split(",");
+      paintPostImage(postImageList, postId);
+
+      // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
+      const slideList = document.querySelector(`#post-${postId} .slide-list`);
+      const slideAll = slideList.querySelectorAll(".slide");
+
+      let slideCount = slideAll.length;
+      slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
+    }
+  });
+}
+
 // 포스트 이미지 생성 함수
 function paintPostImage(postImageList, postId) {
   const slideWrapper = document.querySelector(`#post-${postId} .slide-wrapper`);
@@ -55,97 +151,6 @@ function transDateFormat(createdAt) {
   const day = date.getDate();
   return `${year}년 ${month}월 ${day}일`;
 }
-
-// 페이지 접근 시 상황에 맞게 처리
-window.onload = async () => {
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS,
-  };
-  const res = await fetch(`${ENDPOINT}/post/feed`, reqOption);
-  if (!res.ok) { location.href = "/pages/404.html"; }
-  const json = await res.json();
-
-  if (json.posts.length === 0) {
-    // follow가 없는 경우
-    hasFeed.classList.add("hidden");
-    hasntFeed.classList.remove("hidden");
-  } else {
-    // follow가 있는 경우
-    const feedList = document.querySelector(".feed-list");
-
-    json.posts.forEach((post) => {
-      const { author, commentCount, content, createdAt, heartCount, hearted } = post;
-      const postId = post.id;
-      const postImage = post.image;
-      const { accountname, username } = author;
-      const userImage = author.image;
-
-      // 포스트에 이미지가 없다면 hidden하기
-      const slideWrapperClassName = (postImage)
-        ? "slide-wrapper"
-        : "slide-wrapper hidden";
-
-      // 좋아요 버튼 확인하기
-      const heartBtnClass = (hearted)
-        ? "heart-btn on"
-        : "heart-btn";
-
-      // 잘못된 이미지 경로 기본 이미지로 바꿔주기
-      const userImageUrl = (userImage.match(/https*:\/\/[0-9.]*:5050/) !== null)
-        ? userImage
-        : "http://146.56.183.55:5050/Ellipse.png";
-
-      // 날짜 변환
-      const createDate = transDateFormat(createdAt);
-
-      feedList.innerHTML += `
-        <li id=post-${post.id} class="home-post">
-          <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
-          <div class="content-wrap">
-            <p class="text-wrap">
-              <a href="/pages/profile_detail.html?id=${accountname}">
-                <strong>${username}</strong>
-                <span>@ ${accountname}</span>
-              </a>
-              <button type="button" class="more-btn">
-                <span class="text-hide">설정 더보기 버트</span>
-              </button>
-            </p>
-            <p class="post-content">${content}</p>
-
-            <div class=${slideWrapperClassName}>
-            </div>
-
-            <button 
-              type="button"
-              class="${heartBtnClass}"
-            >${heartCount}</button>
-            <button
-              type="button"
-              class="comment-btn"
-            >${commentCount}</button>
-            <span class="upload-date">${createDate}</span>
-          </div>
-        </li>
-      `;
-
-      // 이미지가 있을 때만 그려주기
-      if (postImage) {
-        const postImageList = postImage.split(",");
-        paintPostImage(postImageList, postId);
-
-        // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
-        const slideList = document.querySelector(`#post-${postId} .slide-list`);
-        const slideAll = slideList.querySelectorAll(".slide");
-
-        let slideCount = slideAll.length;
-        slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
-      }
-    });
-  }
-};
-
 
 // 이미지 슬라이드 이동 계산 함수
 function moveSlide(num, slideList) {
