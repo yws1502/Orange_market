@@ -1253,8 +1253,16 @@ input::placeholder {
   vertical-align: -6px;
 }
 
-.user-follow-container {
+.user-follow-list {
   padding: 18px 16px 0;
+}
+.user-follow-list li + li {
+  margin-top: 16px;
+}
+.user-follow-list .s-button.on {
+  background-color: #FFF;
+  color: #767676;
+  border: 1px solid #DBDBDB;
 }
 
 /*# sourceMappingURL=style.css.map */

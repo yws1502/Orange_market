@@ -9,6 +9,12 @@
   }
 }
 
-.user-follow-container {
+.user-follow-list {
   padding: 18px 16px 0;
+  li + li { margin-top: 16px; }
+  .s-button.on {
+    background-color: #FFF;
+    color: $gray-color;
+    border: 1px solid $line-color;
+  }
 }

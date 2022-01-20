@@ -103,11 +103,11 @@ $userView.addEventListener("click", (event) => {
 
   if (currentNode.className === "follower-btn") {
     // followers list로
-    location.href = `/pages/followlist.html?id=${accountName}&page=Followers`;
+    location.href = `/pages/followlist.html?id=${accountName}&page=follower`;
 
   } else if (currentNode.className === "following-btn") {
     // followings list로
-    location.href = `/pages/followlist.html?id=${accountName}&page=Followings`;
+    location.href = `/pages/followlist.html?id=${accountName}&page=following`;
 
   } else if (currentNode.className === "chat-btn") {
     // 채팅룸으로
