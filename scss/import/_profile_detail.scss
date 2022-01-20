@@ -66,8 +66,13 @@
   // 다른 사람 프로필인 경우 버튼 스타일
   .other-profile {
     & > * { vertical-align: top; }
-    .follow-button {
+    .m-button {
       margin: 0 10px;
+    }
+    .m-button.on {
+      color: $gray-color;
+      background-color: #FFF;
+      border: 1px solid $line-color;
     }
     .chat-btn,
     .share-btn {

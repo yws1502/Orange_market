@@ -90,7 +90,7 @@ button {
 }
 
 /* button module */
-[class$=button] {
+button {
   border: none;
   border-radius: 30px;
   color: #767676;
@@ -478,6 +478,7 @@ button {
   display: block;
   width: 304px;
   height: 228px;
+  border-radius: 10px;
 }
 .home-post .content-wrap .heart-btn {
   font-size: 1.2rem;
@@ -1077,8 +1078,13 @@ input::placeholder {
 .user-view .other-profile > * {
   vertical-align: top;
 }
-.user-view .other-profile .follow-button {
+.user-view .other-profile .m-button {
   margin: 0 10px;
+}
+.user-view .other-profile .m-button.on {
+  color: #767676;
+  background-color: #FFF;
+  border: 1px solid #DBDBDB;
 }
 .user-view .other-profile .chat-btn,
 .user-view .other-profile .share-btn {

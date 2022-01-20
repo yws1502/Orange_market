@@ -78,13 +78,8 @@ async function getProfileDataAPI(path, path2=false) {
   }
   const res = await fetch(URL, reqOption);
   const json = await res.json();
-  if (!res.ok) {
-    // 실패
-    alert(json.message);
-    location.href = "/pages/404.html";
-  } else {
-    return json
-  }
+  failConnectCheck(res, json);
+  return json
 }
 
 // user view 그려주기 함수
@@ -93,9 +88,77 @@ function paintUserView(props) {
   $followingBtn.textContent = props.followingCount;
   $userImage.src = props.image;
   $userName.textContent = props.username;
-  $accountName.textContent = props.accountName;
+  $accountName.textContent = props.accountname;
   $intro.textContent = props.intro;
+  if (props.isfollow) {
+    const followBtn = document.querySelector(".other-profile .m-button");
+    followBtn.classList.add("on");
+    followBtn.textContent = "언팔로우";
+  }
 }
+
+// user View Event
+$userView.addEventListener("click", (event) => {
+  const currentNode = event.target;
+
+  if (currentNode.className === "follower-btn") {
+    // followers list로
+    location.href = "/pages/profile_detail.html?page=followers";
+
+  } else if (currentNode.className === "following-btn") {
+    // followings list로
+    location.href = "/pages/profile_detail.html?page=followings";
+
+  } else if (currentNode.className === "chat-btn") {
+    // 채팅룸으로
+    location.href = `/pages/chatting_room.html?id=${accountName}`;
+
+  } else if (currentNode.name === "edit-profile-btn") {
+    // 프로필 수정 페이지
+    location.href = `/pages/profile.html?id=${accountName}`;
+
+  } else if (currentNode.name === "create-product-btn") {
+    // 상품 생성 페이지
+    location.href = "/pages/product.html";
+
+  } else if (currentNode.name === "follow-button") {
+    // 팔로우 버튼
+    handleFollowBtn(currentNode);
+  }
+});
+
+// 팔로우 repaint 함수
+async function handleFollowBtn(Node) {
+  let state;
+  let followerCount;
+
+  if (Node.className.includes(" on")) {
+    // 언팔로우하기
+    followerCount = await followAPI("DELETE", "unfollow");
+    state = "팔로우";
+  } else {
+    // 팔로우하기
+    followerCount = await followAPI("POST", "follow");
+    state = "언팔로우";
+  }
+
+  $followerBtn.textContent = followerCount;
+  Node.textContent = state;
+  Node.classList.toggle("on");
+}
+
+// 팔로우 API 함수
+async function followAPI(method, modePath) {
+  const reqOption = {
+    method: method,
+    headers: HEADERS
+  };
+  const res = await fetch(`${ENDPOINT}/profile/${accountName}/${modePath}`, reqOption);
+  const json = await res.json();
+  failConnectCheck(res, json);
+  return json.profile.followerCount;
+}
+
 
 // product view 그려주기 함수
 function paintProductView(products) {
@@ -319,6 +382,7 @@ async function paintHeart(Node, postId) {
 // 각 포스트 이벤트
 $feedList.addEventListener("click", (event) => {
   const currentNode = event.target;
+  console.log(currentNode);
   const currentPost = event.path.find((node) => {
     return node.id.split("-")[0] === "post"
   });
@@ -335,3 +399,19 @@ $feedList.addEventListener("click", (event) => {
       location.href = `/pages/post_detail.html/?id=${postId}`
     }
 });
+
+
+// 뒤로 가기 버튼
+const prevBtn = document.querySelector(".prev-btn");
+
+prevBtn.addEventListener("click", () => {
+  history.back();
+});
+
+// 에러 처리
+function failConnectCheck(res, json) {
+  if (!res.ok) {
+    alert(json.message);
+    location.href = "/pages/404.html";
+  }
+}

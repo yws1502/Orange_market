@@ -90,7 +90,7 @@ button {
 }
 
 /* button module */
-[class$=button] {
+button {
   border: none;
   border-radius: 30px;
   color: #767676;
@@ -478,6 +478,7 @@ button {
   display: block;
   width: 304px;
   height: 228px;
+  border-radius: 10px;
 }
 .home-post .content-wrap .heart-btn {
   font-size: 1.2rem;
