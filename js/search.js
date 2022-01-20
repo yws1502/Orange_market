@@ -51,7 +51,7 @@ async function paintUserList(event) {
         const li = document.createElement("li");
         li.className = "user-search";
         li.innerHTML = `
-          <a href="/views/profile_detail.html?id=${accountname}">
+          <a href="/pages/profile_detail.html?id=${accountname}">
             <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
             <p class="user-info">
               <strong>${userName}</strong>
