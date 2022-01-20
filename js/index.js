@@ -63,12 +63,13 @@ window.onload = async () => {
     headers: HEADERS,
   };
   const res = await fetch(`${ENDPOINT}/post/feed`, reqOption);
+  if (!res.ok) { location.href = "/pages/404.html"; }
   const json = await res.json();
 
   if (json.posts.length === 0) {
     // follow가 없는 경우
-    // hasFeed.classList.add("hidden");
-    // hasntFeed.classList.remove("hidden");
+    hasFeed.classList.add("hidden");
+    hasntFeed.classList.remove("hidden");
   } else {
     // follow가 있는 경우
     const feedList = document.querySelector(".feed-list");
