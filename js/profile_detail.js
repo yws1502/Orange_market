@@ -103,15 +103,15 @@ $userView.addEventListener("click", (event) => {
 
   if (currentNode.className === "follower-btn") {
     // followers list로
-    location.href = "/pages/profile_detail.html?page=followers";
+    location.href = `/pages/followlist.html?id=${accountName}&page=Followers`;
 
   } else if (currentNode.className === "following-btn") {
     // followings list로
-    location.href = "/pages/profile_detail.html?page=followings";
+    location.href = `/pages/followlist.html?id=${accountName}&page=Followings`;
 
   } else if (currentNode.className === "chat-btn") {
     // 채팅룸으로
-    location.href = `/pages/chatting_room.html?id=${accountName}`;
+    location.href = `/pages/chattingroom.html?id=${accountName}`;
 
   } else if (currentNode.name === "edit-profile-btn") {
     // 프로필 수정 페이지
@@ -395,7 +395,7 @@ $feedList.addEventListener("click", (event) => {
     paintHeart(currentNode, postId);
 
   } else if (currentNode.className === "comment-btn"
-    || currentNode.tagName === "IMG") {
+    || currentNode.className === "post-img") {
       location.href = `/pages/post_detail.html/?id=${postId}`
     }
 });

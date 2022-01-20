@@ -229,7 +229,7 @@ feedList.addEventListener("click", (event) => {
     paintHeart(currentNode, postId);
 
   } else if (currentNode.className === "comment-btn"
-    || currentNode.tagName === "IMG") {
+    || currentNode.className === "post-img") {
       location.href = `/pages/post_detail.html/?id=${postId}`
     }
 });
