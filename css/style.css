@@ -1003,6 +1003,7 @@ input::placeholder {
 /* profile_detail */
 .profile-container {
   width: 390px;
+  height: 100vh;
   background-color: #E5E5E5;
 }
 
@@ -1148,6 +1149,9 @@ input::placeholder {
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 16px;
+}
+.my-feed-view .feed-grid.hidden {
+  display: none;
 }
 .my-feed-view .feed-grid .multi {
   position: relative;

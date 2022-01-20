@@ -3,6 +3,7 @@
 /* profile_detail */
 .profile-container {
   width: 390px;
+  height: 100vh;
   background-color: $bg-color;
 }
 // 유저 정보
@@ -129,6 +130,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     padding: 16px;
+    &.hidden { display: none; }
     .multi {
       position: relative;
       &:after {
