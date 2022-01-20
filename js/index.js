@@ -212,7 +212,7 @@ feedList.addEventListener("click", (event) => {
 
   } else if (currentNode.className === "comment-btn"
     || currentNode.tagName === "IMG") {
-      // location.href = `/pages/post_detail.html/?id=${test}`
+      location.href = `/pages/post_detail.html/?id=${postId}`
     }
 });
 

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* reset */
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -968,6 +969,29 @@ input::placeholder {
 .search-user-container .highlight {
   font-size: inherit;
   color: #F26E22;
+}
+
+/* 404 페이지 */
+#error-app {
+  text-align: center;
+  margin-top: 200px;
+}
+
+#error-app::before {
+  content: "";
+  display: inline-block;
+  background-image: url("/images/logo_error.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 158px;
+  height: 158px;
+}
+
+#error-app p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #767676;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */
