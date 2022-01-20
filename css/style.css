@@ -1246,5 +1246,15 @@ input::placeholder {
     bottom: 0;
   }
 }
+/* followlist */
+.follow-nav h1 {
+  font-size: 1.4rem;
+  display: inline-block;
+  vertical-align: -6px;
+}
+
+.user-follow-container {
+  padding: 18px 16px 0;
+}
 
 /*# sourceMappingURL=style.css.map */
