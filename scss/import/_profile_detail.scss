@@ -3,12 +3,14 @@
 /* profile_detail */
 .profile-container {
   width: 390px;
+  background-color: $bg-color;
 }
 // 유저 정보
 .user-view {
   text-align: center;
+  background-color: #fff;
   padding-bottom: 26px;
-  border-bottom: 10px solid $bg-color;
+  margin-bottom: 10px;
   .follow-wrapper {
     display: flex;
     justify-content: center;
@@ -78,9 +80,9 @@
 
 // 상품 목록
 .product-view {
-  border-bottom: 10px solid $bg-color;
-  padding: 21px 0 21px 21px;
-
+  background-color: #fff;
+  padding: 21px 0 0 21px;
+  margin-bottom: 10px;
   div { margin: 0 auto; }
   h2 {
     @include font_module(1.6rem, 700);
@@ -97,6 +99,7 @@
 // 피드 목록
 .my-feed-view {
   nav {
+    background-color: #fff;
     border-bottom: 1px solid $bg-color;
     ul {
       display: flex;
@@ -118,7 +121,31 @@
     }
   }
   .home-post {
-    margin-top: 16px;
+    padding-top: 16px;
+  }
+  .feed-grid {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 16px;
+    .multi {
+      position: relative;
+      &:after {
+        @include create_visual_class(
+          "/icon/icon-img-layers.svg",
+          20px, 20px
+        );
+        position: absolute;
+        top: 6px;
+        right: 6px;
+      }
+    }
+    img {
+      width: 114px;
+      height: 114px;
+      cursor: pointer;
+    }
   }
 }
 

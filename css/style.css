@@ -1003,12 +1003,14 @@ input::placeholder {
 /* profile_detail */
 .profile-container {
   width: 390px;
+  background-color: #E5E5E5;
 }
 
 .user-view {
   text-align: center;
+  background-color: #fff;
   padding-bottom: 26px;
-  border-bottom: 10px solid #E5E5E5;
+  margin-bottom: 10px;
 }
 .user-view .follow-wrapper {
   display: flex;
@@ -1086,8 +1088,9 @@ input::placeholder {
 }
 
 .product-view {
-  border-bottom: 10px solid #E5E5E5;
-  padding: 21px 0 21px 21px;
+  background-color: #fff;
+  padding: 21px 0 0 21px;
+  margin-bottom: 10px;
 }
 .product-view div {
   margin: 0 auto;
@@ -1105,6 +1108,7 @@ input::placeholder {
 }
 
 .my-feed-view nav {
+  background-color: #fff;
   border-bottom: 1px solid #E5E5E5;
 }
 .my-feed-view nav ul {
@@ -1136,7 +1140,34 @@ input::placeholder {
   background-image: url(/icon/icon-post-album-on.png);
 }
 .my-feed-view .home-post {
-  margin-top: 16px;
+  padding-top: 16px;
+}
+.my-feed-view .feed-grid {
+  background-color: #fff;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  padding: 16px;
+}
+.my-feed-view .feed-grid .multi {
+  position: relative;
+}
+.my-feed-view .feed-grid .multi:after {
+  content: "";
+  display: block;
+  background-image: url("/icon/icon-img-layers.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+}
+.my-feed-view .feed-grid img {
+  width: 114px;
+  height: 114px;
+  cursor: pointer;
 }
 
 .modal {
