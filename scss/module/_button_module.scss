@@ -30,6 +30,10 @@
   pointer-events: none;
 }
 
+.m-activ-button,
+.s-activ-button {
+  border: 1px solid $line-color;
+}
 
 // button size
 // large
