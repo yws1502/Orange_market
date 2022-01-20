@@ -98,7 +98,6 @@
 
 .product {
   background-color: #fff;
-  width: fit-content;
   a {
     color: #000;
     &:active {
@@ -106,6 +105,8 @@
     }
     img {
       display: block;
+      width: 140px;
+      height: 90px;
       border-radius: 5px;
       margin-bottom: 0.6rem;
     }

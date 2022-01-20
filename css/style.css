@@ -86,7 +86,7 @@ button {
 }
 
 #tbm-main {
-  margin: 55px 0 60px;
+  margin: 55px auto 60px;
 }
 
 /* button module */
@@ -529,7 +529,6 @@ button {
 
 .product {
   background-color: #fff;
-  width: fit-content;
 }
 .product a {
   color: #000;
@@ -539,6 +538,8 @@ button {
 }
 .product a img {
   display: block;
+  width: 140px;
+  height: 90px;
   border-radius: 5px;
   margin-bottom: 0.6rem;
 }
@@ -551,6 +552,29 @@ button {
   font-size: 1.2rem;
   font-weight: 700;
   color: #F26E22;
+}
+
+/* 404 페이지 */
+#error-app {
+  text-align: center;
+  margin-top: 200px;
+}
+
+#error-app::before {
+  content: "";
+  display: inline-block;
+  background-image: url("/images/logo_error.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 158px;
+  height: 158px;
+}
+
+#error-app p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #767676;
+  margin-bottom: 20px;
 }
 
 /* login page */
@@ -976,27 +1000,198 @@ input::placeholder {
   color: #F26E22;
 }
 
-/* 404 페이지 */
-#error-app {
+/* profile_detail */
+.profile-container {
+  width: 390px;
+}
+
+.user-view {
   text-align: center;
-  margin-top: 200px;
+  padding-bottom: 26px;
+  border-bottom: 10px solid #E5E5E5;
 }
-
-#error-app::before {
-  content: "";
-  display: inline-block;
-  background-image: url("/images/logo_error.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 158px;
-  height: 158px;
+.user-view .follow-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 16px;
 }
-
-#error-app p {
+.user-view .follow-wrapper img {
+  margin: 0 40px;
+}
+.user-view .follow-wrapper button {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+.user-view .follow-wrapper button::after {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #767676;
+  display: block;
+  margin-top: 6px;
+}
+.user-view .follow-wrapper .follower-btn::after {
+  content: "followers";
+}
+.user-view .follow-wrapper .following-btn {
+  color: #767676;
+}
+.user-view .follow-wrapper .following-btn::after {
+  content: "followings";
+}
+.user-view strong {
+  font-size: 1.6rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 6px;
+}
+.user-view span {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #767676;
+}
+.user-view p {
   font-size: 1.4rem;
   font-weight: 400;
   color: #767676;
+  margin: 16px 0 24px;
+}
+.user-view .my-profile button + button {
+  margin-left: 12px;
+  width: 25.65%;
+}
+.user-view .other-profile > * {
+  vertical-align: top;
+}
+.user-view .other-profile .follow-button {
+  margin: 0 10px;
+}
+.user-view .other-profile .chat-btn,
+.user-view .other-profile .share-btn {
+  background-image: url(/icon/icon-message-circle.png);
+  background-repeat: no-repeat;
+  background-position: 50% 45%;
+  background-size: 20px;
+  border: 1px solid #DBDBDB;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 3px 0px;
+}
+.user-view .other-profile .chat-btn:active,
+.user-view .other-profile .share-btn:active {
+  box-shadow: none;
+}
+.user-view .other-profile .share-btn {
+  background-image: url(/icon/icon-share.png);
+}
+
+.product-view {
+  border-bottom: 10px solid #E5E5E5;
+  padding: 21px 0 21px 21px;
+}
+.product-view div {
+  margin: 0 auto;
+}
+.product-view h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
   margin-bottom: 20px;
+}
+.product-view ul {
+  height: 146px;
+  display: flex;
+  gap: 10px;
+  overflow-x: scroll;
+}
+
+.my-feed-view nav {
+  border-bottom: 1px solid #E5E5E5;
+}
+.my-feed-view nav ul {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  padding: 10px;
+}
+.my-feed-view nav ul li + li {
+  margin-left: 13px;
+}
+.my-feed-view nav ul button {
+  display: block;
+  background-repeat: no-repeat;
+  background-size: 25px;
+  width: 26px;
+  height: 26px;
+}
+.my-feed-view nav ul .row-mode-btn {
+  background-image: url(/icon/icon-post-list-off.png);
+}
+.my-feed-view nav ul .grid-mode-btn {
+  background-image: url(/icon/icon-post-album-off.png);
+}
+.my-feed-view nav ul .row-mode-btn.on {
+  background-image: url(/icon/icon-post-list-on.png);
+}
+.my-feed-view nav ul .grid-mode-btn.on {
+  background-image: url(/icon/icon-post-album-on.png);
+}
+.my-feed-view .home-post {
+  margin-top: 16px;
+}
+
+.modal {
+  position: fixed;
+  z-index: 50;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal ul {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding-bottom: 50px;
+  animation: show-modal 1s ease-out;
+  animation-fill-mode: forwards;
+}
+.modal ul::before {
+  content: "";
+  display: block;
+  width: 13%;
+  height: 5px;
+  background-color: #DBDBDB;
+  border-radius: 10px;
+  margin: 20px auto;
+}
+.modal ul li + li {
+  margin-top: 10px;
+}
+.modal ul button {
+  font-size: 1.4rem;
+  background-color: inherit;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  padding: 14px 0 14px 26px;
+}
+.modal ul button:hover {
+  color: #F26E22;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+@keyframes show-modal {
+  0% {
+    bottom: -400px;
+  }
+  100% {
+    bottom: 0;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

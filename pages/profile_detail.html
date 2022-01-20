@@ -29,77 +29,85 @@
   </header>
   <!-- header navigation section end -->
   <!-- main content section start -->
-  <div role="main" id="tbm-main">
+  <div role="main" id="tbm-main" class="profile-container">
     <!-- user info section start -->
     <section class="user-view">
       <h2 class="text-hide">유저 정보</h2>
-      <div>
+      <div class="follow-wrapper">
         <button type="button" class="follower-btn">
-          <strong>2950</strong>
-          followers
+          2950
         </button>
         <img
           src="/images/basic-profile-img.png"
           alt="프로필 사진"
           class="avartar-image">
         <button type="button" class="following-btn">
-          <strong>128</strong>
-          followings
+          128
         </button>
       </div>
       <strong>애월읍 위니브 감귤농장</strong>
       <span>@ weniv_Mandarin</span>
       <p>애월읍 감귤 전국 배송, 귤따기 체험, 감귤 농장</p>
-      <ul class="other-profile hide">
-        <li>
-          <button>
-            <span class="text-hide">채팅창 바로가기</span>
-          </button>
-        </li>
-        <li>
-          <button type="button" class="m-button">팔로우</button>
-        </li>
-        <li>
-          <button>
-            <span class="text-hide">공유하기</span>
-          </button>
-        </li>
-      </ul>
-      <ul class="my-profile">
-        <li>
-          <button
-          type="button" 
-          class="edit-profile-btn m-activ-button">
-          프로필 수정</button>
-        </li>
-        <li>
-          <button
-          type="button" 
-          class="create-product-btn m-activ-button">
-          상품 등록</button>
-        </li>
-      </ul>
+      <div class="other-profile hidden">
+        <button type="button" class="chat-btn">
+          <span class="text-hide">채팅창 바로가기</span>
+        </button>
+        <button type="button" class="m-button follow-button">
+          팔로우
+        </button>
+        <button type="button" class="share-btn">
+          <span class="text-hide">공유하기</span>
+        </button>
+      </div>
+      <div class="my-profile">
+        <button
+        type="button"
+        name="edit-profile-btn"
+        class="m-activ-button">
+        프로필 수정</button>
+        <button
+        type="button" 
+        name="create-product-btn"
+        class="m-activ-button">
+        상품 등록</button>
+      </div>
     </section>
     <!-- user info section end -->
     <!-- product view section start -->
     <section class="product-view">
-      <h2>판매 중인 상품</h2>
-      <ul>
-        <li class="product">
-          <a href="#none">
-            <img src="/images/product-img-example.png" alt="상품 이미지">
-            <strong>애월읍 노지 감귤</strong>
-            <span>35,000원</span>
-          </a>
-        </li>
-        <li class="product">
-          <a href="#none">
-            <img src="/images/product-img-example.png" alt="상품 이미지">
-            <strong>애월읍 노지 감귤</strong>
-            <span>35,000원</span>
-          </a>
-        </li>
-      </ul>
+      <div>
+        <h2>판매 중인 상품</h2>
+        <ul>
+          <li class="product">
+            <a href="#none">
+              <img src="/images/product-img-example.png" alt="상품 이미지">
+              <strong>애월읍 노지 감귤</strong>
+              <span>35,000원</span>
+            </a>
+          </li>
+          <li class="product">
+            <a href="#none">
+              <img src="/images/product-img-example.png" alt="상품 이미지">
+              <strong>애월읍 노지 감귤</strong>
+              <span>35,000원</span>
+            </a>
+          </li>
+          <li class="product">
+            <a href="#none">
+              <img src="/images/product-img-example.png" alt="상품 이미지">
+              <strong>애월읍 노지 감귤</strong>
+              <span>35,000원</span>
+            </a>
+          </li>
+          <li class="product">
+            <a href="#none">
+              <img src="/images/product-img-example.png" alt="상품 이미지">
+              <strong>애월읍 노지 감귤</strong>
+              <span>35,000원</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </section>
     <!-- product view section end -->
     <!-- my feed view section start -->
@@ -108,7 +116,7 @@
       <nav>
         <ul>
           <li>
-            <button type="button" class="row-mode-btn">
+            <button type="button" class="row-mode-btn on">
               <span class="text-hide">행으로 보기</span>
             </button>
           </li>
@@ -214,5 +222,17 @@
     <!-- my feed view section end -->
   </div>
   <!-- main content section end -->
+  <!-- modal section start -->
+  <div class="modal hidden">
+    <ul>
+      <li>
+        <button type="button" class="delete-btn">삭제</button>
+      </li>
+      <li>
+        <button type="button" class="edit-btn">수정</button>
+      </li>
+    </ul>
+  </div>
+  <!-- modal section end -->
 </body>
 </html>

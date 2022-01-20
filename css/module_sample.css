@@ -86,7 +86,7 @@ button {
 }
 
 #tbm-main {
-  margin: 55px 0 60px;
+  margin: 55px auto 60px;
 }
 
 /* button module */
@@ -529,7 +529,6 @@ button {
 
 .product {
   background-color: #fff;
-  width: fit-content;
 }
 .product a {
   color: #000;
@@ -539,6 +538,8 @@ button {
 }
 .product a img {
   display: block;
+  width: 140px;
+  height: 90px;
   border-radius: 5px;
   margin-bottom: 0.6rem;
 }

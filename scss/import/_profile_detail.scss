@@ -1,0 +1,173 @@
+@charset "utf-8";
+
+/* profile_detail */
+.profile-container {
+  width: 390px;
+}
+// 유저 정보
+.user-view {
+  text-align: center;
+  padding-bottom: 26px;
+  border-bottom: 10px solid $bg-color;
+  .follow-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 30px 0 16px;
+    img { margin: 0 40px; }
+    button {
+      @include font_module(1.8rem, 700);
+      &::after {
+        @include font_module(1.1rem, 400);
+        color: $gray-color;
+        display: block;
+        margin-top: 6px;
+      }
+    }
+    .follower-btn::after { content: "followers"; }
+    .following-btn {
+      color: $gray-color;
+      &::after { content: "followings"; }
+    }
+  }
+  strong {
+    @include font_module(1.6rem, 700);
+    display: block;
+    margin-bottom: 6px;
+  }
+  span {
+    @include font_module(1.2rem, 400);
+    color: $gray-color;
+  }
+  p {
+    @include font_module(1.4rem, 400);
+    color: $gray-color;
+    margin: 16px 0 24px;
+  }
+  // 내 프로필인 경우 버튼 스타일
+  .my-profile {
+    button + button {
+      margin-left: 12px;
+      width: 25.65%;
+    }
+  }
+  // 다른 사람 프로필인 경우 버튼 스타일
+  .other-profile {
+    & > * { vertical-align: top; }
+    .follow-button {
+      margin: 0 10px;
+    }
+    .chat-btn,
+    .share-btn {
+      background-image: url(/icon/icon-message-circle.png);
+      background-repeat: no-repeat;
+      background-position: 50% 45%;
+      background-size: 20px;
+      border: 1px solid $line-color;
+      border-radius: 50%;
+      width: 34px;
+      height: 34px;
+      box-shadow: $shadow;
+      &:active {
+        box-shadow: none;
+      }
+    }
+    .share-btn { background-image: url(/icon/icon-share.png); }
+  }
+
+}
+
+// 상품 목록
+.product-view {
+  border-bottom: 10px solid $bg-color;
+  padding: 21px 0 21px 21px;
+
+  div { margin: 0 auto; }
+  h2 {
+    @include font_module(1.6rem, 700);
+    margin-bottom: 20px;
+  }
+  ul {
+    height: 146px;
+    display: flex;
+    gap: 10px;
+    overflow-x: scroll;
+  }
+}
+
+// 피드 목록
+.my-feed-view {
+  nav {
+    border-bottom: 1px solid $bg-color;
+    ul {
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      padding: 10px;
+      li + li { margin-left: 13px; }
+      button {
+        display: block;
+        background-repeat: no-repeat;
+        background-size: 25px;
+        width: 26px;
+        height: 26px;
+      }
+      .row-mode-btn { background-image: url(/icon/icon-post-list-off.png); }
+      .grid-mode-btn { background-image: url(/icon/icon-post-album-off.png); }
+      .row-mode-btn.on { background-image: url(/icon/icon-post-list-on.png); }
+      .grid-mode-btn.on { background-image: url(/icon/icon-post-album-on.png); }
+    }
+  }
+  .home-post {
+    margin-top: 16px;
+  }
+}
+
+// 모달
+.modal {
+  position: fixed;
+  z-index: 50;
+  bottom: 0; top: 0;
+  left: 0; right: 0;
+  background-color: rgba(0,0,0,0.5);
+  ul {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    background-color: #fff;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding-bottom: 50px;
+    animation: show-modal 1s ease-out;
+    animation-fill-mode: forwards;
+    &::before {
+      content: "";
+      display: block;
+      width: 13%;
+      height: 5px;
+      background-color: $line-color;
+      border-radius: 10px;
+      margin: 20px auto;
+    }
+    li + li { margin-top: 10px; }
+    button {
+      font-size: 1.4rem;
+      background-color: inherit;
+      text-align: left;
+      width: 100%; height: 100%;
+      padding: 14px 0 14px 26px;
+      &:hover {
+        color: $base-color;
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+  }
+}
+
+@keyframes show-modal {
+  0% {
+    bottom: -400px;
+  }
+  100% {
+    bottom: 0;
+  }
+}
