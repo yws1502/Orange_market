@@ -10,6 +10,52 @@ const hasntFeed = document.querySelector(".hasnt-feed-section");
 const slideWidth = 304;
 const slideMargin = 20;
 
+// 포스트 이미지 생성 함수
+function paintPostImage(postImageList, postId) {
+  const slideWrapper = document.querySelector(`#post-${postId} .slide-wrapper`);
+  const slideList = document.createElement("ul");
+  const controlBtns = document.createElement("div");
+  slideList.className = "slide-list";
+  controlBtns.className = "control-btns";
+
+  const btnIdList = ["one", "two", "three"];
+
+  slideList.innerHTML += `
+  <li class="slide">
+    <img src=${postImageList[0]} alt="포스트 사진" class="post-img"> 
+  </li>
+  `;
+  controlBtns.innerHTML += `
+    <button type="button" class="on" name=${btnIdList[0]}></button>
+  `;
+
+  if (postImageList.length === 1) {
+    slideWrapper.appendChild(slideList);
+  } else {
+    for (let i = 1; i < postImageList.length; i++) {
+      slideList.innerHTML += `
+      <li class="slide">
+        <img src=${postImageList[i]} alt="포스트 사진" class="post-img"> 
+      </li>
+      `;
+      controlBtns.innerHTML += `
+        <button type="button" name=${btnIdList[i]}></button>
+      `;
+    }
+    slideWrapper.appendChild(slideList);
+    slideWrapper.appendChild(controlBtns);
+  }
+}
+
+// 날짜 포멧 변환함수 
+function transDateFormat(createdAt) {
+  const date = new Date(createdAt)
+  const year = date.getFullYear(); 
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return `${year}년 ${month}월 ${day}일`;
+}
+
 // 페이지 접근 시 상황에 맞게 처리
 window.onload = async () => {
   const reqOption = {
@@ -49,6 +95,9 @@ window.onload = async () => {
         ? userImage
         : "http://146.56.183.55:5050/Ellipse.png";
 
+      // 날짜 변환
+      const createDate = transDateFormat(createdAt);
+
       feedList.innerHTML += `
         <li id=post-${post.id} class="home-post">
           <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
@@ -75,7 +124,7 @@ window.onload = async () => {
               type="button"
               class="comment-btn"
             >${commentCount}</button>
-            <span class="upload-date">${createdAt}</span>
+            <span class="upload-date">${createDate}</span>
           </div>
         </li>
       `;
@@ -95,43 +144,6 @@ window.onload = async () => {
     });
   }
 };
-
-// 포스트 이미지 생성 함수
-function paintPostImage(postImageList, postId) {
-  const slideWrapper = document.querySelector(`#post-${postId} .slide-wrapper`);
-  const slideList = document.createElement("ul");
-  const controlBtns = document.createElement("div");
-  slideList.className = "slide-list";
-  controlBtns.className = "control-btns";
-
-  const btnIdList = ["one", "two", "three"];
-
-  slideList.innerHTML += `
-  <li class="slide">
-    <img src=${postImageList[0]} alt="포스트 사진" class="post-img"> 
-  </li>
-  `;
-  controlBtns.innerHTML += `
-    <button type="button" class="on" name=${btnIdList[0]}></button>
-  `;
-
-  if (postImageList.length === 1) {
-    slideWrapper.appendChild(slideList);
-  } else {
-    for (let i = 1; i < postImageList.length; i++) {
-      slideList.innerHTML += `
-      <li class="slide">
-        <img src=${postImageList[i]} alt="포스트 사진" class="post-img"> 
-      </li>
-      `;
-      controlBtns.innerHTML += `
-        <button type="button" name=${btnIdList[i]}></button>
-      `;
-    }
-    slideWrapper.appendChild(slideList);
-    slideWrapper.appendChild(controlBtns);
-  }
-}
 
 
 // 이미지 슬라이드 이동 계산 함수
