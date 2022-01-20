@@ -1006,7 +1006,6 @@ input::placeholder {
 /* profile_detail */
 .profile-container {
   width: 390px;
-  height: 100vh;
   background-color: #E5E5E5;
 }
 
@@ -1039,11 +1038,11 @@ input::placeholder {
   display: block;
   margin-top: 6px;
 }
+.user-view .follow-wrapper .follower-btn {
+  color: #000;
+}
 .user-view .follow-wrapper .follower-btn::after {
   content: "followers";
-}
-.user-view .follow-wrapper .following-btn {
-  color: #767676;
 }
 .user-view .follow-wrapper .following-btn::after {
   content: "followings";
