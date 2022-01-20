@@ -128,7 +128,7 @@ function paintPostImage(postImageList, postId) {
   if (postImageList.length === 1) {
     slideWrapper.appendChild(slideList);
   } else {
-    for (let i = 1; i < postImageList.length; i++) {
+    for (let i = 1; i < 3; i++) {
       slideList.innerHTML += `
       <li class="slide">
         <img src=${postImageList[i]} alt="포스트 사진" class="post-img"> 
