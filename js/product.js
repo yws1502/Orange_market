@@ -112,7 +112,7 @@ async function productAPI(method, productId=false) {
   const json = await res.json();
 
   if (res.ok) {
-    location.href = "/views/profile_detail.html";
+    location.href = "/pages/profile_detail.html";
   } else {
     const errMsg = (json)
       ? json.message
@@ -130,3 +130,11 @@ $submitBtn.addEventListener("click", () => {
     productAPI("PUT", productId);
   }
 })
+
+
+// 뒤로 가기 버튼
+const prevBtn = document.querySelector(".prev-btn");
+
+prevBtn.addEventListener("click", () => {
+  history.back();
+});
