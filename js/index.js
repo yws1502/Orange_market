@@ -16,7 +16,7 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS,
   };
-  const res = await fetch(`${ENDPOINT}/post/feed`, reqOption);
+  const res = await fetch(`${ENDPOINT}/post/feed?limit=40`, reqOption);
   if (!res.ok) { location.href = "/pages/404.html"; }
   const json = await res.json();
 
