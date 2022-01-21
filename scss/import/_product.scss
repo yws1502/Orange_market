@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+/* product */
+
+.product-app {
+  overflow: hidden;
+  padding: 0 34px; 
+  p {
+    font-size: 1.2rem;
+    color: $gray-color;
+    margin: 30px 0 18px;
+  }
+}
+
+.product-image-wrap {
+  position: relative;
+  width: 322px;
+  height: 204px;
+  background-color: $white-gray-color; 
+  border: 1px solid $line-color;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+  .preview-image {
+    width: 100%;
+    height: 100%;
+  }
+  label {
+    cursor: pointer;
+    &::before {
+      @include create_visual_class(
+        "/icon/img-button.png",
+        36px, 36px
+      );
+      position: absolute;
+      bottom: 12px; right: 12px;
+    }
+  }
+  #imageInput { display: none; }
+}
+
+.nonFile-input-wrapper {
+  margin-top: 30px;
+  fieldset + fieldset {
+    margin-top: 16px;
+  }
+  fieldset {
+    label {
+      font-size: 1.2rem;
+      color: $gray-color;
+      margin-top: 8%;
+    }
+    input {
+      width: 100%;
+      font-size: 1.4rem;
+      border-style: none;
+      border-bottom: 1px solid $light-gray-color;
+      padding: 10px 0 8px;
+      &:focus {
+        border-color: $base-color;
+        outline: none;
+      }
+      &::placeholder { color: $light-gray-color; }
+    }
+  }
+}

@@ -191,7 +191,7 @@ button {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #DBDBDB;
-  padding: 1.2rem 1.2rem 1.2rem 1.6rem;
+  padding: 0.8rem 1.2rem 0.8rem 1.6rem;
 }
 
 .top-search-nav {
@@ -1264,6 +1264,76 @@ input::placeholder {
   background-color: #FFF;
   color: #767676;
   border: 1px solid #DBDBDB;
+}
+
+/* product */
+.product-app {
+  overflow: hidden;
+  padding: 0 34px;
+}
+.product-app p {
+  font-size: 1.2rem;
+  color: #767676;
+  margin: 30px 0 18px;
+}
+
+.product-image-wrap {
+  position: relative;
+  width: 322px;
+  height: 204px;
+  background-color: #F2F2F2;
+  border: 1px solid #DBDBDB;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+.product-image-wrap .preview-image {
+  width: 100%;
+  height: 100%;
+}
+.product-image-wrap label {
+  cursor: pointer;
+}
+.product-image-wrap label::before {
+  content: "";
+  display: block;
+  background-image: url("/icon/img-button.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
+.product-image-wrap #imageInput {
+  display: none;
+}
+
+.nonFile-input-wrapper {
+  margin-top: 30px;
+}
+.nonFile-input-wrapper fieldset + fieldset {
+  margin-top: 16px;
+}
+.nonFile-input-wrapper fieldset label {
+  font-size: 1.2rem;
+  color: #767676;
+  margin-top: 8%;
+}
+.nonFile-input-wrapper fieldset input {
+  width: 100%;
+  font-size: 1.4rem;
+  border-style: none;
+  border-bottom: 1px solid #C4C4C4;
+  padding: 10px 0 8px;
+}
+.nonFile-input-wrapper fieldset input:focus {
+  border-color: #F26E22;
+  outline: none;
+}
+.nonFile-input-wrapper fieldset input::placeholder {
+  color: #C4C4C4;
 }
 
 /*# sourceMappingURL=style.css.map */
