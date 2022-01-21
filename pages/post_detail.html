@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>orange market | post detail</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1 class="text-hide">포스트 상세 페이지</h1>
+  <!-- header section start -->
+  <header class="top-basic-nav">
+    <h2 class="text-hide">네비게이션 영역</h2>
+    <button type="button" class="prev-btn">
+      <span class="text-hide">이전으로 가기 버튼</span>
+    </button>
+    <button type="button" class="more-btn">
+      <span class="text-hide">설정 더보기 버튼</span>
+    </button>
+  </header>
+  <!-- header section end -->
+  <div role="main" id="tbm-main">
+    <!-- feed detail start -->
+    <section class="home-post">
+      <h2 class="text-hide">포스트 상세</h2>
+      <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
+      <div class="content-wrap">
+        <p class="text-wrap">
+          <a href="/pages/profile.html?=id${props.userId}">
+            <strong>${props.username}</strong>
+            <span>@ ${props.accountname}</span>
+          </a>
+          <button type="button" class="more-btn">
+            <span class="text-hide">설정 더보기 버트</span>
+          </button>
+        </p>
+        <p class="post-content">${props.content}</p>
+
+        <div class="slide-wrapper">
+          <ul class="slide-list">
+            <li class="slide">
+              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
+            </li>
+            <li class="slide">
+              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
+            </li>
+            <li class="slide">
+              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
+            </li>
+          </ul>
+          <div class="control-btns">
+            <button type="button" class="on" name="one"></button>
+            <button type="button" name="two"></button>
+            <button type="button" name="three"></button>
+          </div>
+        </div>
+
+        <button 
+          type="button"
+          class="heart-btn"
+        >3</button>
+        <button
+          type="button"
+          class="comment-btn"
+        >3</button>
+        <span class="upload-date">2022년 1월 21일</span>
+      </div>
+    </section>
+    <!-- feed detail end -->
+    <!-- comment view start -->
+    <section class="comment-view">
+      <h2 class="text-hide">포스트 댓글 리스트</h2>
+      <ul>
+        <li>
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+          <div>
+            <a href="#none">
+              <strong>서귀포시 무슨 농장</strong>
+              <em>5분 전</em>
+            </a>
+            <button class="more-btn">
+              <span class="text-hide">더보기 버튼</span>
+            </button>
+            <p>게시물 답글~!! 최고최고</p>
+          </div>
+        </li>
+        <li>
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+          <div>
+            <a href="#none">
+              <strong>서귀포시 무슨 농장</strong>
+              <em>5분 전</em>
+            </a>
+            <button class="more-btn">
+              <span class="text-hide">더보기 버튼</span>
+            </button>
+            <p>게시물 답글~!! 최고최고</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+    <!-- comment view end -->
+  </div>
+  <!-- comment section start -->
+  <section class="comment">
+    <h2 class="text-hide">포스트 댓글 입력 양식</h2>
+    <a href="#none"><img src="/images/Ellipse_mid.png" alt="프로필 사진"></a>
+    <form>
+      <label for="commentInput" class="text-hide">댓글 입력창</label>
+      <input
+      id="commentInput"
+      type="text"
+      placeholder="댓글 입력하기..."
+      >
+      <button type="submit">게시</button>
+    </form>
+  </section>
+  <!-- comment section end -->
+</body>
+</html>
