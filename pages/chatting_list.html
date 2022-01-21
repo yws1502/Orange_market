@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>orange market | chatting list</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1 class="text-hide">채팅 리스트</h1>
+  <header class="top-basic-nav">
+    <button type="button" class="prev-btn">
+      <span class="text-hide">이전으로 가기 버튼</span>
+    </button>
+    <button type="button" class="more-btn">
+      <span class="text-hide">설정 더보기 버튼</span>
+    </button>
+    <nav class="tab-menu">
+      <ul>
+        <li><a href="/" class="home-tab">홈</a></li>
+        <li><a href="/pages/chatting_list.html" class="chat-tab on">채팅</a></li>
+        <li><a href="/pages/post.html" class="post-tab">게시물 작성</a></li>
+        <li><a href="/pages/profile_detail.html" class="profile-tab">프로필</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div role="main" id="tbm-main" class="chat-container">
+    <h2 class="text-hide">채팅창 내용</h2>
+    <ul>
+      <li class="on">
+        <a href="/pages/chatting_room.html">
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+          <div class="user-info">
+            <strong>애월읍 위니브 감귤농장</strong>
+            <p>
+              이번에 정정 언제하맨마씸?이번에 정정 언제하맨마씸?
+            </p>
+          </div>
+        </a>
+        <em>2020.10.25</em>
+      </li>
+      <li>
+        <a href="/pages/chatting_room.html">
+          <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+          <div class="user-info">
+            <strong>애월읍 위니브 감귤농장</strong>
+            <p>
+              이번에 정정 언제하맨마씸?
+            </p>
+          </div>
+        </a>
+        <em>2020.10.25</em>
+      </li>
+    </ul>
+  </div>
+  <script>
+    // 뒤로 가기 버튼
+    const prevBtn = document.querySelector(".prev-btn");
+
+    prevBtn.addEventListener("click", () => {
+      history.back();
+    });
+  </script>
+</body>
+</html>

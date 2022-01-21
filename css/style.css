@@ -1416,4 +1416,62 @@ input::placeholder {
   margin-top: 15px;
 }
 
+/* chatting list */
+.chat-container ul {
+  padding: 20px 16px;
+}
+.chat-container ul li + li {
+  margin-top: 20px;
+}
+.chat-container ul li {
+  display: flex;
+  justify-content: space-between;
+}
+.chat-container ul li.on a::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  background-color: #F26E22;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+}
+.chat-container ul li a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+.chat-container ul li a:active {
+  color: #F26E22;
+}
+.chat-container ul li a img {
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.chat-container ul li a .user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-container ul li a .user-info strong {
+  font-size: 1.4rem;
+}
+.chat-container ul li a .user-info p {
+  width: 200px;
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 200px;
+  font-size: 1.2rem;
+  color: #767676;
+}
+.chat-container ul li em {
+  color: #DBDBDB;
+  margin-top: 30px;
+}
+
 /*# sourceMappingURL=style.css.map */

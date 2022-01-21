@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+/* chatting list */
+.chat-container {
+  ul {
+    padding: 20px 16px;
+    li + li { margin-top: 20px; }
+    li {
+      display: flex;
+      justify-content: space-between;
+      &.on a::before {  
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        display: block;
+        background-color: $base-color;
+        border-radius: 50%;
+        width: 14px;
+        height: 14px;
+      }
+      a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: #000;
+        &:active { color: $base-color; }
+        img {
+          border-radius: 50%;
+          margin-right: 12px
+        }
+        .user-info {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          strong { font-size: 1.4rem; }
+          p {
+            @include ellipsis(200px);
+            max-width: 200px;
+            font-size: 1.2rem;
+            color: $gray-color;
+          }
+        }
+      }
+      em {
+        color: $line-color;
+        margin-top: 30px;
+      }
+    }
+  }
+}
