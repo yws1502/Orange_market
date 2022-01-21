@@ -793,12 +793,6 @@ input::placeholder {
 .join {
   margin: 40px 0;
 }
-.join h2 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 40px;
-}
 .join fieldset label {
   font-size: 1.2rem;
   font-weight: 500;
@@ -832,23 +826,16 @@ input::placeholder {
   color: #EB5757;
   margin-top: 6px;
 }
+.join h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+}
 .join button {
   margin-top: 30px;
 }
 
-.set-profile h2 {
-  font-size: 2.8rem;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 12px;
-}
-.set-profile p {
-  font-size: 1.4rem;
-  font-weight: 400;
-  color: #767676;
-  text-align: center;
-  margin-bottom: 30px;
-}
 .set-profile fieldset label {
   font-size: 1.2rem;
   font-weight: 500;
@@ -882,6 +869,19 @@ input::placeholder {
   color: #EB5757;
   margin-top: 6px;
 }
+.set-profile h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 12px;
+}
+.set-profile p {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #767676;
+  text-align: center;
+  margin-bottom: 30px;
+}
 .set-profile .image-input-wrap input {
   display: none;
 }
@@ -906,6 +906,8 @@ input::placeholder {
 .set-profile .image-input-wrap label img {
   width: 110px;
   height: 110px;
+  border: 1px solid #DBDBDB;
+  border-radius: 50%;
 }
 .set-profile button {
   margin-top: 30px;
