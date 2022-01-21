@@ -1408,7 +1408,8 @@ input::placeholder {
 .comment-view ul li div p {
   font-size: 1.3rem;
   font-weight: 400;
-  margin-top: 22px;
+  line-height: 16px;
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
