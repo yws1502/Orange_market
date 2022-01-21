@@ -1368,6 +1368,8 @@ input::placeholder {
 .comment-view ul li img {
   width: 42px;
   height: 42px;
+  border: 1px solid #DBDBDB;
+  border-radius: 50%;
   margin-right: 12px;
 }
 .comment-view ul li div {

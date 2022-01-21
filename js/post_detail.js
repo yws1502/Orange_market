@@ -7,6 +7,7 @@ const HEADERS = {
 };
 
 const $homePost = document.querySelector(".home-post");
+const $commentList = document.querySelector(".comment-view ul");
 
 function searchParam(key) {
   return new URLSearchParams(location.search).get(key);
@@ -24,17 +25,71 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS,
   };
-  const res = await fetch(`${ENDPOINT}/post/${postId}`, reqOption);
-  if (!res.ok) { location.href = "/pages/404.html"; }
-  const json = await res.json();
+  const postJson = await getDataAPI(`${ENDPOINT}/post/${postId}`, reqOption);
+  const commentsJson = await getDataAPI(`${ENDPOINT}/post/${postId}/comments`, reqOption);
 
-  paintPost(json.post);
+  paintPost(postJson.post);
+  paintComments(commentsJson.comments);
 };
 
-// 포스트 컴포넌트
+async function getDataAPI(URL, reqOption) {
+  const res = await fetch(URL, reqOption);
+  if (!res.ok) { location.href = "/pages/404.html"; }
+  return await res.json();
+}
+
+/* 댓글 ---------------------------------------------------------- */
+
+// 댓글 그리기
+function paintComments(comments) {
+  comments.forEach((el) => {
+    const { author, content, createdAt } = el;
+    const { accountname, image, username } = author;
+
+    $commentList.innerHTML += `
+    <li>
+      <img src=${image} alt="프로필 사진">
+      <div>
+        <a href="/pages/profile_detail.html?id=${accountname}">
+          <strong>${username}</strong>
+          <em>${timeForToday(createdAt)}</em>
+        </a>
+        <button class="more-btn">
+          <span class="text-hide">더보기 버튼</span>
+        </button>
+        <p>${content}</p>
+      </div>
+    </li>
+    `;
+  });
+}
+
+function timeForToday(startDate) {
+  const today = new Date();
+  const timeValue = new Date(startDate);
+
+  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+  if (betweenTime < 1) return "방금 전";
+  if (betweenTime < 60) return `${betweenTime}분 전`;
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `${betweenTimeHour}시간 전`
+  };
+
+  const betweenTimeDay = Math.floor(betweenTimeHour / 24 );
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}일 전`
+  };
+
+  return `${Math.floor(betweenTimeDay / 365)}년 전`;
+}
+
+/* 포스트 ---------------------------------------------------------- */
+
+// 포스트 그리기
 function paintPost(post) {
   const { author, commentCount, content, createdAt, heartCount, hearted } = post;
-  const postId = post.id;
   const postImage = post.image;
   const { accountname, username } = author;
   const userImage = author.image;
