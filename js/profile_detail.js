@@ -486,7 +486,7 @@ $feedList.addEventListener("click", (event) => {
 
   } else if (currentClass === "comment-btn"
     || currentClass === "post-img") {
-      location.href = `/pages/post_detail.html/?id=${postId}`
+      location.href = `/pages/post_detail.html?id=${postId}`
 
   } else if (accountName === myAccountName
     && currentClass === "more-btn") {
