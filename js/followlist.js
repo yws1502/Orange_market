@@ -42,7 +42,11 @@ window.onload = async () => {
             <span>@ ${el.accountname}</span>
           </p>
         </a>
-        <button type="button" name="follow-btn" class="s-button">팔로우</button>
+        <button
+          type="button"
+          name="follow-btn"
+          data-account=${el.accountname}
+          class="s-button">팔로우</button>
       </li>
     `;
     // 나랑 팔로우가 되어있는 경우
@@ -53,6 +57,43 @@ window.onload = async () => {
     }
   });
 }
+
+$followList.addEventListener("click", (event) => {
+  const currentNode = event.target;
+  
+  if (currentNode.name === "follow-btn") {
+    handleFollowBtn(currentNode);
+  }
+});
+
+// 팔로우 repaint 함수
+async function handleFollowBtn(Node) {
+  const account = Node.dataset.account;
+  let state;
+
+  if (Node.className.includes(" on")) {
+    // 언팔로우하기
+    await followAPI("DELETE", "unfollow", account);
+    state = "팔로우";
+  } else {
+    // 팔로우하기
+    await followAPI("POST", "follow", account);
+    state = "취소";
+  }
+
+  Node.textContent = state;
+  Node.classList.toggle("on");
+}
+
+// 팔로우 API 함수
+async function followAPI(method, modePath, accountname) {
+  const reqOption = {
+    method: method,
+    headers: HEADERS
+  };
+  await fetch(`${ENDPOINT}/profile/${accountname}/${modePath}`, reqOption);
+}
+
 
 
 // 뒤로 가기 버튼
