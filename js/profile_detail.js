@@ -29,7 +29,11 @@ const $productView = document.querySelector(".product-view");
 const $productList = $productView.querySelector("ul");
 
 const $feedList = document.querySelector(".feed-list");
+const $feedGrid = document.querySelector(".feed-grid");
 const $modal = document.querySelector(".modal");
+
+const $rowModeBtn = document.querySelector(".row-mode-btn");
+const $gridModeBtn = document.querySelector(".grid-mode-btn");
 
 
 // 접근한 사람 확인
@@ -193,15 +197,13 @@ $productList.addEventListener("click", (event) => {
     window.open(parentNode.dataset.link);
   } else if (parentNode.className === "product") {
     $modal.classList.remove("hidden");
-    if ($modal.children[0].children.length < 3) {
-      createModalTab(); // link-btn 생성
-    }
+    createModalTab(); // link-btn 생성
 
     const productId = parentNode.id;
     const productLink = parentNode.dataset.link;
 
     $modal.addEventListener("click", (event) => {
-      modalEvent(event, productId, productLink);
+      productModalEvent(event, productId, productLink);
     });
   }
 });
@@ -218,12 +220,13 @@ function createModalTab() {
 }
 
 // 모달 이벤트핸들러
-function modalEvent(event, productId, productLink) {
+function productModalEvent(event, productId, productLink) {
   const currentNode = event.target;
   const currentClass = currentNode.className;
   if (currentClass === "modal") {
     // 모달 창 닫기
     $modal.classList.add("hidden")
+    $modal.children[0].removeChild($modal.children[0].lastChild);
   } else if (currentClass === "delete-btn") {
     // 상품 삭제 
     if (confirm("해당 상품을 삭제하시겠습니까?")) {
@@ -450,10 +453,26 @@ async function paintHeart(Node, postId) {
   Node.textContent = heartCount;
 }
 
+// 포스트 모드 선택 이벤트
+$rowModeBtn.addEventListener("click", () => {
+  $rowModeBtn.classList.add("on");
+  $feedList.classList.remove("hidden");
+  $gridModeBtn.classList.remove("on");
+  $feedGrid.classList.add("hidden");
+})
+
+$gridModeBtn.addEventListener("click", () => {
+  $gridModeBtn.classList.add("on");
+  $feedGrid.classList.remove("hidden");
+  $rowModeBtn.classList.remove("on");
+  $feedList.classList.add("hidden");
+})
+
+
 // 각 포스트 이벤트
 $feedList.addEventListener("click", (event) => {
   const currentNode = event.target;
-  console.log(currentNode);
+  const currentClass = currentNode.className;
   const currentPost = event.path.find((node) => {
     return node.id.split("-")[0] === "post"
   });
@@ -462,15 +481,45 @@ $feedList.addEventListener("click", (event) => {
   if (currentNode.parentElement.className === "control-btns") {
     slideAnimation(currentNode);
 
-  } else if (currentNode.className.includes("heart-btn")) {
+  } else if (currentClass.includes("heart-btn")) {
     paintHeart(currentNode, postId);
 
-  } else if (currentNode.className === "comment-btn"
-    || currentNode.className === "post-img") {
+  } else if (currentClass === "comment-btn"
+    || currentClass === "post-img") {
       location.href = `/pages/post_detail.html/?id=${postId}`
+
+  } else if (accountName === myAccountName
+    && currentClass === "more-btn") {
+      $modal.classList.remove("hidden");
+
+      $modal.addEventListener("click", (event) => {
+        const currentNode = event.target;
+        const currentClass = currentNode.className;
+        if (currentClass === "modal") {
+          // 모달창 닫기
+          $modal.classList.add("hidden");
+        } else if (currentClass === "delete-btn") {
+          // 포스트 삭제
+          if (confirm("해당 피드를 삭제하시겠습니까?")) {
+            deletePost(postId)
+          }
+        } else if (currentClass === "edit-btn") {
+          // 포스트 수정
+          location.href = `/pages/post.html?id=${postId}`;
+        }
+      })
     }
 });
 
+async function deletePost(postId) {
+  const reqOption = {
+    method: "DELETE",
+    headers: HEADERS
+  };
+  const res = await fetch(`${ENDPOINT}/post/${postId}`, reqOption);
+  const json = await res.json();
+  alert(json.message);
+}
 
 // 뒤로 가기 버튼
 const prevBtn = document.querySelector(".prev-btn");

@@ -1130,55 +1130,55 @@ input::placeholder {
   overflow-x: scroll;
 }
 
-.my-feed-view nav {
+.feed-view nav {
   background-color: #fff;
   border-bottom: 1px solid #E5E5E5;
 }
-.my-feed-view nav ul {
+.feed-view nav ul {
   display: flex;
   justify-content: right;
   align-items: center;
   padding: 10px;
 }
-.my-feed-view nav ul li + li {
+.feed-view nav ul li + li {
   margin-left: 13px;
 }
-.my-feed-view nav ul button {
+.feed-view nav ul button {
   display: block;
   background-repeat: no-repeat;
   background-size: 25px;
   width: 26px;
   height: 26px;
 }
-.my-feed-view nav ul .row-mode-btn {
+.feed-view nav ul .row-mode-btn {
   background-image: url(/icon/icon-post-list-off.png);
 }
-.my-feed-view nav ul .grid-mode-btn {
+.feed-view nav ul .grid-mode-btn {
   background-image: url(/icon/icon-post-album-off.png);
 }
-.my-feed-view nav ul .row-mode-btn.on {
+.feed-view nav ul .row-mode-btn.on {
   background-image: url(/icon/icon-post-list-on.png);
 }
-.my-feed-view nav ul .grid-mode-btn.on {
+.feed-view nav ul .grid-mode-btn.on {
   background-image: url(/icon/icon-post-album-on.png);
 }
-.my-feed-view .home-post {
+.feed-view .home-post {
   padding-top: 16px;
 }
-.my-feed-view .feed-grid {
+.feed-view .feed-grid {
   background-color: #fff;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 8px;
   padding: 16px;
 }
-.my-feed-view .feed-grid.hidden {
+.feed-view .feed-grid.hidden {
   display: none;
 }
-.my-feed-view .feed-grid .multi {
+.feed-view .feed-grid .multi {
   position: relative;
 }
-.my-feed-view .feed-grid .multi:after {
+.feed-view .feed-grid .multi:after {
   content: "";
   display: block;
   background-image: url("/icon/icon-img-layers.svg");
@@ -1190,7 +1190,8 @@ input::placeholder {
   top: 6px;
   right: 6px;
 }
-.my-feed-view .feed-grid img {
+.feed-view .feed-grid img {
+  border-radius: 10px;
   width: 114px;
   height: 114px;
   cursor: pointer;
