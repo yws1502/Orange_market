@@ -188,7 +188,10 @@ $productList.addEventListener("click", (event) => {
   const currentNode = event.target;
   const parentNode = currentNode.parentElement;
 
-  if (parentNode.className === "product") {
+  if (accountName !== myAccountName) {
+    // 다른 유저 디테일
+    window.open(parentNode.dataset.link);
+  } else if (parentNode.className === "product") {
     $modal.classList.remove("hidden");
     if ($modal.children[0].children.length < 3) {
       createModalTab(); // link-btn 생성
