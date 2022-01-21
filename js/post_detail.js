@@ -8,12 +8,15 @@ const HEADERS = {
 
 const $homePost = document.querySelector(".home-post");
 const $commentList = document.querySelector(".comment-view ul");
+const $commentInput = document.querySelector("#commentInput");
+const $commentForm = document.querySelector(".comment form");
+const $modal = document.querySelector(".modal");
 
 function searchParam(key) {
   return new URLSearchParams(location.search).get(key);
 }
 
-const postId = searchParam("id");
+const POSTID = searchParam("id");
 
 // 이미지 슬라이드 가로길이
 const slideWidth = 304;
@@ -25,8 +28,8 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS,
   };
-  const postJson = await getDataAPI(`${ENDPOINT}/post/${postId}`, reqOption);
-  const commentsJson = await getDataAPI(`${ENDPOINT}/post/${postId}/comments`, reqOption);
+  const postJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}`, reqOption);
+  const commentsJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}/comments`, reqOption);
 
   paintPost(postJson.post);
   paintComments(commentsJson.comments);
@@ -34,7 +37,6 @@ window.onload = async () => {
 
 async function getDataAPI(URL, reqOption) {
   const res = await fetch(URL, reqOption);
-  if (!res.ok) { location.href = "/pages/404.html"; }
   return await res.json();
 }
 
@@ -43,7 +45,7 @@ async function getDataAPI(URL, reqOption) {
 // 댓글 그리기
 function paintComments(comments) {
   comments.forEach((el) => {
-    const { author, content, createdAt } = el;
+    const { author, content, createdAt, id } = el;
     const { accountname, image, username } = author;
 
     $commentList.innerHTML += `
@@ -54,7 +56,7 @@ function paintComments(comments) {
           <strong>${username}</strong>
           <em>${timeForToday(createdAt)}</em>
         </a>
-        <button class="more-btn">
+        <button data-id=${id} class="more-btn">
           <span class="text-hide">더보기 버튼</span>
         </button>
         <p>${content}</p>
@@ -64,6 +66,7 @@ function paintComments(comments) {
   });
 }
 
+// 생성일자와 현재 시간 비교 함수
 function timeForToday(startDate) {
   const today = new Date();
   const timeValue = new Date(startDate);
@@ -85,8 +88,78 @@ function timeForToday(startDate) {
   return `${Math.floor(betweenTimeDay / 365)}년 전`;
 }
 
-/* 포스트 ---------------------------------------------------------- */
+// 버튼 활성화 이벤트
+$commentInput.addEventListener("keyup", (event) => {
+  const submitBtn = event.target.nextElementSibling;
+  if ($commentInput.value) {
+    submitBtn.classList.add("on");
+  } else {
+    submitBtn.classList.remove("on");
+  }
+});
 
+// 댓글 생성 기능
+$commentForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const URL = `${ENDPOINT}/post/${POSTID}/comments`;
+  const comment = { content: $commentInput.value }
+  const reqOption = {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({ comment })
+  }
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+
+  if (res.ok) {
+    location.href = `/pages/post_detail.html?id=${POSTID}`;
+  } else {
+    alert(json.message)
+  }
+});
+
+// 댓글 이벤트 달기
+$commentList.addEventListener("click", (event) => {
+  const currentNode = event.target;
+  if (currentNode.className === "more-btn") {
+    const commentId = currentNode.dataset.id;
+    $modal.classList.remove("hidden");
+    
+    $modal.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const currentNode = event.target;
+      const currentClass = currentNode.className;
+      if (currentClass === "modal") {
+        $modal.classList.add("hidden");
+      } else if (currentClass === "delete-btn") {
+        if (confirm("댓글을 삭제하시겠습니까?")) {
+          await commentAPI("DELETE", commentId);
+          location.href = `/pages/post_detail.html?id=${POSTID}`;
+        }
+      } else if (currentClass === "report-btn") {
+        await commentAPI("GET", commentId, "report");
+      }
+      $modal.classList.add("hidden");
+    });
+  }
+});
+
+async function commentAPI(method, commentId, lastUrl=false) {
+  const URL = (!lastUrl)
+    ? `${ENDPOINT}/post/${POSTID}/comments/${commentId}`
+    : `${ENDPOINT}/post/${POSTID}/comments/${commentId}/${lastUrl}`;
+  
+  const reqOption = {
+    method: method,
+    headers: HEADERS
+  }
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+
+  alert(json.message);
+}
+
+/* 포스트 ---------------------------------------------------------- */
 // 포스트 그리기
 function paintPost(post) {
   const { author, commentCount, content, createdAt, heartCount, hearted } = post;
@@ -233,12 +306,12 @@ function slideAnimation(Node) {
 }
 
 // 좋아요 기능 통신
-async function heartAPI(route, method, postId, count) {
+async function heartAPI(route, method, POSTID, count) {
   const reqOption = {
     method: method,
     headers: HEADERS
   }
-  const res = await fetch(`${ENDPOINT}/post/${postId}/${route}`, reqOption);
+  const res = await fetch(`${ENDPOINT}/post/${POSTID}/${route}`, reqOption);
   const json = await res.json();
   if (json.status === 404) {
     alert("존재하지 않는 게시글입니다.");
@@ -253,10 +326,10 @@ async function paintHeart(Node) {
   let heartCount;
   if (Node.className.includes("on")) {
     // 좋아요 취소
-    heartCount = await heartAPI("unheart", "DELETE", postId, Node.textContent)
+    heartCount = await heartAPI("unheart", "DELETE", POSTID, Node.textContent)
   } else {
     // 좋아요
-    heartCount = await heartAPI("heart", "POST", postId, Node.textContent)
+    heartCount = await heartAPI("heart", "POST", POSTID, Node.textContent)
   }
   Node.classList.toggle("on");
   Node.textContent = heartCount;

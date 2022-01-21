@@ -166,7 +166,11 @@
     button {
       color: $light-gray-color;
       font-size: 1.4rem;
+      pointer-events: none;
     }
-    button.on { color: $base-color; }
+    button.on {
+      color: $base-color;
+      pointer-events: painted;
+    }
   }
 }

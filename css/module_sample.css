@@ -438,9 +438,11 @@ button {
 .comment form button {
   color: #C4C4C4;
   font-size: 1.4rem;
+  pointer-events: none;
 }
 .comment form button.on {
   color: #F26E22;
+  pointer-events: painted;
 }
 
 /* user module */
