@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orange market | profile edit</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1 class="text-hide">프로필 수정 페이지</h1>
+  <form>
+    <header class="top-upload-nav">
+      <h2 class="text-hide">네비게이션 영역</h2>
+      <button type="button" class="prev-btn">
+        <span class="text-hide">이전으로 가기 버튼</span>
+      </button>
+      <button type="submit" class="ms-button">저장</button>
+    </header>
+    <div role="main" id="tbm-main" class="form-container">
+      <!-- profile 설정 page start -->
+      <section class="set-profile">
+        <h2 class="text-hide">프로필 설정 입력 양식</h2>
+        <fieldset class="image-input-wrap">
+          <label for="imageInput">
+            <img
+              class="previewImage"
+              src="/images/basic-profile-img.png"
+              alt="프로필 설정하기"
+            >
+          </label>
+          <input 
+            type="file"
+            id="imageInput"
+            name="image"
+            accept="image/png, image/jpeg"
+          >
+        </fieldset>
+        <fieldset class="username-input-wrap">
+          <label for="userNameInput">사용자 이름</label>
+          <input
+            type="text"
+            id="userNameInput"
+            name="username"
+            minlength="2"
+            maxlength="10"
+            placeholder="2~10자 이내여야 합니다."
+            required
+          >
+          <strong class="err-msg">글자 수를 확인해 주세요.</strong>
+        </fieldset>
+        <fieldset class="account-input-wrap">
+          <label for="accountInput">계정 ID</label>
+          <input
+            type="text"
+            id="accountInput"
+            name="accountname"
+            placeholder="영문, 숫자, 특수문자(.),(_)만 사용 가능합니다."
+            required
+          >
+          <strong class="err-msg">영문,숫자,밑줄 및 마침표만 사용할 수 있습니다.</strong>
+        </fieldset>
+        <fieldset class="intro-input-wrap">
+          <label for="introInput">소개</label>
+          <input
+            type="text"
+            id="introInput"
+            name="intro"
+            maxlength="200"
+            placeholder="자신과 판매할 상품에 대해 소개해 주세요!"
+          >
+        </fieldset>
+      </section>
+    </div>
+  </form>
+  <!-- profile 설정 page end -->
+</body>
+</html>
