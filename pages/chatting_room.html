@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>orange market | chatting room</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <h1 class="text-hide">채팅방 페이지</h1>
+  <header class="top-chat-nav">
+    <h2 class="text-hide">채팅 탑 네비게이션</h2>
+    <div class="wrap">
+      <button type="button" class="prev-btn">
+        <span class="text-hide">이전 버튼</span>
+      </button>
+      <h2 class="top-nav-text">애월읍 위니브 감귤농장</h2>
+    </div>
+    <button type="button" class="more-btn">
+      <span class="text-hide">설정 더보기 버튼</span>
+    </button>
+  </header>
+  <div role="main" id="tbm-main" class="chatting-room">
+    <h2 class="text-hide">채팅방 내용</h2>
+    <ul class="chatting-cont">
+      <li class="other-user">
+        <a href="#none">
+          <img src="/images/Ellipse_mid.png" alt="상대 프로필 사진" class="avatar-img">
+        </a>
+        <p class="sended-text">아니한 것은 원질이 사막이다. 위하여, 청춘 보내는 있음으로써 인간이 열매를 크고 있으며, 쓸쓸하랴? 내려온 오직 용기가 풍부하게 얼마나 있을 아니다. 바로 발휘하기 있는 끝에 아니한 이상을 청춘의 타오르고 청춘 것이다. 맺어, 할지니, 그들의 인생에 얼마나 가슴이 굳세게 행복스럽고 사라지지 교향악이다. 대고, 위하여, 품었기 인생의 풀이 이것이야말로 기관과 있는가? 그것은 꾸며 같지 뼈 우는 듣는다. 앞이 투명하되 이상은 얼마나 살 곳이 오직 유소년에게서 것이다. 그림자는 인생을 실현에 피어나는 이것은 희망의 것이다.</p>
+        <em class="sended-time">12:39</em>
+      </li>
+      <li class="other-user">
+        <a href="#none">
+          <img src="/images/Ellipse_mid.png" alt="상대 프로필 사진" class="avatar-img">
+        </a>
+        <p class="sended-text">안녕하세요.</p>
+        <em class="sended-time">12:41</em>
+      </li>
+      <li class="other-user">
+        <a href="#none">
+          <img src="/images/Ellipse_mid.png" alt="상대 프로필 사진" class="avatar-img">
+        </a>
+        <img src="/images/chat-exapmle.png" alt="채팅방 사진" class="sended-img">
+        <em class="sended-time">12:45</em>
+      </li>
+      <li class="my-user">
+        <p class="sended-text">네 말씀하세요.</p>
+        <em class="sended-time">12:51</em>
+      </li>
+      <li class="my-user">
+        <img src="/images/chat-exapmle.png" alt="채팅방 사진" class="sended-img">
+        <em class="sended-time">12:51</em>
+      </li>
+      <li class="my-user">
+        <img src="/images/chat-exapmle.png" alt="채팅방 사진" class="sended-img">
+        <em class="sended-time">12:51</em>
+      </li>
+    </ul>
+  </div>
+  <div class="chatting-text">
+    <h2 class="text-hide">채팅 보내기 영역</h2>
+    <form>
+      <label class="text-hide" for="chatImgIput">사진 첨부 버튼</label>
+      <input
+        type="file"
+        id="chatImgIput"
+        class="chat-img-input"
+        name="send-img" 
+        accept="image/png, image/jpeg"
+        multiple
+      >
+      <label for="chatTextInput" class="text-hide">댓글 입력창</label>
+      <input
+        type="text"
+        id="chatTextInput"
+        class="chat-text-input"
+        name="send-chat-text"
+        placeholder="댓글 입력하기..."
+      >
+      <button type="submit" class="chat-submit-btn">전송</button>
+    </form>
+  </div>
+  <script>
+    // 뒤로 가기 버튼
+    const prevBtn = document.querySelector(".prev-btn");
+
+    prevBtn.addEventListener("click", () => {
+      history.back();
+    });
+  </script>
+</body>
+</html>

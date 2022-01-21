@@ -16,12 +16,6 @@
   font-weight: $font-weight;
 }
 
-@mixin sl-ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 @mixin input_module {
   fieldset {
     label {

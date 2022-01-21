@@ -1,0 +1,101 @@
+@charset "utf-8";
+/* chatt room */
+.chatting-room#tbm-main {
+  background-color: #f2f2f2;
+  margin-top: 40px;
+  .chatting-cont {
+    padding: 20px 16px;
+    .avatar-img {
+      border-radius: 50%;
+      width: 42px;
+      margin-right: 12px;
+    }
+    li + li { margin-top: 10px}
+    .other-user {
+      display: flex;
+      .sended-text { border-top-left-radius: 0; }
+      .sended-time {
+        @include font-module(1rem, 400);
+        color: $gray-color;
+        margin: auto 0 10px 6px;
+      }
+    }
+    .my-user {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: right;
+      .sended-text {
+        position: relative;
+        background-color: $base-color;
+        border-top-right-radius: 0;
+        color: #fff;
+        border: none;
+      }
+      .sended-time {
+        @include font-module(1rem, 400);
+        color: $gray-color;
+        margin: auto 6px 10px 0;
+      }
+    }
+    // 말풍선
+    .sended-text {
+      display: block;
+      background-color: #fff;
+      border: 1px solid $light-gray-color;
+      border-radius: 10px;
+      max-width: 240px;
+      font-size: 1.4rem;
+      line-height: 17px;
+      padding: 12px;
+    }
+    // 보낸 이미지
+    .sended-img { border-radius: 5px; }
+  }
+}
+
+// 하단 메시지 보내기 창
+.chatting-text {
+  @include fixed_position("bottom");
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid $line-color;
+  padding: 1.3rem 2rem 1.2rem 1.6rem;
+  form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .chat-img-input {
+      text-indent: -9999px;
+      position: relative;
+      width: 41px;
+      cursor: pointer;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        background-image: url(/icon/img-button.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 36px;
+        height: 36px;
+      }
+    }
+    .chat-text-input {
+      width: 90%;
+      font-size: 1.4rem;
+      border: none;
+      padding: 1rem 1.8rem;
+      &:focus { outline: none; }
+      &::placeholder { color: $light-gray-color; }
+    }
+    .chat-submit-btn {
+      color: $light-gray-color;
+      font-size: 1.4rem;
+      width: 32px;
+      &.on {
+        color: $base-color;
+      }
+    }
+  }
+}

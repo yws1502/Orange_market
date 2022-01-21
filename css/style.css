@@ -1474,4 +1474,119 @@ input::placeholder {
   margin-top: 30px;
 }
 
+/* chatt room */
+.chatting-room#tbm-main {
+  background-color: #f2f2f2;
+  margin-top: 40px;
+}
+.chatting-room#tbm-main .chatting-cont {
+  padding: 20px 16px;
+}
+.chatting-room#tbm-main .chatting-cont .avatar-img {
+  border-radius: 50%;
+  width: 42px;
+  margin-right: 12px;
+}
+.chatting-room#tbm-main .chatting-cont li + li {
+  margin-top: 10px;
+}
+.chatting-room#tbm-main .chatting-cont .other-user {
+  display: flex;
+}
+.chatting-room#tbm-main .chatting-cont .other-user .sended-text {
+  border-top-left-radius: 0;
+}
+.chatting-room#tbm-main .chatting-cont .other-user .sended-time {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #767676;
+  margin: auto 0 10px 6px;
+}
+.chatting-room#tbm-main .chatting-cont .my-user {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: right;
+}
+.chatting-room#tbm-main .chatting-cont .my-user .sended-text {
+  position: relative;
+  background-color: #F26E22;
+  border-top-right-radius: 0;
+  color: #fff;
+  border: none;
+}
+.chatting-room#tbm-main .chatting-cont .my-user .sended-time {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #767676;
+  margin: auto 6px 10px 0;
+}
+.chatting-room#tbm-main .chatting-cont .sended-text {
+  display: block;
+  background-color: #fff;
+  border: 1px solid #C4C4C4;
+  border-radius: 10px;
+  max-width: 240px;
+  font-size: 1.4rem;
+  line-height: 17px;
+  padding: 12px;
+}
+.chatting-room#tbm-main .chatting-cont .sended-img {
+  border-radius: 5px;
+}
+
+.chatting-text {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  bottom: 0;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #DBDBDB;
+  padding: 1.3rem 2rem 1.2rem 1.6rem;
+}
+.chatting-text form {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.chatting-text form .chat-img-input {
+  text-indent: -9999px;
+  position: relative;
+  width: 41px;
+  cursor: pointer;
+}
+.chatting-text form .chat-img-input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url(/icon/img-button.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 36px;
+  height: 36px;
+}
+.chatting-text form .chat-text-input {
+  width: 90%;
+  font-size: 1.4rem;
+  border: none;
+  padding: 1rem 1.8rem;
+}
+.chatting-text form .chat-text-input:focus {
+  outline: none;
+}
+.chatting-text form .chat-text-input::placeholder {
+  color: #C4C4C4;
+}
+.chatting-text form .chat-submit-btn {
+  color: #C4C4C4;
+  font-size: 1.4rem;
+  width: 32px;
+}
+.chatting-text form .chat-submit-btn.on {
+  color: #F26E22;
+}
+
 /*# sourceMappingURL=style.css.map */
