@@ -532,26 +532,29 @@ button {
 
 .product {
   background-color: #fff;
-}
-.product a {
   color: #000;
 }
-.product a:active {
+.product:active {
   color: #F26E22;
 }
-.product a img {
+.product img {
   display: block;
   width: 140px;
   height: 90px;
   border-radius: 5px;
   margin-bottom: 0.6rem;
 }
-.product a strong {
+.product strong {
+  width: 120px;
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   display: block;
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
 }
-.product a span {
+.product span {
   font-size: 1.2rem;
   font-weight: 700;
   color: #F26E22;

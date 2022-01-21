@@ -101,27 +101,26 @@
 
 .product {
   background-color: #fff;
-  a {
-    color: #000;
-    &:active {
-      color: $base-color;
-    }
-    img {
-      display: block;
-      width: 140px;
-      height: 90px;
-      border-radius: 5px;
-      margin-bottom: 0.6rem;
-    }
-    strong {
-      display: block;
-      font-size: 1.4rem;
-      margin-bottom: 0.4rem;
-    }
-    span {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: $base-color;
-    }
+  color: #000;
+  &:active {
+    color: $base-color;
+  }
+  img {
+    display: block;
+    width: 140px;
+    height: 90px;
+    border-radius: 5px;
+    margin-bottom: 0.6rem;
+  }
+  strong {
+    @include ellipsis(120px);
+    display: block;
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+  }
+  span {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: $base-color;
   }
 }

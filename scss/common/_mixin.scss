@@ -63,3 +63,11 @@
     bottom: 0;
   }
 }
+
+@mixin ellipsis($width:70px) {
+  width: $width;
+  padding: 0 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
