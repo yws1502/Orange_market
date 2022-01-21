@@ -359,6 +359,10 @@ button {
   border-top: 1px solid #DBDBDB;
   padding: 1.3rem 2rem 1.2rem 1.6rem;
 }
+.comment img {
+  width: 42px;
+  height: 42px;
+}
 .comment form {
   display: flex;
   justify-content: space-between;
@@ -379,6 +383,9 @@ button {
 .comment form button {
   color: #C4C4C4;
   font-size: 1.4rem;
+}
+.comment form button.on {
+  color: #F26E22;
 }
 
 /* user module */

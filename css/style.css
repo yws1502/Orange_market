@@ -359,6 +359,10 @@ button {
   border-top: 1px solid #DBDBDB;
   padding: 1.3rem 2rem 1.2rem 1.6rem;
 }
+.comment img {
+  width: 42px;
+  height: 42px;
+}
 .comment form {
   display: flex;
   justify-content: space-between;
@@ -379,6 +383,9 @@ button {
 .comment form button {
   color: #C4C4C4;
   font-size: 1.4rem;
+}
+.comment form button.on {
+  color: #F26E22;
 }
 
 /* user module */
@@ -1339,6 +1346,69 @@ input::placeholder {
 }
 .nonFile-input-wrapper fieldset input::placeholder {
   color: #C4C4C4;
+}
+
+/* post detail */
+.comment-view {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid #DBDBDB;
+  margin-top: 20px;
+}
+.comment-view ul {
+  width: 359px;
+  padding: 15px 10px;
+}
+.comment-view ul li + li {
+  margin-top: 23px;
+}
+.comment-view ul li {
+  display: flex;
+}
+.comment-view ul li img {
+  width: 42px;
+  height: 42px;
+  margin-right: 12px;
+}
+.comment-view ul li div {
+  width: 304px;
+}
+.comment-view ul li div a {
+  color: #000;
+  vertical-align: -15px;
+}
+.comment-view ul li div a strong {
+  font-size: 1.4rem;
+  font-weight: 550;
+}
+.comment-view ul li div a em {
+  font-size: 1rem;
+  font-weight: 400;
+  vertical-align: 2px;
+  color: #767676;
+}
+.comment-view ul li div a em::before {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  vertical-align: 3px;
+  background-color: #767676;
+  margin: 0 5px;
+}
+.comment-view ul li div .more-btn {
+  background-image: url(/icon/icon-more-vertical.png);
+  background-position: center;
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-top: 8px;
+}
+.comment-view ul li div p {
+  font-size: 1.3rem;
+  font-weight: 400;
+  margin-top: 22px;
 }
 
 /*# sourceMappingURL=style.css.map */

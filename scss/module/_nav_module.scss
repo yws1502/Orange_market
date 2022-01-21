@@ -147,6 +147,10 @@
   align-items: center;
   border-top: 1px solid $line-color;
   padding: 1.3rem 2rem 1.2rem 1.6rem;
+  img {
+    width: 42px;
+    height: 42px;
+  }
   form {
     display: flex;
     justify-content: space-between;
@@ -163,5 +167,6 @@
       color: $light-gray-color;
       font-size: 1.4rem;
     }
+    button.on { color: $base-color; }
   }
 }
