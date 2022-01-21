@@ -1235,11 +1235,12 @@ input::placeholder {
   text-align: left;
   width: 100%;
   height: 100%;
+  border-radius: 10px;
   padding: 14px 0 14px 26px;
 }
 .modal ul button:hover {
   color: #F26E22;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(240, 240, 240, 0.8);
 }
 
 @keyframes show-modal {
