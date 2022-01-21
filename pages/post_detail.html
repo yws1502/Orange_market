@@ -22,50 +22,11 @@
   <!-- header section end -->
   <div role="main" id="tbm-main">
     <!-- feed detail start -->
-    <section class="home-post">
+    <section>
       <h2 class="text-hide">포스트 상세</h2>
-      <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-img">
-      <div class="content-wrap">
-        <p class="text-wrap">
-          <a href="/pages/profile.html?=id${props.userId}">
-            <strong>${props.username}</strong>
-            <span>@ ${props.accountname}</span>
-          </a>
-          <button type="button" class="more-btn">
-            <span class="text-hide">설정 더보기 버트</span>
-          </button>
-        </p>
-        <p class="post-content">${props.content}</p>
-
-        <div class="slide-wrapper">
-          <ul class="slide-list">
-            <li class="slide">
-              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-            </li>
-            <li class="slide">
-              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-            </li>
-            <li class="slide">
-              <img src="/images/post-img-example.png" alt="포스트 사진" class="post-img"> 
-            </li>
-          </ul>
-          <div class="control-btns">
-            <button type="button" class="on" name="one"></button>
-            <button type="button" name="two"></button>
-            <button type="button" name="three"></button>
-          </div>
-        </div>
-
-        <button 
-          type="button"
-          class="heart-btn"
-        >3</button>
-        <button
-          type="button"
-          class="comment-btn"
-        >3</button>
-        <span class="upload-date">2022년 1월 21일</span>
-      </div>
+      <article class="home-post">
+        <!-- feed 동적 생성 -->
+      </article>
     </section>
     <!-- feed detail end -->
     <!-- comment view start -->
@@ -131,5 +92,6 @@
   </div>
   <!-- modal section end -->
   <!-- comment section end -->
+  <script src="/js/post_detail.js"></script>
 </body>
 </html>
