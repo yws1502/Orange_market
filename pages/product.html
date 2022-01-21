@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/product_upload.css">
+    <title>orange market | product upload or update</title>
+</head>
+<body>
+  <h1 class="text-hide">상품 등록</h1>
+  <form>
+    <header class="top-upload-nav">
+      <h2 class="text-hide">네이게이션 영역</h2>
+      <button type="button" class="prev-btn">
+        <span class="text-hide">이전으로 가기</span>
+      </button>
+      <button type="button" class="ms-disabled-button" id="submitBtn">저장</button>
+    </header>
+    <div role="main" class="product-app">
+      <h2 class="text-hide">상품 등록 양식</h2>
+        <p>이미지 등록</p>
+        <!-- 상품 이미지 인풋 -->
+        <fieldset class="product-image-wrap">
+          <img class="preview-image hidden" src="" alt="상품 이미지">
+          <label for="imageInput">
+            <span class="text-hide">이미지 등록 버튼</span>
+          </label>
+          <input type="file" id="imageInput" accept="image/png, image/jpeg">
+        </fieldset>
+        <div class="nonFile-input-wrapper">
+          <!-- 상품 이름 인풋 -->
+          <fieldset class="name-input-wrap">
+            <label for="productName">상품명</label>
+            <input
+            type="text"
+            id="productName"
+            name="itemName"
+            placeholder="2~15자 이내여야 합니다."
+            minlength="2"
+            maxlength="15"
+            required
+            >
+          </fieldset>
+          <!-- 상품 가격 인풋 -->
+          <fieldset class="price-input-wrap">
+            <label for="productPrice">가격</label>
+            <input
+            type="number"
+            id="productPrice"
+            name="price"
+            placeholder="숫자만 입력 가능합니다."
+            required
+            >
+          </fieldset>
+          <!-- 상품 주소 인풋 -->
+          <fieldset class="link-input-wrap">
+            <label for="productLink">판매 링크</label>
+            <input
+              type="url"
+              id="productLink"
+              name="link"
+              placeholder="URL을 입력해 주세요."
+              pattern="https://.*"
+              required
+            >
+          </fieldset>
+        </div> 
+      </div>
+  </form>
+  <script src="/js/product.js"></script>
+</body>
+</html>
