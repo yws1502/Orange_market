@@ -29,6 +29,8 @@ const $productView = document.querySelector(".product-view");
 const $productList = $productView.querySelector("ul");
 
 const $feedList = document.querySelector(".feed-list");
+const $modal = document.querySelector(".modal");
+
 
 // 접근한 사람 확인
 const temp = searchParam("id")
@@ -67,6 +69,8 @@ window.onload = async () => {
 }
 
 
+/* user view ----------------------------------------------------- */
+
 // 서버에서 Profile 관련된 데이터 불러오기 함수
 async function getProfileDataAPI(path, path2=false) {
   const URL = (path2)
@@ -96,6 +100,7 @@ function paintUserView(props) {
     followBtn.textContent = "언팔로우";
   }
 }
+
 
 // user View Event
 $userView.addEventListener("click", (event) => {
@@ -159,7 +164,7 @@ async function followAPI(method, modePath) {
   return json.profile.followerCount;
 }
 
-
+/* product view ----------------------------------------------------- */
 // product view 그려주기 함수
 function paintProductView(products) {
   products.forEach((el) => {
@@ -170,16 +175,79 @@ function paintProductView(products) {
         class="product"
         data-link=${el.link}
       >
-        <a>
-          <img src=${el.itemImage} alt="상품 이미지">
-          <strong>${el.itemName}</strong>
-          <span>${price}원</span>
-        </a>
+        <img src=${el.itemImage} alt="상품 이미지">
+        <strong>${el.itemName}</strong>
+        <span>${price}원</span>
       </li>
     `;
   });
 }
 
+// product 영역 이벤트 추가
+$productList.addEventListener("click", (event) => {
+  const currentNode = event.target;
+  const parentNode = currentNode.parentElement;
+
+  if (parentNode.className === "product") {
+    $modal.classList.remove("hidden");
+    if ($modal.children[0].children.length < 3) {
+      createModalTab(); // link-btn 생성
+    }
+
+    const productId = parentNode.id;
+    const productLink = parentNode.dataset.link;
+
+    $modal.addEventListener("click", (event) => {
+      modalEvent(event, productId, productLink);
+    });
+  }
+});
+
+// 링크 버튼 생성
+function createModalTab() {
+  const li = document.createElement("li");
+  const button = document.createElement("button");
+  button.setAttribute("type", "button");
+  button.className = "link-btn"
+  button.textContent = "웹사이트에서 상품 보기"
+  li.appendChild(button);
+  $modal.children[0].appendChild(li); // ul에 넣어주기
+}
+
+// 모달 이벤트핸들러
+function modalEvent(event, productId, productLink) {
+  const currentNode = event.target;
+  const currentClass = currentNode.className;
+  if (currentClass === "modal") {
+    // 모달 창 닫기
+    $modal.classList.add("hidden")
+  } else if (currentClass === "delete-btn") {
+    // 상품 삭제 
+    if (confirm("해당 상품을 삭제하시겠습니까?")) {
+      deleteProduct(productId);
+    }
+  } else if (currentClass === "edit-btn") {
+    // 상품 수정 페이지 이동
+    location.href = `/pages/product.html?id=${productId}`;
+
+  } else if (currentClass === "link-btn") {
+    // 해당 링크로 이동
+    window.open(productLink);
+  }
+}
+
+// 상품 삭제 API
+async function deleteProduct(productId) {
+  const reqOption = {
+    method: "DELETE",
+    headers: HEADERS
+  };
+  const res = await fetch(`${ENDPOINT}/product/${productId}`, reqOption);
+  const json = await res.json();
+  alert(json.message)
+}
+
+/* post view ----------------------------------------------------- */
 // post grid view 그려주기 함수
 function paintPostGridView(posts) {
   const $feedGrid = document.querySelector(".feed-grid");
