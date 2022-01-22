@@ -158,7 +158,7 @@ function resizeHeight($node) {
 }
 
 // 게시물 게시
-$form.addEventListener("submit", (event) => {
+$form.addEventListener("submit", async (event) => {
   event.preventDefault();
   const postImages = $imageWrapper.querySelectorAll("img");
   const imageUrls = [].map.call(postImages, (el) => el.src);
@@ -168,9 +168,9 @@ $form.addEventListener("submit", (event) => {
     image: stringImageUrl
   };
   if (POSTID) {
-    uploadPost("PUT", post, POSTID);
+    await uploadPost("PUT", post, POSTID);
   } else {
-    uploadPost("POST", post);
+    await uploadPost("POST", post);
   }
   location.href = "/pages/profile_detail.html";
 });
@@ -187,9 +187,6 @@ async function uploadPost(method, post, lastUrl=false) {
     body: JSON.stringify({post})
   };
   const res = await fetch(URL, reqOption);
-  console.log(res)
-  const json = await res.json();
-  console.log(json)
 }
 
 
