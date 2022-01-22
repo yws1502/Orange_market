@@ -36,6 +36,7 @@ if (POSTID) {
     const images = stringImage.split(",");
 
     $textInput.value = content;
+    resizeHeight($textInput); // 높이 맞춰주기
     paintImage(images)
   }
 }
@@ -72,6 +73,42 @@ function paintImage(images) {
   }
 }
 
+// 이미지 취소
+$imageWrapper.addEventListener("click", (event) => {
+  const currentNode = event.target;
+  if (currentNode.tagName === "BUTTON") {
+    currentNode.parentElement.remove()
+    const $lis = $imageWrapper.children;
+    // 만약 삭제 후 이미지가 1개가 남는 다면 single-image 클래스 추가
+    if ($lis.length === 1) {
+      $lis[0].querySelector("img").classList.add("single-image");
+    }
+  }
+})
+
+// textarea 이벤트
+$textInput.addEventListener("keyup", () => {
+  resizeHeight($textInput);
+  if ($textInput.value) {
+    stateBtnContol(true);
+  } else {
+    stateBtnContol(false);
+  }
+});
+
+// 버튼 활성화 함수 true를 넘겨준 경우 활성화
+function stateBtnContol(state) {
+  $submitBtn.className = (state === true)
+    ? "ms-button"
+    : "ms-disabled-button";
+  $submitBtn.disabled = !state;
+}
+
+// textarea 높이 조절 함수
+function resizeHeight($node) {
+  $node.style.height = "0px";
+  $node.style.height = `${($node.scrollHeight)}px`;
+}
 
 // 뒤로 가기 버튼
 const prevBtn = document.querySelector(".prev-btn");
