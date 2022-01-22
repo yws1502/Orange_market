@@ -1073,6 +1073,15 @@ input::placeholder {
 }
 
 /* profile_detail */
+.logout-btn {
+  background-image: url(/icon/icon-logout.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
+  width: 25px;
+  height: 25px;
+}
+
 .profile-container {
   width: 390px;
   background-color: #E5E5E5;

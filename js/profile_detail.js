@@ -34,7 +34,7 @@ const $modal = document.querySelector(".modal");
 
 const $rowModeBtn = document.querySelector(".row-mode-btn");
 const $gridModeBtn = document.querySelector(".grid-mode-btn");
-
+const $logoutBtn = document.querySelector("header .logout-btn");
 
 // 접근한 사람 확인
 const temp = searchParam("id")
@@ -520,6 +520,14 @@ async function deletePost(postId) {
   const json = await res.json();
   alert(json.message);
 }
+
+$logoutBtn.addEventListener("click", () => {
+  if (confirm("로그아웃 하시겠습니까?")) {
+    localStorage.removeItem("TOKEN");
+    localStorage.removeItem("ACCOUNTNAME");
+    location.href = "/pages/login.html";
+  }
+});
 
 // 뒤로 가기 버튼
 const prevBtn = document.querySelector(".prev-btn");
