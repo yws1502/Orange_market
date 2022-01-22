@@ -14,6 +14,8 @@ const POSTID = searchParam("id");
 const $textInput = document.querySelector("#textInput");
 const $imageWrapper = document.querySelector(".post-input-section ul");
 const $submitBtn = document.querySelector("#submitBtn");
+const $imageInput = document.querySelector("#imageInput");
+
 
 // 포스트 수정인 경우 값 불러오기
 if (POSTID) {
@@ -37,13 +39,54 @@ if (POSTID) {
 
     $textInput.value = content;
     resizeHeight($textInput); // 높이 맞춰주기
-    paintImage(images)
+    paintPreviewImage(images)
   }
 }
 
+// 이미지 서버에 올리기
+$imageInput.addEventListener("change", async () => {
+  const limit = 3 - $imageWrapper.childElementCount;
+
+  if ($imageInput.files.length > limit) {
+    // 제한을 넘긴 경우
+    const infoMsg = (limit)
+      ? `업로드 갯수 제한이 넘었습니다. [${3-limit} / 3]`
+      : "총 3장의 이미지만 업로드 가능합니다.";
+    alert(infoMsg);
+    // $imageInput에 files 값 초기화
+    $imageInput.files = new DataTransfer().files;
+  } else {
+
+    const formData = new FormData();
+    [].forEach.call($imageInput.files, ((file) => {
+      formData.append("image", file);
+    }));
+    const stringImageUrl = await uploadImages(formData);
+    const imageUrls = stringImageUrl.split(",");
+    paintPreviewImage(imageUrls)
+  };
+});
+
+// 이미지 API
+async function uploadImages(formData) {
+  const URL = `${ENDPOINT}/image/uploadfiles`;
+  const reqOption = {
+    method: "POST",
+    body: formData
+  };
+
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+  const result = json.map((file) => `${ENDPOINT}/${file.filename}`);
+  return result.join(",");
+}
+
+
 // 이미지 뿌려주기 함수
-function paintImage(images) {
-  if (images.length && images.length === 1) {
+function paintPreviewImage(images) {
+  // 사진을 뿌려준 것이 없고 한개만 들어온 경우
+  if (!$imageWrapper.childElementCount
+      && images.length === 1) {
     $imageWrapper.innerHTML += `
     <li>
       <img
@@ -56,7 +99,12 @@ function paintImage(images) {
       </button>
     </li>
     `;
-  } else if (images.length > 1) {
+  } else if (images.length > 0) {
+    // 이미 이미지가 1개만 업로드 되어 있는 경우 처리
+    if ($imageWrapper.childElementCount === 1) {
+      $imageWrapper.children[0].querySelector("img")
+        .classList.remove("single-image");
+    }
     images.forEach((image) => {
       $imageWrapper.innerHTML += `
       <li>
@@ -72,6 +120,7 @@ function paintImage(images) {
     });
   }
 }
+
 
 // 이미지 취소
 $imageWrapper.addEventListener("click", (event) => {
@@ -116,4 +165,3 @@ const prevBtn = document.querySelector(".prev-btn");
 prevBtn.addEventListener("click", () => {
   history.back();
 });
-
