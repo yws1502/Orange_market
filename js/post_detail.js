@@ -1,5 +1,6 @@
 const TOKEN = localStorage.getItem("TOKEN");
 const ENDPOINT = "http://146.56.183.55:5050";
+const MYACCOUNTNAME = localStorage.getItem("ACCOUNTNAME");
 
 const HEADERS = {
   "Authorization" : `Bearer ${TOKEN}`,
@@ -40,124 +41,6 @@ async function getDataAPI(URL, reqOption) {
   return await res.json();
 }
 
-/* 댓글 ---------------------------------------------------------- */
-
-// 댓글 그리기
-function paintComments(comments) {
-  comments.forEach((el) => {
-    const { author, content, createdAt, id } = el;
-    const { accountname, image, username } = author;
-
-    $commentList.innerHTML += `
-    <li>
-      <img src=${image} alt="프로필 사진">
-      <div>
-        <a href="/pages/profile_detail.html?id=${accountname}">
-          <strong>${username}</strong>
-          <em>${timeForToday(createdAt)}</em>
-        </a>
-        <button data-id=${id} class="more-btn">
-          <span class="text-hide">더보기 버튼</span>
-        </button>
-        <p>${content}</p>
-      </div>
-    </li>
-    `;
-  });
-}
-
-// 생성일자와 현재 시간 비교 함수
-function timeForToday(startDate) {
-  const today = new Date();
-  const timeValue = new Date(startDate);
-
-  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
-  if (betweenTime < 1) return "방금 전";
-  if (betweenTime < 60) return `${betweenTime}분 전`;
-
-  const betweenTimeHour = Math.floor(betweenTime / 60);
-  if (betweenTimeHour < 24) {
-    return `${betweenTimeHour}시간 전`
-  };
-
-  const betweenTimeDay = Math.floor(betweenTimeHour / 24 );
-  if (betweenTimeDay < 365) {
-    return `${betweenTimeDay}일 전`
-  };
-
-  return `${Math.floor(betweenTimeDay / 365)}년 전`;
-}
-
-// 버튼 활성화 이벤트
-$commentInput.addEventListener("keyup", (event) => {
-  const submitBtn = event.target.nextElementSibling;
-  if ($commentInput.value) {
-    submitBtn.classList.add("on");
-  } else {
-    submitBtn.classList.remove("on");
-  }
-});
-
-// 댓글 생성 기능
-$commentForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const URL = `${ENDPOINT}/post/${POSTID}/comments`;
-  const comment = { content: $commentInput.value }
-  const reqOption = {
-    method: "POST",
-    headers: HEADERS,
-    body: JSON.stringify({ comment })
-  }
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-
-  if (res.ok) {
-    location.href = `/pages/post_detail.html?id=${POSTID}`;
-  } else {
-    alert(json.message)
-  }
-});
-
-// 댓글 이벤트 달기
-$commentList.addEventListener("click", (event) => {
-  const currentNode = event.target;
-  if (currentNode.className === "more-btn") {
-    const commentId = currentNode.dataset.id;
-    $modal.classList.remove("hidden");
-    
-    $modal.addEventListener("click", async (event) => {
-      event.preventDefault();
-      const currentNode = event.target;
-      const currentClass = currentNode.className;
-      if (currentClass === "modal") {
-        $modal.classList.add("hidden");
-      } else if (currentClass === "delete-btn") {
-        if (confirm("댓글을 삭제하시겠습니까?")) {
-          await commentAPI("DELETE", commentId);
-          location.href = `/pages/post_detail.html?id=${POSTID}`;
-        }
-      } else if (currentClass === "report-btn") {
-        await commentAPI("GET", commentId, "report");
-      }
-      $modal.classList.add("hidden");
-    });
-  }
-});
-
-async function commentAPI(method, commentId, lastUrl=false) {
-  const URL = (!lastUrl)
-    ? `${ENDPOINT}/post/${POSTID}/comments/${commentId}`
-    : `${ENDPOINT}/post/${POSTID}/comments/${commentId}/${lastUrl}`;
-  
-  const reqOption = {
-    method: method,
-    headers: HEADERS
-  }
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-
-  alert(json.message);
-}
 
 /* 포스트 ---------------------------------------------------------- */
 // 포스트 그리기
@@ -191,7 +74,7 @@ function paintPost(post) {
       <p class="text-wrap">
         <a href="/pages/profile_detail.html?id=${accountname}">
           <strong>${username}</strong>
-          <span>@ ${accountname}</span>
+          <span class="post-accountname">@ ${accountname}</span>
         </a>
         <button type="button" class="more-btn">
           <span class="text-hide">설정 더보기 버트</span>
@@ -347,6 +230,132 @@ $homePost.addEventListener("click", (event) => {
 
   }
 });
+
+
+/* 댓글 ---------------------------------------------------------- */
+
+// 댓글 그리기
+function paintComments(comments) {
+  comments.forEach((el) => {
+    const { author, content, createdAt, id } = el;
+    const { accountname, image, username } = author;
+
+    $commentList.innerHTML += `
+    <li>
+      <img src=${image} alt="프로필 사진">
+      <div>
+        <a href="/pages/profile_detail.html?id=${accountname}">
+          <strong>${username}</strong>
+          <em>${timeForToday(createdAt)}</em>
+        </a>
+        <button data-id=${id} class="more-btn">
+          <span class="text-hide">더보기 버튼</span>
+        </button>
+        <p>${content}</p>
+      </div>
+    </li>
+    `;
+  });
+}
+
+// 생성일자와 현재 시간 비교 함수
+function timeForToday(startDate) {
+  const today = new Date();
+  const timeValue = new Date(startDate);
+
+  const betweenTime = Math.floor((today.getTime() - timeValue.getTime()) / 1000 / 60);
+  if (betweenTime < 1) return "방금 전";
+  if (betweenTime < 60) return `${betweenTime}분 전`;
+
+  const betweenTimeHour = Math.floor(betweenTime / 60);
+  if (betweenTimeHour < 24) {
+    return `${betweenTimeHour}시간 전`
+  };
+
+  const betweenTimeDay = Math.floor(betweenTimeHour / 24 );
+  if (betweenTimeDay < 365) {
+    return `${betweenTimeDay}일 전`
+  };
+
+  return `${Math.floor(betweenTimeDay / 365)}년 전`;
+}
+
+// 버튼 활성화 이벤트
+$commentInput.addEventListener("keyup", (event) => {
+  const submitBtn = event.target.nextElementSibling;
+  if ($commentInput.value) {
+    submitBtn.classList.add("on");
+  } else {
+    submitBtn.classList.remove("on");
+  }
+});
+
+// 댓글 생성 기능
+$commentForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const URL = `${ENDPOINT}/post/${POSTID}/comments`;
+  const comment = { content: $commentInput.value }
+  const reqOption = {
+    method: "POST",
+    headers: HEADERS,
+    body: JSON.stringify({ comment })
+  }
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+
+  if (res.ok) {
+    location.href = `/pages/post_detail.html?id=${POSTID}`;
+  } else {
+    alert(json.message)
+  }
+});
+
+// 댓글 이벤트 달기
+$commentList.addEventListener("click", (event) => {
+  const currentNode = event.target;
+  if (currentNode.className === "more-btn") {
+    const commentId = currentNode.dataset.id;
+    $modal.classList.remove("hidden");
+    const postAccountName 
+    = document.querySelector(".post-accountname").textContent.split(" ")[1];
+
+    if (postAccountName !== MYACCOUNTNAME) {
+      $modal.querySelector(".delete-btn").remove();
+    }
+
+    $modal.addEventListener("click", async (event) => {
+      event.preventDefault();
+      const currentNode = event.target;
+      const currentClass = currentNode.className;
+      if (currentClass === "modal") {
+        $modal.classList.add("hidden");
+      } else if (currentClass === "delete-btn") {
+        if (confirm("댓글을 삭제하시겠습니까?")) {
+          await commentAPI("DELETE", commentId);
+          location.href = `/pages/post_detail.html?id=${POSTID}`;
+        }
+      } else if (currentClass === "report-btn") {
+        await commentAPI("GET", commentId, "report");
+      }
+      $modal.classList.add("hidden");
+    });
+  }
+});
+
+async function commentAPI(method, commentId, lastUrl=false) {
+  const URL = (!lastUrl)
+    ? `${ENDPOINT}/post/${POSTID}/comments/${commentId}`
+    : `${ENDPOINT}/post/${POSTID}/comments/${commentId}/${lastUrl}`;
+  
+  const reqOption = {
+    method: method,
+    headers: HEADERS
+  }
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+
+  alert(json.message);
+}
 
 
 // 뒤로 가기 버튼
