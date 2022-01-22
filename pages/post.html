@@ -21,7 +21,7 @@
     <div role="main" id="tbm-main">
       <section class="post-input-section">
         <h2 class="text-hide">게시물 입력 양식</h2>
-        <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+        <img src="/images/Ellipse_mid.png" alt="프로필 사진" class="avatar-image">
         <div>
           <fieldset class="text-input-container">
             <label for="textInput" class="text-hide">게시물 입력란</label>
@@ -29,7 +29,9 @@
           </fieldset>
           <fieldset class="image-input-container">
             <label for="imageInput">
-              이미지 추가하기
+              <span class="text-hide">
+                이미지 추가하기
+              </span>
             </label>
             <input
               id="imageInput"
@@ -39,7 +41,10 @@
           </fieldset>
           <ul>
             <li>
-              <img src="/images/post-img-example.png" alt="게시물 사진">
+              <img
+                src="/images/post-img-example.png"
+                alt="게시물 사진" class="single-image"
+              >
               <button type="button">
                 <span class="text-hide">사진 업로드 취소하기</span>
               </button>

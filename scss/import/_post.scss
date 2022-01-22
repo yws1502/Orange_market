@@ -1,0 +1,64 @@
+@charset "utf-8";
+
+/* post */
+.post-input-section {
+  display: flex;
+  padding: 16px;
+  .avatar-image {
+    width: 42px;
+    height: 42px;
+    border: 1px solid $line-color;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  div {
+    width: 304px;
+  }
+  .text-input-container {
+    margin: 15px 0;
+    #textInput {
+      border: none;
+      width: 100%;
+      height: fit-content;
+      &:focus {
+        outline-color: $base-color;
+      }
+    }
+  }
+  .image-input-container {
+    #imageInput { display: none; }
+    label {
+      position: absolute;
+      bottom: 36px;
+      right: 36px;
+      cursor: pointer;
+      &::before {
+        @include create_visual_class(
+          "/icon/upload-file.png",
+          45px, 45px
+        );
+      }
+    }
+  }
+  ul {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+  }
+  li {
+    position: relative;
+    width: fit-content;
+    .single-image { width: 304px; }
+    img { width: 168px; }
+    button {
+      position: absolute;
+      top: 8px; right: 8px;
+      background-image: url(/icon/icon-delete.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-color: transparent;
+      width: 15px;
+      height: 15px;
+    }
+  }
+}
