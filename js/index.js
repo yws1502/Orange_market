@@ -1,8 +1,24 @@
+const TOKEN = localStorage.getItem("TOKEN");
 const ENDPOINT = "http://146.56.183.55:5050";
 const HEADERS = {
-  "Authorization": `Bearer ${localStorage.getItem("TOKEN")}`,
+  "Authorization": `Bearer ${TOKEN}`,
   "Content-type": "application/json",
 };
+
+// access check function
+async function accessCheck() {
+  const URL = `${ENDPOINT}/user/checktoken`;
+  const reqOption = {
+    method: "GET",
+    headers: HEADERS
+  };
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+  // 접근 금지!
+  if (!json.isValid) { location.href = "/pages/login.html" }
+}
+accessCheck();
+
 const hasFeed = document.querySelector(".has-feed-section");
 const hasntFeed = document.querySelector(".hasnt-feed-section");
 

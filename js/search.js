@@ -3,6 +3,20 @@ const ENDPOINT = "http://146.56.183.55:5050";
 const SEARCH_API = ENDPOINT + "/user/searchuser/?keyword=";
 const defaultImage = "http://146.56.183.55:5050/Ellipse.png";
 
+// access check function
+async function accessCheck() {
+  const URL = `${ENDPOINT}/user/checktoken`;
+  const reqOption = {
+    method: "GET",
+    headers: HEADERS
+  };
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+  // 접근 금지!
+  if (!json.isValid) { location.href = "/pages/login.html" }
+}
+accessCheck();
+
 const HEADERS = {
   "Authorization" : `Bearer ${TOKEN}`,
   "Content-type" : "application/json"

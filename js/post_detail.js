@@ -7,6 +7,20 @@ const HEADERS = {
   "Content-type" : "application/json"
 };
 
+// access check function
+async function accessCheck() {
+  const URL = `${ENDPOINT}/user/checktoken`;
+  const reqOption = {
+    method: "GET",
+    headers: HEADERS
+  };
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+  // 접근 금지!
+  if (!json.isValid) { location.href = "/pages/login.html" }
+}
+accessCheck();
+
 const $homePost = document.querySelector(".home-post");
 const $commentList = document.querySelector(".comment-view ul");
 const $commentInput = document.querySelector("#commentInput");

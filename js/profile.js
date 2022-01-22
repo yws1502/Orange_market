@@ -6,6 +6,20 @@ const HEADERS = {
   "Content-Type": "application/json",
 };
 
+// access check function
+async function accessCheck() {
+  const URL = `${ENDPOINT}/user/checktoken`;
+  const reqOption = {
+    method: "GET",
+    headers: HEADERS
+  };
+  const res = await fetch(URL, reqOption);
+  const json = await res.json();
+  // 접근 금지!
+  if (!json.isValid) { location.href = "/pages/login.html" }
+}
+accessCheck();
+
 // 이메일 비밀번호 둘다 입력했을 떄 button 활성화
 const $setProfileSection = document.querySelector(".set-profile");
 const $setProfileBtn = document.querySelector("#submitBtn");
