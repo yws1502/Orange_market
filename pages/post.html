@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>orage market | post</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <form>
+    <h1 class="text-hide">게시물 생성 및 수정 페이지</h1>
+    <!-- navigation start -->
+    <header class="top-upload-nav">
+      <button type="button" class="prev-btn">
+        <span class="text-hide">이전으로 가기 버튼</span>
+      </button>
+      <button type="button" class="ms-disabled-button">업로드</button>
+    </header>
+    <!-- navigation end -->
+    <div role="main" id="tbm-main">
+      <section class="post-input-section">
+        <h2 class="text-hide">게시물 입력 양식</h2>
+        <img src="/images/Ellipse_mid.png" alt="프로필 사진">
+        <div>
+          <fieldset class="text-input-container">
+            <label for="textInput" class="text-hide">게시물 입력란</label>
+            <textarea name="textInput" id="textInput" placeholder="게시물 입력하기..."></textarea>
+          </fieldset>
+          <fieldset class="image-input-container">
+            <label for="imageInput">
+              이미지 추가하기
+            </label>
+            <input
+              id="imageInput"
+              type="file"
+              multiple
+              accept="image/png, image/jpeg">
+          </fieldset>
+          <ul>
+            <li>
+              <img src="/images/post-img-example.png" alt="게시물 사진">
+              <button type="button">
+                <span class="text-hide">사진 업로드 취소하기</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </form>
+</body>
+</html>
