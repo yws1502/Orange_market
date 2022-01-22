@@ -15,7 +15,7 @@
       <button type="button" class="prev-btn">
         <span class="text-hide">이전으로 가기 버튼</span>
       </button>
-      <button type="button" class="ms-disabled-button">업로드</button>
+      <button type="button" id="submitBtn" class="ms-disabled-button">업로드</button>
     </header>
     <!-- navigation end -->
     <div role="main" id="tbm-main">
@@ -40,19 +40,12 @@
               accept="image/png, image/jpeg">
           </fieldset>
           <ul>
-            <li>
-              <img
-                src="/images/post-img-example.png"
-                alt="게시물 사진" class="single-image"
-              >
-              <button type="button">
-                <span class="text-hide">사진 업로드 취소하기</span>
-              </button>
-            </li>
+            <!-- 이미지 동적 생성 li -->
           </ul>
         </div>
       </section>
     </div>
   </form>
+  <script src="/js/post.js"></script>
 </body>
 </html>

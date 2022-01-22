@@ -15,11 +15,12 @@
     width: 304px;
   }
   .text-input-container {
-    margin: 15px 0;
+    margin: 10px 0;
     #textInput {
       border: none;
       width: 100%;
       height: fit-content;
+      line-height: 16px;
       &:focus {
         outline-color: $base-color;
       }
@@ -48,8 +49,16 @@
   li {
     position: relative;
     width: fit-content;
-    .single-image { width: 304px; }
-    img { width: 168px; }
+    .single-image {
+      width: 304px;
+      height: 228px;
+      border-radius: 10px;
+    }
+    img {
+      width: 168px;
+      height: 126px;
+      border-radius: 10px;
+    }
     button {
       position: absolute;
       top: 8px; right: 8px;

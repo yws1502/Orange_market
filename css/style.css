@@ -1605,12 +1605,13 @@ input::placeholder {
   width: 304px;
 }
 .post-input-section .text-input-container {
-  margin: 15px 0;
+  margin: 10px 0;
 }
 .post-input-section .text-input-container #textInput {
   border: none;
   width: 100%;
   height: fit-content;
+  line-height: 16px;
 }
 .post-input-section .text-input-container #textInput:focus {
   outline-color: #F26E22;
@@ -1644,9 +1645,13 @@ input::placeholder {
 }
 .post-input-section li .single-image {
   width: 304px;
+  height: 228px;
+  border-radius: 10px;
 }
 .post-input-section li img {
   width: 168px;
+  height: 126px;
+  border-radius: 10px;
 }
 .post-input-section li button {
   position: absolute;
