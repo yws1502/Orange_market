@@ -107,7 +107,7 @@ button {
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   padding-bottom: 50px;
-  animation: show-modal 1s ease-out;
+  animation: show-modal 0.7s ease-out;
   animation-fill-mode: forwards;
 }
 .modal ul::before {
@@ -1658,6 +1658,9 @@ input::placeholder {
   background-color: transparent;
   width: 15px;
   height: 15px;
+}
+.post-input-section li button:hover {
+  background-color: #fff;
 }
 
 /*# sourceMappingURL=style.css.map */

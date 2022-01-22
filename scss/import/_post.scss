@@ -59,6 +59,9 @@
       background-color: transparent;
       width: 15px;
       height: 15px;
+      &:hover {
+        background-color: #fff;
+      }
     }
   }
 }

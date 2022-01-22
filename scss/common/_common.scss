@@ -26,7 +26,7 @@
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     padding-bottom: 50px;
-    animation: show-modal 1s ease-out;
+    animation: show-modal .7s ease-out;
     animation-fill-mode: forwards;
     &::before {
       content: "";
