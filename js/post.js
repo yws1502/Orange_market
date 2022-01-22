@@ -15,7 +15,7 @@ const $textInput = document.querySelector("#textInput");
 const $imageWrapper = document.querySelector(".post-input-section ul");
 const $submitBtn = document.querySelector("#submitBtn");
 const $imageInput = document.querySelector("#imageInput");
-
+const $form = document.querySelector("form");
 
 // 포스트 수정인 경우 값 불러오기
 if (POSTID) {
@@ -56,7 +56,7 @@ $imageInput.addEventListener("change", async () => {
     // $imageInput에 files 값 초기화
     $imageInput.files = new DataTransfer().files;
   } else {
-
+    stateBtnContol(true)
     const formData = new FormData();
     [].forEach.call($imageInput.files, ((file) => {
       formData.append("image", file);
@@ -80,7 +80,6 @@ async function uploadImages(formData) {
   const result = json.map((file) => `${ENDPOINT}/${file.filename}`);
   return result.join(",");
 }
-
 
 // 이미지 뿌려주기 함수
 function paintPreviewImage(images) {
@@ -121,7 +120,6 @@ function paintPreviewImage(images) {
   }
 }
 
-
 // 이미지 취소
 $imageWrapper.addEventListener("click", (event) => {
   const currentNode = event.target;
@@ -158,6 +156,42 @@ function resizeHeight($node) {
   $node.style.height = "0px";
   $node.style.height = `${($node.scrollHeight)}px`;
 }
+
+// 게시물 게시
+$form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const postImages = $imageWrapper.querySelectorAll("img");
+  const imageUrls = [].map.call(postImages, (el) => el.src);
+  const stringImageUrl = imageUrls.join(",");
+  const post = {
+    content: $textInput.value,
+    image: stringImageUrl
+  };
+  if (POSTID) {
+    uploadPost("PUT", post, POSTID);
+  } else {
+    uploadPost("POST", post);
+  }
+  location.href = "/pages/profile_detail.html";
+});
+
+// 서버에 올리기
+async function uploadPost(method, post, lastUrl=false) {
+  const URL = (lastUrl)
+    ? `${ENDPOINT}/post/${lastUrl}`
+    : `${ENDPOINT}/post`;
+
+  const reqOption = {
+    method: method,
+    headers: HEADERS,
+    body: JSON.stringify({post})
+  };
+  const res = await fetch(URL, reqOption);
+  console.log(res)
+  const json = await res.json();
+  console.log(json)
+}
+
 
 // 뒤로 가기 버튼
 const prevBtn = document.querySelector(".prev-btn");
