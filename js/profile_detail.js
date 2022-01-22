@@ -120,7 +120,7 @@ $userView.addEventListener("click", (event) => {
 
   } else if (currentNode.className === "chat-btn") {
     // 채팅룸으로
-    location.href = `/pages/chattingroom.html?id=${accountName}`;
+    location.href = `/pages/chatting_room.html?id=${accountName}`;
 
   } else if (currentNode.name === "edit-profile-btn") {
     // 프로필 수정 페이지
