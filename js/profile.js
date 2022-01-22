@@ -123,3 +123,10 @@ async function updateProfile(event) {
 }
 
 $form.addEventListener("submit", updateProfile);
+
+// 뒤로 가기 버튼
+const prevBtn = document.querySelector(".prev-btn");
+
+prevBtn.addEventListener("click", () => {
+  history.back();
+});
