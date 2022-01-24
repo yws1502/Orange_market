@@ -74,16 +74,11 @@ function paintPost(post) {
     ? "heart-btn on"
     : "heart-btn";
 
-  // 잘못된 이미지 경로 기본 이미지로 바꿔주기
-  const userImageUrl = (userImage.match(/https*:\/\/[0-9.]*:5050/) !== null)
-    ? userImage
-    : "http://146.56.183.55:5050/Ellipse.png";
-
   // 날짜 변환
   const createDate = transDateFormat(createdAt);
 
   $homePost.innerHTML += `
-    <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
+    <img src=${userImage} alt="프로필 사진" class="avatar-img">
     <div class="content-wrap">
       <p class="text-wrap">
         <a href="/pages/profile_detail.html?id=${accountname}">

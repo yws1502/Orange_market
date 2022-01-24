@@ -1,7 +1,6 @@
 const TOKEN = localStorage.getItem("TOKEN");
 const ENDPOINT = "https://api.mandarin.cf/";
 const SEARCH_API = ENDPOINT + "/user/searchuser/?keyword=";
-const defaultImage = "https://api.mandarin.cf/1643007582530.png";
 
 // access check function
 async function accessCheck() {
