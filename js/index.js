@@ -108,29 +108,19 @@ function paintPost(posts) {
     `;
 
     // 이미지가 있을 때만 그려주기
-    if (postImage) {
-      const postImageList = postImage.split(",");
-      paintPostImage(postImageList, postId);
-
-      // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
-      const slideList = document.querySelector(`#post-${postId} .slide-list`);
-      const slideAll = slideList.querySelectorAll(".slide");
-
-      let slideCount = slideAll.length;
-      slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
-    }
+    if (postImage) { paintPostImage(postImage, postId); }
   });
 }
 
 // 포스트 이미지 생성 함수
-function paintPostImage(postImageList, postId) {
+function paintPostImage(postImage, postId) {
+  const postImageList = postImage.split(",");
+
   const slideWrapper = document.querySelector(`#post-${postId} .slide-wrapper`);
   const slideList = document.createElement("ul");
   const controlBtns = document.createElement("div");
   slideList.className = "slide-list";
   controlBtns.className = "control-btns";
-
-  const btnIdList = ["one", "two", "three"];
 
   slideList.innerHTML += `
   <li class="slide">
@@ -138,25 +128,29 @@ function paintPostImage(postImageList, postId) {
   </li>
   `;
   controlBtns.innerHTML += `
-    <button type="button" class="on" name=${btnIdList[0]}></button>
+    <button type="button" class="on" name="0"}></button>
   `;
 
   if (postImageList.length === 1) {
     slideWrapper.appendChild(slideList);
   } else {
-    for (let i = 1; i < 3; i++) {
+    for (let i = 1; i < postImageList.length; i++) {
       slideList.innerHTML += `
       <li class="slide">
         <img src=${postImageList[i]} alt="포스트 사진" class="post-img"> 
       </li>
       `;
       controlBtns.innerHTML += `
-        <button type="button" name=${btnIdList[i]}></button>
+        <button type="button" name=${i}></button>
       `;
     }
     slideWrapper.appendChild(slideList);
     slideWrapper.appendChild(controlBtns);
   }
+
+  // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
+  let slideCount = slideList.childElementCount;
+  slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
 }
 
 // 날짜 포멧 변환함수 
@@ -178,25 +172,19 @@ function slideAnimation(Node) {
   const ControlBtnAll = ControlList.querySelectorAll("button"); // button list
   const slideList = ControlList.previousElementSibling; // .slide-list ul
 
-  // 이전에 선택되어 있던 위치 찾기
+  // 이전에 선택되어 있던 위치와 이동할 위치 찾기
   let prevIdx;
+  let moveIdx;
   ControlBtnAll.forEach((el, idx) => {
-    if (el.className === "on") prevIdx = idx;
+    if (el.className === "on") {
+      prevIdx = idx;
+    } else if (+Node.name === idx) {
+      moveIdx = idx;
+    }
   });
   ControlBtnAll[prevIdx].classList.remove("on");
   Node.classList.add("on");
-
-  switch (Node.name) {
-    case "one":
-      moveSlide(0, slideList);
-      break;
-    case "two":
-      moveSlide(1, slideList);
-      break;
-    case "three":
-      moveSlide(2, slideList);
-      break;
-  }
+  moveSlide(moveIdx, slideList);
 }
 
 // 좋아요 기능 통신
