@@ -1,9 +1,10 @@
-const ENDPOINT = "http://146.56.183.55:5050";
+const ENDPOINT = "https://api.mandarin.cf/";
 const HEADERS = {
   "Content-type" : "application/json"
 };
 
 const selectLogin = document.querySelector(".select-login");
+const splash = document.querySelector(".splash");
 const loginSection = document.querySelector(".login");
 const selectLoginBtnWrap = selectLogin.querySelector(".btn-wrap")
 const loginForm = loginSection.querySelector("form");
@@ -14,6 +15,7 @@ const loginBtn = loginSection.querySelector("form button");
 // hello orange market
 setTimeout(() => {
   selectLogin.classList.remove("show-effect");
+  splash.classList.add("hidden");
 }, 2100);
 
 // 화면 이동 함수 (이메일 로그인, 회원가입)

@@ -1,4 +1,4 @@
-const ENDPOINT = "http://146.56.183.55:5050";
+const ENDPOINT = "https://api.mandarin.cf/";
 const TOKEN = localStorage.getItem("TOKEN");
 const ACCOUNTNAME = localStorage.getItem("ACCOUNTNAME");
 const HEADERS = {

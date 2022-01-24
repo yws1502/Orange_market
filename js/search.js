@@ -1,7 +1,7 @@
 const TOKEN = localStorage.getItem("TOKEN");
-const ENDPOINT = "http://146.56.183.55:5050";
+const ENDPOINT = "https://api.mandarin.cf/";
 const SEARCH_API = ENDPOINT + "/user/searchuser/?keyword=";
-const defaultImage = "http://146.56.183.55:5050/Ellipse.png";
+const defaultImage = "https://api.mandarin.cf/1643007582530.png";
 
 // access check function
 async function accessCheck() {
@@ -56,17 +56,11 @@ async function paintUserList(event) {
           `<span class="highlight">${searchValue}</span>`
         );
 
-        // 잘못된 이미지 경로 예외 처리
-        const userImageUrl = 
-        (image.match(/http:\/\/[0-9].*:5050\//) && !image.match(/undefined/))
-        ? image
-        : defaultImage;
-  
         const li = document.createElement("li");
         li.className = "user-search";
         li.innerHTML = `
           <a href="/pages/profile_detail.html?id=${accountname}">
-            <img src=${userImageUrl} alt="프로필 사진" class="avatar-img">
+            <img src=${image} alt="프로필 사진" class="avatar-img">
             <p class="user-info">
               <strong>${userName}</strong>
               <span>@ ${accountname}</span>
