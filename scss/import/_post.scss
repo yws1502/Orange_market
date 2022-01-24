@@ -17,13 +17,13 @@
   .text-input-container {
     margin: 10px 0;
     #textInput {
-      border: none;
       width: 100%;
-      height: fit-content;
-      line-height: 16px;
-      &:focus {
-        outline-color: $base-color;
-      }
+      line-height: 20px;
+      border: none;
+      resize: none;
+      outline: none;
+      border-radius: 2px;
+      &:focus { border-bottom: 2px solid $base-color; }
     }
   }
   .image-input-container {

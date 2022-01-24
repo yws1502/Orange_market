@@ -1617,13 +1617,15 @@ input::placeholder {
   margin: 10px 0;
 }
 .post-input-section .text-input-container #textInput {
-  border: none;
   width: 100%;
-  height: fit-content;
-  line-height: 16px;
+  line-height: 20px;
+  border: none;
+  resize: none;
+  outline: none;
+  border-radius: 2px;
 }
 .post-input-section .text-input-container #textInput:focus {
-  outline-color: #F26E22;
+  border-bottom: 2px solid #F26E22;
 }
 .post-input-section .image-input-container #imageInput {
   display: none;
