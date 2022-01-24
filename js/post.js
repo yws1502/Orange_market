@@ -31,6 +31,8 @@ const $submitBtn = document.querySelector("#submitBtn");
 const $imageInput = document.querySelector("#imageInput");
 const $form = document.querySelector("form");
 
+document.querySelector(".avatar-image").src = localStorage.getItem("PROFILE_IMAGE");
+
 // 포스트 수정인 경우 값 불러오기
 if (POSTID) {
   window.onload = async () => {

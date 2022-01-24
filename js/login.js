@@ -84,6 +84,7 @@ async function loginApi(event) {
     // 토큰 저장 후 메인 피드 화면으로 이동
     localStorage.setItem("TOKEN", json.user.token);
     localStorage.setItem("ACCOUNTNAME", json.user.accountname);
+    localStorage.setItem("PROFILE_IMAGE", json.user.image);
     location.href = "/index.html";
   }
 };
