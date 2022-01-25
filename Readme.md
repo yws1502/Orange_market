@@ -1,8 +1,15 @@
 <div align="center">
   <h1>🍊 Orange market</h1>
-  <a href="https://paullabworkspace.notion.site/SNS-cdd5ed88a24b499593d7081dc28a5cbc" style="color: orange">
+  <a href="https://paullabworkspace.notion.site/SNS-cdd5ed88a24b499593d7081dc28a5cbc">
   프로젝트 설명 및 요구 사항
   </a>
+  
+  <p>
+    <br>
+    <a href="orange-maket.netlify.app">
+      오렌지 마켓 배포 URL
+    </a>
+  </p>
 </div>
 
 
