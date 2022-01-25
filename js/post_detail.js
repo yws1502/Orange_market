@@ -59,55 +59,54 @@ async function getDataAPI(URL, reqOption) {
 /* 포스트 ---------------------------------------------------------- */
 // 포스트 그리기
 function paintPost(post) {
-  const { author, commentCount, content, createdAt, heartCount, hearted } = post;
-  const postImage = post.image;
-  const { accountname, username } = author;
-  const userImage = author.image;
+  $homePost.innerHTML += createFeed(post);
 
-  // 포스트에 이미지가 없다면 hidden하기
-  const slideWrapperClassName = (postImage)
+  // 이미지가 있을 때만 그려주기
+  if (post.image) { paintPostImage(post.image); }
+}
+
+function createFeed(post) {
+  const { author } = post;
+  const { accountname, username } = author;
+
+  const slideWrapperClassName = (post.image)
     ? "slide-wrapper"
     : "slide-wrapper hidden";
 
-  // 좋아요 버튼 확인하기
-  const heartBtnClass = (hearted)
+  const heartBtnClassName = (post.hearted)
     ? "heart-btn on"
     : "heart-btn";
 
-  // 날짜 변환
-  const createDate = transDateFormat(createdAt);
+  const createDate = transDateFormat(post.createdAt);
 
-  $homePost.innerHTML += `
-    <img src=${userImage} alt="프로필 사진" class="avatar-img">
-    <div class="content-wrap">
-      <p class="text-wrap">
-        <a href="/pages/profile_detail.html?id=${accountname}">
-          <strong>${username}</strong>
-          <span class="post-accountname">@ ${accountname}</span>
-        </a>
-        <button type="button" class="more-btn">
-          <span class="text-hide">설정 더보기 버트</span>
-        </button>
-      </p>
-      <p class="post-content">${content}</p>
+  return (`
+  <img src=${author.image} alt="프로필 사진" class="avatar-img">
+  <div class="content-wrap">
+    <p class="text-wrap">
+      <a href="/pages/profile_detail.html?id=${accountname}">
+        <strong>${username}</strong>
+        <span class="post-accountname">@ ${accountname}</span>
+      </a>
+      <button type="button" class="more-btn">
+        <span class="text-hide">설정 더보기 버트</span>
+      </button>
+    </p>
+    <p class="post-content">${post.content}</p>
 
-      <div class=${slideWrapperClassName}>
-      </div>
-
-      <button 
-        type="button"
-        class="${heartBtnClass}"
-      >${heartCount}</button>
-      <button
-        type="button"
-        class="comment-btn"
-      >${commentCount}</button>
-      <span class="upload-date">${createDate}</span>
+    <div class=${slideWrapperClassName}>
     </div>
-  `;
 
-  // 이미지가 있을 때만 그려주기
-  if (postImage) { paintPostImage(postImage); }
+    <button 
+      type="button"
+      class="${heartBtnClassName}"
+    >${post.heartCount}</button>
+    <button
+      type="button"
+      class="comment-btn"
+    >${post.commentCount}</button>
+    <span class="upload-date">${createDate}</span>
+  </div>
+  `);
 }
 
 // 포스트 이미지 생성 함수
@@ -197,20 +196,19 @@ async function heartAPI(route, method, POSTID, count) {
     alert("존재하지 않는 게시글입니다.");
     location.href = "/pages/404.html";
   }
-  const resultCount = (method === "POST") ? +count + 1 : +count - 1
+  const resultCount = (method === "POST")
+    ? +count + 1
+    : +count - 1;
+
   return resultCount
 }
 
 
 async function paintHeart(Node) {
-  let heartCount;
-  if (Node.className.includes("on")) {
-    // 좋아요 취소
-    heartCount = await heartAPI("unheart", "DELETE", POSTID, Node.textContent)
-  } else {
-    // 좋아요
-    heartCount = await heartAPI("heart", "POST", POSTID, Node.textContent)
-  }
+  const heartCount = (Node.className.includes("on"))
+    ? await heartAPI("unheart", "DELETE", POSTID, Node.textContent)
+    : await heartAPI("heart", "POST", POSTID, Node.textContent);
+
   Node.classList.toggle("on");
   Node.textContent = heartCount;
 }

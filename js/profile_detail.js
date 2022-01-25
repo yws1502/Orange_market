@@ -290,59 +290,58 @@ function paintPostGridView(posts) {
 // post list view 그려주기 함수
 function paintPostListView(posts) {
   posts.forEach((post) => {
-    const { author, commentCount, content, createdAt, heartCount, hearted } = post;
-    const postId = post.id;
-    const postImage = post.image;
-    const { accountname, username } = author;
-    const userImage = author.image;
 
-    // 포스트에 이미지가 없다면 hidden하기
-    const slideWrapperClassName = (postImage)
-      ? "slide-wrapper"
-      : "slide-wrapper hidden";
-
-    // 좋아요 버튼 확인하기
-    const heartBtnClass = (hearted)
-      ? "heart-btn on"
-      : "heart-btn";
-
-    // 날짜 변환
-    const createDate = transDateFormat(createdAt);
-
-    $feedList.innerHTML += `
-      <li id=post-${post.id} class="home-post">
-        <img src=${userImage} alt="프로필 사진" class="avatar-img">
-        <div class="content-wrap">
-          <p class="text-wrap">
-            <a href="/pages/profile_detail.html?id=${accountname}">
-              <strong>${username}</strong>
-              <span>@ ${accountname}</span>
-            </a>
-            <button type="button" class="more-btn">
-              <span class="text-hide">설정 더보기 버트</span>
-            </button>
-          </p>
-          <p class="post-content">${content}</p>
-
-          <div class=${slideWrapperClassName}>
-          </div>
-
-          <button 
-            type="button"
-            class="${heartBtnClass}"
-          >${heartCount}</button>
-          <button
-            type="button"
-            class="comment-btn"
-          >${commentCount}</button>
-          <span class="upload-date">${createDate}</span>
-        </div>
-      </li>
-    `;
+    $feedList.innerHTML += createFeed(post);
 
     // 이미지가 있을 때만 그려주기
-    if (postImage) { paintPostImage(postImage, postId); }
+    if (post.image) { paintPostImage(post.image, post.id); }
   });
+}
+
+function createFeed(post) {
+  const { author } = post;
+  const { accountname, username } = author;
+
+  const slideWrapperClassName = (post.image)
+    ? "slide-wrapper"
+    : "slide-wrapper hidden";
+
+  const heartBtnClassName = (post.hearted)
+    ? "heart-btn on"
+    : "heart-btn";
+
+  const createDate = transDateFormat(post.createdAt);
+
+  return (`
+    <li id=post-${post.id} class="home-post">
+      <img src=${author.image} alt="프로필 사진" class="avatar-img">
+      <div class="content-wrap">
+        <p class="text-wrap">
+          <a href="/pages/profile_detail.html?id=${accountname}">
+            <strong>${username}</strong>
+            <span>@ ${accountname}</span>
+          </a>
+          <button type="button" class="more-btn">
+            <span class="text-hide">설정 더보기 버트</span>
+          </button>
+        </p>
+        <p class="post-content">${post.content}</p>
+
+        <div class=${slideWrapperClassName}>
+        </div>
+
+        <button 
+          type="button"
+          class="${heartBtnClassName}"
+        >${post.heartCount}</button>
+        <button
+          type="button"
+          class="comment-btn"
+        >${post.commentCount}</button>
+        <span class="upload-date">${createDate}</span>
+      </div>
+    </li>
+  `);
 }
 
 // 포스트 이미지 생성 함수
@@ -439,14 +438,10 @@ async function heartAPI(route, method, postId, count) {
 
 
 async function paintHeart(Node, postId) {
-  let heartCount;
-  if (Node.className.includes("on")) {
-    // 좋아요 취소
-    heartCount = await heartAPI("unheart", "DELETE", postId, Node.textContent)
-  } else {
-    // 좋아요
-    heartCount = await heartAPI("heart", "POST", postId, Node.textContent)
-  }
+  const heartCount = (Node.className.includes("on"))
+    ? await heartAPI("unheart", "DELETE", postId, Node.textContent)
+    : await heartAPI("heart", "POST", postId, Node.textContent);
+
   Node.classList.toggle("on");
   Node.textContent = heartCount;
 }
