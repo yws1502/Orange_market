@@ -98,7 +98,10 @@
       width: 84px;
       text-align: center;
       // 공통 속성
-      a { color: $gray-color; }
+      a {
+        color: $gray-color;
+        display: block;
+      }
       a.on, a:hover { color: $base-color; }
       a::before { margin: 0 auto 4px; }
       // 개별 속성

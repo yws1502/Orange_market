@@ -334,6 +334,7 @@ button {
 }
 .tab-menu ul li a {
   color: #767676;
+  display: block;
 }
 .tab-menu ul li a.on, .tab-menu ul li a:hover {
   color: #F26E22;
