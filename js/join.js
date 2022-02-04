@@ -1,7 +1,6 @@
-const ENDPOINT = "https://api.mandarin.cf/";
-const HEADERS = {
-  "Content-Type": "application/json",
-};
+import { ENDPOINT, LOGIN_PATH } from "./modules/path.js";
+import { HEADERS } from "./modules/constants.js";
+
 
 const joinSection = document.querySelector(".join");
 const joinInputList = document.querySelectorAll(".join input");
@@ -189,32 +188,12 @@ async function createUser(event) {
 
   const res = await fetch(`${ENDPOINT}/user`, reqOption);
   const json = await res.json();
-  console.log(json);
+
   if (json.status) {
     alert(json.message);
   } else {
-    location.href = "/pages/login.html";
+    location.href = LOGIN_PATH;
   }
 }
 
 form.addEventListener("submit", createUser);
-
-// "{
-//   "user":{
-//     "email":"test21412@mascd.com",
-//     "password":"123123",
-//     "username":"asdasd214",
-//     "accountname":"asrfsrar12",
-//     "intro":""
-//   }
-// }"
-
-// "{
-//   "user": {
-//     "email":"test21412@mascd.com",
-//     "password":"123123",
-//     "image":"http://146.56.183.55:5050/1642177681899.png",
-//     "username":"asdasd214",
-//     "accountname":"asrfsrar122",
-//     "intro":""}
-// }"

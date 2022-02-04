@@ -1,28 +1,10 @@
-const TOKEN = localStorage.getItem("TOKEN");
-const ENDPOINT = "https://api.mandarin.cf/";
-const HEADERS = {
-  "Authorization" : `Bearer ${TOKEN}`,
-  "Content-type" : "application/json"
-};
+import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
+import { HEADERS_AUTH } from "./modules/constants.js";
+import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
 
 // access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
+
 accessCheck();
-
-function searchParam(key) {
-  return new URLSearchParams(location.search).get(key);
-}
-
 const POSTID = searchParam("id");
 
 const $textInput = document.querySelector("#textInput");
@@ -39,7 +21,7 @@ if (POSTID) {
     const URL = `${ENDPOINT}/post/${POSTID}`;
     const reqOption = {
       method: "GET",
-      headers: HEADERS
+      headers: HEADERS_AUTH,
     };
     const res = await fetch(URL, reqOption);
     const json = await res.json();
@@ -188,7 +170,7 @@ $form.addEventListener("submit", async (event) => {
   } else {
     await uploadPost("POST", post);
   }
-  location.href = "/pages/profile_detail.html";
+  location.href = PROFILE_DETAIL_PATH;
 });
 
 // 서버에 올리기
@@ -199,16 +181,15 @@ async function uploadPost(method, post, lastUrl=false) {
 
   const reqOption = {
     method: method,
-    headers: HEADERS,
-    body: JSON.stringify({post})
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({ post }),
   };
   const res = await fetch(URL, reqOption);
 }
 
 
 // 뒤로 가기 버튼
-const prevBtn = document.querySelector(".prev-btn");
+document.querySelector(".prev-btn")
+  .addEventListener("click", prevPage);
 
-prevBtn.addEventListener("click", () => {
-  history.back();
-});
+

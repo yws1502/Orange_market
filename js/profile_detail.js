@@ -1,32 +1,30 @@
-const ENDPOINT = "https://api.mandarin.cf/";
-const TOKEN = localStorage.getItem("TOKEN");
-const myAccountName = localStorage.getItem("ACCOUNTNAME");
-const HEADERS = {
-  "Authorization" : `Bearer ${TOKEN}`,
-  "Content-type" : "application/json"
-}
+import {
+  ENDPOINT,
+  CHATTING_ROOM_PATH,
+  PROFILE_PATH,
+  PRODUCT_PATH,
+  FOLLOWLIST_PATH,
+  PROFILE_DETAIL_PATH,
+  NOT_FOUND_PATH,
+  POST_DETAIL_PATH,
+  POST_PATH,
+  LOGIN_PATH,
+} from "./modules/path.js";
+import {
+  HEADERS_AUTH,
+  MY_ACCOUNTNAME,
+  SLIDE_WIDTH,
+  SLIDE_MARGIN,
+} from "./modules/constants.js";
+import {
+  accessCheck,
+  prevPage,
+  searchParam,
+  transDateFormat,
+} from "./modules/utility.js";
 
-// access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
+
 accessCheck();
-
-// 이미지 슬라이드 가로길이
-const slideWidth = 304;
-const slideMargin = 20;
-
-function searchParam(key) {
-  return new URLSearchParams(location.search).get(key)
-}
 
 const $otherProfile = document.querySelector(".other-profile");
 const $myProfile = document.querySelector(".my-profile");
@@ -52,12 +50,12 @@ const $logoutBtn = document.querySelector("header .logout-btn");
 
 // 접근한 사람 확인
 const temp = searchParam("id")
-const accountName = (temp && myAccountName != temp)
+const accountName = (temp && MY_ACCOUNTNAME != temp)
   ? searchParam("id")
-  : myAccountName;
+  : MY_ACCOUNTNAME;
 
 // 접근한 사람 확인 후 알맞은 정보 불러오기
-if (myAccountName !== accountName) {
+if (MY_ACCOUNTNAME !== accountName) {
   // 다른 사람 프로필 보여주기
   $otherProfile.classList.remove("hidden");
   $myProfile.classList.add("hidden");
@@ -96,8 +94,8 @@ async function getProfileDataAPI(path, path2=false) {
     : `${ENDPOINT}/${path}/${accountName}`;
   const reqOption = {
     method: "GET",
-    headers: HEADERS
-  }
+    headers: HEADERS_AUTH,
+  };
   const res = await fetch(URL, reqOption);
   const json = await res.json();
   failConnectCheck(res, json);
@@ -119,30 +117,29 @@ function paintUserView(props) {
   }
 }
 
-
 // user View Event
 $userView.addEventListener("click", (event) => {
   const currentNode = event.target;
 
   if (currentNode.className === "follower-btn") {
     // followers list로
-    location.href = `/pages/followlist.html?id=${accountName}&page=follower`;
+    location.href = `${FOLLOWLIST_PATH}?id=${accountName}&page=follower`;
 
   } else if (currentNode.className === "following-btn") {
     // followings list로
-    location.href = `/pages/followlist.html?id=${accountName}&page=following`;
+    location.href = `${FOLLOWLIST_PATH}?id=${accountName}&page=following`;
 
   } else if (currentNode.className === "chat-btn") {
     // 채팅룸으로
-    location.href = `/pages/chatting_room.html?id=${accountName}`;
+    location.href = `${CHATTING_ROOM_PATH}?id=${accountName}`;
 
   } else if (currentNode.name === "edit-profile-btn") {
     // 프로필 수정 페이지
-    location.href = `/pages/profile.html?id=${accountName}`;
+    location.href = `${PROFILE_PATH}?id=${accountName}`;
 
   } else if (currentNode.name === "create-product-btn") {
     // 상품 생성 페이지
-    location.href = "/pages/product.html";
+    location.href = PRODUCT_PATH;
 
   } else if (currentNode.name === "follow-button") {
     // 팔로우 버튼
@@ -174,7 +171,7 @@ async function handleFollowBtn(Node) {
 async function followAPI(method, modePath) {
   const reqOption = {
     method: method,
-    headers: HEADERS
+    headers: HEADERS_AUTH,
   };
   const res = await fetch(`${ENDPOINT}/profile/${accountName}/${modePath}`, reqOption);
   const json = await res.json();
@@ -206,7 +203,7 @@ $productList.addEventListener("click", (event) => {
   const currentNode = event.target;
   const parentNode = currentNode.parentElement;
 
-  if (accountName !== myAccountName) {
+  if (accountName !== MY_ACCOUNTNAME) {
     // 다른 유저 디테일
     window.open(parentNode.dataset.link);
   } else if (parentNode.className === "product") {
@@ -248,7 +245,7 @@ function productModalEvent(event, productId, productLink) {
     }
   } else if (currentClass === "edit-btn") {
     // 상품 수정 페이지 이동
-    location.href = `/pages/product.html?id=${productId}`;
+    location.href = `${PRODUCT_PATH}?id=${productId}`;
 
   } else if (currentClass === "link-btn") {
     // 해당 링크로 이동
@@ -260,7 +257,7 @@ function productModalEvent(event, productId, productLink) {
 async function deleteProduct(productId) {
   const reqOption = {
     method: "DELETE",
-    headers: HEADERS
+    headers: HEADERS_AUTH,
   };
   const res = await fetch(`${ENDPOINT}/product/${productId}`, reqOption);
   const json = await res.json();
@@ -317,7 +314,7 @@ function createFeed(post) {
       <img src=${author.image} alt="프로필 사진" class="avatar-img">
       <div class="content-wrap">
         <p class="text-wrap">
-          <a href="/pages/profile_detail.html?id=${accountname}">
+          <a href="${PROFILE_DETAIL_PATH}?id=${accountname}">
             <strong>${username}</strong>
             <span>@ ${accountname}</span>
           </a>
@@ -382,21 +379,13 @@ function paintPostImage(postImage, postId) {
 
   // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
   let slideCount = slideList.childElementCount;
-  slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
+  slideList.style.width = (SLIDE_WIDTH + SLIDE_MARGIN) * slideCount - SLIDE_MARGIN + "px";
 }
 
-// 날짜 포멧 변환함수 
-function transDateFormat(createdAt) {
-  const date = new Date(createdAt)
-  const year = date.getFullYear(); 
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${year}년 ${month}월 ${day}일`;
-}
 
 // 이미지 슬라이드 이동 계산 함수
 function moveSlide(num, slideList) {
-  slideList.style.left = -num * (slideWidth + slideMargin) + "px";
+  slideList.style.left = -num * (SLIDE_WIDTH + SLIDE_MARGIN) + "px";
 }
 
 function slideAnimation(Node) {
@@ -424,13 +413,13 @@ function slideAnimation(Node) {
 async function heartAPI(route, method, postId, count) {
   const reqOption = {
     method: method,
-    headers: HEADERS
-  }
+    headers: HEADERS_AUTH,
+  };
   const res = await fetch(`${ENDPOINT}/post/${postId}/${route}`, reqOption);
   const json = await res.json();
   if (json.status === 404) {
     alert("존재하지 않는 게시글입니다.");
-    location.href = "/pages/404.html";
+    location.href = NOT_FOUND_PATH;
   }
   const resultCount = (method === "POST") ? +count + 1 : +count - 1
   return resultCount
@@ -479,9 +468,9 @@ $feedList.addEventListener("click", (event) => {
 
   } else if (currentClass === "comment-btn"
     || currentClass === "post-img") {
-      location.href = `/pages/post_detail.html?id=${postId}`
+      location.href = `${POST_DETAIL_PATH}?id=${postId}`
 
-  } else if (accountName === myAccountName
+  } else if (accountName === MY_ACCOUNTNAME
     && currentClass === "more-btn") {
       $modal.classList.remove("hidden");
 
@@ -498,7 +487,7 @@ $feedList.addEventListener("click", (event) => {
           }
         } else if (currentClass === "edit-btn") {
           // 포스트 수정
-          location.href = `/pages/post.html?id=${postId}`;
+          location.href = `${POST_PATH}?id=${postId}`;
         }
       })
     }
@@ -507,7 +496,7 @@ $feedList.addEventListener("click", (event) => {
 async function deletePost(postId) {
   const reqOption = {
     method: "DELETE",
-    headers: HEADERS
+    headers: HEADERS_AUTH,
   };
   const res = await fetch(`${ENDPOINT}/post/${postId}`, reqOption);
   const json = await res.json();
@@ -518,21 +507,19 @@ $logoutBtn.addEventListener("click", () => {
   if (confirm("로그아웃 하시겠습니까?")) {
     localStorage.removeItem("TOKEN");
     localStorage.removeItem("ACCOUNTNAME");
-    location.href = "/pages/login.html";
+    location.href = LOGIN_PATH;
   }
 });
 
 // 뒤로 가기 버튼
-const prevBtn = document.querySelector(".prev-btn");
+document.querySelector(".prev-btn")
+  .addEventListener("click", prevPage);
 
-prevBtn.addEventListener("click", () => {
-  history.back();
-});
 
 // 에러 처리
 function failConnectCheck(res, json) {
   if (!res.ok) {
     alert(json.message);
-    location.href = "/pages/404.html";
+    location.href = NOT_FOUND_PATH;
   }
 }

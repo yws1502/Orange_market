@@ -1,3 +1,9 @@
+import { prevPage, accessCheck } from "./modules/utility.js";
+import { CHATTING_LIST_PATH } from "./modules/path.js"
+
+
+accessCheck();
+
 const $settingMoreBtn = document.querySelector(".more-btn");
 const $modal = document.querySelector(".modal");
 const $chatroom = document.querySelector(".chatting-room");
@@ -15,7 +21,7 @@ $settingMoreBtn.addEventListener("click", () => {
     if (currentNode.className === "modal") {
       $modal.classList.add("hidden");
     } else if (currentNode.tagName === "BUTTON") {
-      location.href = "/pages/chatting_list.html";
+      location.href = CHATTING_LIST_PATH;
     }
   });
 });
@@ -47,8 +53,5 @@ $chatSubmitBtn.addEventListener("click", (event) => {
 });
 
 // 뒤로 가기 버튼
-const prevBtn = document.querySelector(".prev-btn");
-
-prevBtn.addEventListener("click", () => {
-  history.back();
-});
+document.querySelector(".prev-btn")
+  .addEventListener("click", prevPage);

@@ -1,23 +1,8 @@
-const ENDPOINT = "https://api.mandarin.cf/";
-const TOKEN = localStorage.getItem("TOKEN");
-const ACCOUNTNAME = localStorage.getItem("ACCOUNTNAME");
-const HEADERS = {
-  "Authorization": `Bearer ${TOKEN}`,
-  "Content-Type": "application/json",
-};
+import { ENDPOINT } from "./modules/path.js";
+import { MY_ACCOUNTNAME, HEADERS_AUTH } from "./modules/constants.js";
+import { accessCheck, prevPage } from "./modules/utility.js";
 
-// access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
+
 accessCheck();
 
 // 이메일 비밀번호 둘다 입력했을 떄 button 활성화
@@ -31,11 +16,11 @@ const $totalInputList = document.querySelectorAll("form input");
 
 // 기존 profile 정보 가져와서 채우기
 window.onload = async () => {
-  const URL = `${ENDPOINT}/profile/${ACCOUNTNAME}`;
+  const URL = `${ENDPOINT}/profile/${MY_ACCOUNTNAME}`;
   const reqOption = {
     method: "GET",
-    headers: HEADERS
-  }
+    headers: HEADERS_AUTH,
+  };
   const res = await fetch(URL, reqOption);
   const json = await res.json();
 
@@ -120,9 +105,9 @@ async function updateProfile(event) {
 
   const reqOption = {
     method: "PUT",
-    headers: HEADERS,
-    body: JSON.stringify({user})
-  }
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({ user }),
+  };
 
   const res = await fetch(`${ENDPOINT}/user`, reqOption);
   const json = await res.json();
@@ -132,15 +117,13 @@ async function updateProfile(event) {
     // 새로운 accountname 갱신
     const newAccountName = json.user.accountname;
     localStorage.setItem("ACCOUNTNAME", newAccountName);
-    location.href = "/pages/profile_detail.html";
+    location.href = PROFILE_DETAIL_PATH;
   }
 }
 
 $form.addEventListener("submit", updateProfile);
 
 // 뒤로 가기 버튼
-const prevBtn = document.querySelector(".prev-btn");
+document.querySelector(".prev-btn")
+  .addEventListener("click", prevPage);
 
-prevBtn.addEventListener("click", () => {
-  history.back();
-});

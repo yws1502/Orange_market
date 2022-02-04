@@ -1,44 +1,26 @@
-const TOKEN = localStorage.getItem("TOKEN");
-const ENDPOINT = "https://api.mandarin.cf/";
-const HEADERS = {
-  "Authorization": `Bearer ${TOKEN}`,
-  "Content-type": "application/json",
-};
+import { SLIDE_MARGIN, SLIDE_WIDTH, HEADERS_AUTH } from "./modules/constants.js";
+import { ENDPOINT, POST_DETAIL_PATH, NOT_FOUND_PATH } from "./modules/path.js";
+import { accessCheck, transDateFormat, searchPage } from "./modules/utility.js";
 
-// access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
-accessCheck();
-
-const hasFeed = document.querySelector(".has-feed-section");
-const hasntFeed = document.querySelector(".hasnt-feed-section");
-
-// 이미지 슬라이드 가로길이
-const slideWidth = 304;
-const slideMargin = 20;
 
 window.onload = async () => {
+  accessCheck();
+
+  const $hasFeed = document.querySelector(".has-feed-section");
+  const $hasntFeed = document.querySelector(".hasnt-feed-section");
+
   const reqOption = {
     method: "GET",
-    headers: HEADERS,
+    headers: HEADERS_AUTH,
   };
   const res = await fetch(`${ENDPOINT}/post/feed?limit=40`, reqOption);
-  if (!res.ok) { location.href = "/pages/404.html"; }
+  if (!res.ok) { location.href = NOT_FOUND_PATH; }
   const json = await res.json();
 
   if (json.posts.length === 0) {
     // follow가 없는 경우
-    hasFeed.classList.add("hidden");
-    hasntFeed.classList.remove("hidden");
+    $hasFeed.classList.add("hidden");
+    $hasntFeed.classList.remove("hidden");
   } else {
     // follow가 있는 경우
     paintPost(json.posts);
@@ -46,10 +28,10 @@ window.onload = async () => {
 };
 
 function paintPost(posts) {
-  const feedContainer = document.querySelector(".feed-list");
+  const $feedContainer = document.querySelector(".feed-list");
 
   posts.forEach((post) => {
-    feedContainer.innerHTML += createFeed(post);
+    $feedContainer.innerHTML += createFeed(post);
 
     if (post.image) { paintPostImage(post.image, post.id); }
   });
@@ -139,20 +121,12 @@ function paintPostImage(postImage, postId) {
 
   // 각 포스트의 이미지 슬라이드 wrapper 총 길이 계산
   let slideCount = slideList.childElementCount;
-  slideList.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + "px";
-}
-
-function transDateFormat(createdAt) {
-  const date = new Date(createdAt)
-  const year = date.getFullYear(); 
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  return `${year}년 ${month}월 ${day}일`;
+  slideList.style.width = (SLIDE_WIDTH + SLIDE_MARGIN) * slideCount - SLIDE_MARGIN + "px";
 }
 
 // 이미지 슬라이드 이동 계산 함수
 function moveSlide(num, slideList) {
-  slideList.style.left = -num * (slideWidth + slideMargin) + "px";
+  slideList.style.left = -num * (SLIDE_WIDTH + SLIDE_MARGIN) + "px";
 }
 
 function slideAnimation(Node) {
@@ -179,13 +153,13 @@ function slideAnimation(Node) {
 async function heartAPI(route, method, postId, count) {
   const reqOption = {
     method: method,
-    headers: HEADERS
-  }
+    headers: HEADERS_AUTH,
+  };
   const res = await fetch(`${ENDPOINT}/post/${postId}/${route}`, reqOption);
   const json = await res.json();
   if (json.status === 404) {
     alert("존재하지 않는 게시글입니다.");
-    location.href = "/pages/404.html";
+    location.href = NOT_FOUND_PATH;
   }
   const resultCount = (method === "POST") ? +count + 1 : +count - 1
   return resultCount
@@ -218,11 +192,9 @@ feedList.addEventListener("click", (event) => {
 
   } else if (currentNode.className === "comment-btn"
     || currentNode.className === "post-img") {
-      location.href = `/pages/post_detail.html?id=${postId}`
+      location.href = `${POST_DETAIL_PATH}?id=${postId}`;
     }
 });
 
-const searchBtn = document.querySelector(".hasnt-feed-section button");
-searchBtn.addEventListener("click", () => {
-  location.href = "/pages/search.html";
-});
+document.querySelector(".hasnt-feed-section button")
+  .addEventListener("click", searchPage);

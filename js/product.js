@@ -1,22 +1,12 @@
-const TOKEN = localStorage.getItem("TOKEN"); 
-const ENDPOINT = "https://api.mandarin.cf/";
-const HEADERS = {
-  "Authorization" : `Bearer ${TOKEN}`,
-  "Content-type" : "application/json"
-}
+import {
+  ENDPOINT,
+  NOT_FOUND_PATH,
+  PROFILE_DETAIL_PATH,
+} from "./modules/path.js";
+import { HEADERS_AUTH } from "./modules/constants.js";
+import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
 
-// access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
+
 accessCheck();
 
 const $inputList = document.querySelectorAll(".product-app input");
@@ -24,11 +14,6 @@ const $submitBtn = document.querySelector("#submitBtn");
 const $previewImage = document.querySelector(".preview-image");
 const $ProductApp = document.querySelector(".product-app");
 const $imageInput = document.querySelector("#imageInput");
-
-
-function searchParam(key) {
-  return new URLSearchParams(location.search).get(key);
-}
 
 const productId = searchParam("id");
 
@@ -39,15 +24,15 @@ if (productId) {
     const URL = `${ENDPOINT}/product/detail/${productId}`
     const reqData = {
       method: "GET",
-      headers: HEADERS,
-    }
+      headers: HEADERS_AUTH,
+    };
     const res = await fetch(URL, reqData);
     const json = await res.json();
 
     // 예외 처리
     if (json.status === "404") {
       alert(json.message);
-      location.href = "/pages/404.html";
+      location.href = NOT_FOUND_PATH;
     } else {
       const { itemImage, itemName, price, link } = json.product;
 
@@ -119,14 +104,14 @@ async function productAPI(method, productId=false) {
 
   const reqData = {
     method: method,
-    headers: HEADERS,
+    headers: HEADERS_AUTH,
     body: JSON.stringify({ product }),
-  }
+  };
   const res = await fetch(URL, reqData);
   const json = await res.json();
 
   if (res.ok) {
-    location.href = "/pages/profile_detail.html";
+    location.href = PROFILE_DETAIL_PATH;
   } else {
     const errMsg = (json)
       ? json.message
@@ -147,8 +132,6 @@ $submitBtn.addEventListener("click", () => {
 
 
 // 뒤로 가기 버튼
-const prevBtn = document.querySelector(".prev-btn");
+document.querySelector(".prev-btn")
+  .addEventListener("click", prevPage);
 
-prevBtn.addEventListener("click", () => {
-  history.back();
-});

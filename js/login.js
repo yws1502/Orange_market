@@ -1,7 +1,6 @@
-const ENDPOINT = "https://api.mandarin.cf/";
-const HEADERS = {
-  "Content-type" : "application/json"
-};
+import { ENDPOINT, JOIN_PATH } from "./modules/path.js";
+import { HEADERS } from "./modules/constants.js";
+
 
 const selectLogin = document.querySelector(".select-login");
 const splash = document.querySelector(".splash");
@@ -10,7 +9,6 @@ const selectLoginBtnWrap = selectLogin.querySelector(".btn-wrap")
 const loginForm = loginSection.querySelector("form");
 const loginInputs = loginSection.querySelectorAll("input");
 const loginBtn = loginSection.querySelector("form button");
-
 
 // hello orange market
 setTimeout(() => {
@@ -26,7 +24,7 @@ function changeLoginWindow(event) {
     selectLogin.classList.add("hidden");
     loginSection.classList.remove("hidden");
   } else if (className === "join-btn") {
-    location.href = "/pages/join.html";
+    location.href = JOIN_PATH;
   }
 }
 
@@ -36,7 +34,7 @@ selectLoginBtnWrap.addEventListener("click", changeLoginWindow);
 
 // 로그인 화면에서 회원가입 화면으로 이동
 document.querySelector(".login .link-btn-join").addEventListener("click", () => {
-  location.href = "/pages/join.html";
+  location.href = JOIN_PATH;
 });
 
 // 로그인 input에 값 입력하면 btn 활성화
@@ -85,7 +83,7 @@ async function loginApi(event) {
     localStorage.setItem("TOKEN", json.user.token);
     localStorage.setItem("ACCOUNTNAME", json.user.accountname);
     localStorage.setItem("PROFILE_IMAGE", json.user.image);
-    location.href = "/index.html";
+    location.href = "/";
   }
 };
 

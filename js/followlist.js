@@ -1,28 +1,8 @@
-const ENDPOINT = "https://api.mandarin.cf/";
-const TOKEN = localStorage.getItem("TOKEN");
-const myAccountName = localStorage.getItem("ACCOUNTNAME");
-const HEADERS = {
-  "Authorization" : `Bearer ${TOKEN}`,
-  "Content-type" : "application/json"
-}
+import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
+import { HEADERS_AUTH } from "./modules/constants.js";
+import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
 
-// access check function
-async function accessCheck() {
-  const URL = `${ENDPOINT}/user/checktoken`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  // 접근 금지!
-  if (!json.isValid) { location.href = "/pages/login.html" }
-}
 accessCheck();
-
-function searchParam(key) {
-  return new URLSearchParams(location.search).get(key)
-}
 
 const $Title = document.querySelector(".follow-nav h1");
 const $followList = document.querySelector(".user-follow-list");
@@ -40,8 +20,8 @@ window.onload = async () => {
   const URL = `${ENDPOINT}/profile/${accessAccount}/${accessPage}`;
   const reqOption = {
     method: "GET",
-    headers: HEADERS
-  }
+    headers: HEADERS_AUTH,
+  };
   const res = await fetch(URL, reqOption);
   const json = await res.json();
   
@@ -49,7 +29,7 @@ window.onload = async () => {
   json.forEach((el) => {
     $followList.innerHTML += `
       <li id=follow-${el._id} class="user-follow">
-        <a href="/pages/profile_detail.html?id=${el.accountname}">
+        <a href="${PROFILE_DETAIL_PATH}?id=${el.accountname}">
           <img src=${el.image} alt="프로필 사진">
           <p>
             <strong>${el.username}</strong>
@@ -103,16 +83,12 @@ async function handleFollowBtn(Node) {
 async function followAPI(method, modePath, accountname) {
   const reqOption = {
     method: method,
-    headers: HEADERS
+    headers: HEADERS_AUTH,
   };
   await fetch(`${ENDPOINT}/profile/${accountname}/${modePath}`, reqOption);
 }
 
 
-
-// 뒤로 가기 버튼
 const prevBtn = document.querySelector(".prev-btn");
 
-prevBtn.addEventListener("click", () => {
-  history.back();
-});
+prevBtn.addEventListener("click", prevPage);
