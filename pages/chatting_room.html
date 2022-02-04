@@ -59,7 +59,7 @@
       </li>
     </ul>
   </div>
-  <div class="chatting-text">
+  <section class="chatting-text">
     <h2 class="text-hide">채팅 보내기 영역</h2>
     <form>
       <label class="text-hide" for="chatImgIput">사진 첨부 버튼</label>
@@ -81,14 +81,16 @@
       >
       <button type="submit" class="chat-submit-btn">전송</button>
     </form>
-  </div>
-  <script>
-    // 뒤로 가기 버튼
-    const prevBtn = document.querySelector(".prev-btn");
-
-    prevBtn.addEventListener("click", () => {
-      history.back();
-    });
-  </script>
+  </section>
+  <section class="modal hidden">
+    <nav>
+      <ul>
+        <li>
+          <button type="button" class="chat-out-btn">채팅방 나가기</button>
+        </li>
+      </ul>
+    </nav>
+  </section>
+  <script src="/js/chatting_room.js"></script>
 </body>
 </html>
