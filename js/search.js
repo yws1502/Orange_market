@@ -1,10 +1,10 @@
 import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
 import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, prevPage } from "./modules/utility.js";
+import { accessCheck, prevPage, showPage } from "./modules/utility.js";
 
 
 accessCheck();
-
+showPage();
 // 기존에 있던 목록 지우기
 function removeAllChilden(parentNode) {
   while (parentNode.hasChildNodes()) {

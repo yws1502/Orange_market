@@ -8,6 +8,7 @@
 
 // tob bottom margin main
 #tbm-main {
+  display: none;
   margin: 55px auto 60px;
 }
 
@@ -60,4 +61,22 @@
   100% {
     bottom: 0;
   }
+}
+
+.loader {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  margin: -50px 0 0 -50px;
+  width: 100px;
+  height: 100px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid $base-color;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
 }

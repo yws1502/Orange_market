@@ -53,3 +53,11 @@ export function searchParam(key) {
 export function prevPage() { history.back(); }
 
 export function searchPage () { location.href = SEARCH_PATH; }
+
+
+export function showPage() {
+  const mainContainer = document.querySelector("#tbm-main");
+  const loader = document.querySelector(".loader");
+  loader.style.display = "none";
+  mainContainer.style.display = "block";
+}

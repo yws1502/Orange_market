@@ -3,7 +3,8 @@ import {
   searchParam,
   transDateFormat,
   prevPage,
-  timeForToday
+  timeForToday,
+  showPage
 } from "./modules/utility.js";
 import {
   ENDPOINT,
@@ -40,6 +41,7 @@ window.onload = async () => {
 
   paintPost(postJson.post);
   paintComments(commentsJson.comments);
+  showPage();
 };
 
 async function getDataAPI(URL, reqOption) {

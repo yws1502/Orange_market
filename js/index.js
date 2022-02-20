@@ -1,6 +1,6 @@
 import { SLIDE_MARGIN, SLIDE_WIDTH, HEADERS_AUTH } from "./modules/constants.js";
 import { ENDPOINT, POST_DETAIL_PATH, NOT_FOUND_PATH } from "./modules/path.js";
-import { accessCheck, transDateFormat, searchPage } from "./modules/utility.js";
+import { accessCheck, transDateFormat, searchPage, showPage } from "./modules/utility.js";
 
 
 window.onload = async () => {
@@ -25,6 +25,7 @@ window.onload = async () => {
     // follow가 있는 경우
     paintPost(json.posts);
   }
+  showPage();
 };
 
 function paintPost(posts) {
@@ -99,7 +100,7 @@ function paintPostImage(postImage, postId) {
   </li>
   `;
   controlBtns.innerHTML += `
-    <button type="button" class="on" name="0"}></button>
+    <button type="button" class="on" name="0"></button>
   `;
 
   if (postImageList.length === 1) {

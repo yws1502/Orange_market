@@ -21,6 +21,7 @@ import {
   prevPage,
   searchParam,
   transDateFormat,
+  showPage
 } from "./modules/utility.js";
 
 
@@ -69,7 +70,7 @@ window.onload = async () => {
   // user view 그리기
   const userInfoJson = await getProfileDataAPI("profile");
   paintUserView(userInfoJson.profile);
-
+  
   // 상품 그리기
   const productJson = await getProfileDataAPI("product");
   if (!productJson.data) {
@@ -77,11 +78,12 @@ window.onload = async () => {
   } else {
     paintProductView(productJson.product);
   }
-
+  
   // 게시물 그리기
   const postJson = await getProfileDataAPI("post", "userpost");
   paintPostListView(postJson.post)
   paintPostGridView(postJson.post)
+  showPage();
 }
 
 

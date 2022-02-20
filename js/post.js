@@ -1,6 +1,6 @@
 import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
 import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
 
 // access check function
 
@@ -40,6 +40,7 @@ if (POSTID) {
     paintPreviewImage(images)
   }
 }
+showPage();
 
 // 이미지 서버에 올리기
 $imageInput.addEventListener("change", async () => {

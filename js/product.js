@@ -4,7 +4,7 @@ import {
   PROFILE_DETAIL_PATH,
 } from "./modules/path.js";
 import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
 
 
 accessCheck();
@@ -45,6 +45,7 @@ if (productId) {
     }
   }
 }
+showPage();
 
 // 서버에 이미지 올리기
 async function uploadImage(formData) {

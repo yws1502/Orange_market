@@ -1,6 +1,6 @@
 import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
 import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage } from "./modules/utility.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
 
 accessCheck();
 
@@ -50,6 +50,7 @@ window.onload = async () => {
       followBtn.textContent = "취소";
     }
   });
+  showPage();
 }
 
 $followList.addEventListener("click", (event) => {

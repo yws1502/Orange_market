@@ -1,8 +1,9 @@
-import { prevPage, accessCheck } from "./modules/utility.js";
+import { prevPage, accessCheck, showPage } from "./modules/utility.js";
 import { CHATTING_LIST_PATH } from "./modules/path.js"
 
 
 accessCheck();
+showPage();
 
 const $settingMoreBtn = document.querySelector(".more-btn");
 const $modal = document.querySelector(".modal");

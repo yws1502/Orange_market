@@ -1,6 +1,6 @@
 import { ENDPOINT } from "./modules/path.js";
 import { MY_ACCOUNTNAME, HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, prevPage } from "./modules/utility.js";
+import { accessCheck, prevPage, showPage } from "./modules/utility.js";
 
 
 accessCheck();
@@ -29,6 +29,7 @@ window.onload = async () => {
   $totalInputList[1].value = username;
   $totalInputList[2].value = accountname;
   $totalInputList[3].value = intro;
+  showPage();
 }
 
 // validation
