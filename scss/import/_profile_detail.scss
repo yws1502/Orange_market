@@ -2,12 +2,20 @@
 
 /* profile_detail */
 .logout-btn {
-  background-image: url(/icon/icon-logout.svg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px;
-  width: 25px;
-  height: 25px;
+  &::before{
+    content: "";
+    display: inline-block;
+    background-image: url(/icon/icon-logout.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20px;
+    width: 25px;
+    height: 25px;
+  }
+  span {
+    @include font-module(1.3rem, 550);
+    vertical-align: 7px;
+  }
 }
 
 .profile-container {

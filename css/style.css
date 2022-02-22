@@ -1101,13 +1101,20 @@ input::placeholder {
 }
 
 /* profile_detail */
-.logout-btn {
+.logout-btn::before {
+  content: "";
+  display: inline-block;
   background-image: url(/icon/icon-logout.svg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 20px;
   width: 25px;
   height: 25px;
+}
+.logout-btn span {
+  font-size: 1.3rem;
+  font-weight: 550;
+  vertical-align: 7px;
 }
 
 .profile-container {
