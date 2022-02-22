@@ -1,7 +1,10 @@
 // 피드가 없는 경우
 .hasnt-feed-section {
-  text-align: center;
-  margin-top: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
   &::before {
     @include create_visual_class(
       "/images/symbol-logo-gray.png",
@@ -13,6 +16,9 @@
     @include font_module(1.4rem, 400);
     color: $gray-color;
     margin: 20px 0;
+  }
+  button {
+    width: 200px;
   }
 }
 
