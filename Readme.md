@@ -10,6 +10,12 @@
       오렌지 마켓 배포 URL
     </a>
   </p>
+  <p>
+    <br>
+    <a href="https://velog.io/@yws1502/%EC%98%A4%EB%A0%8C%EC%A7%80-%EB%A7%88%EC%BC%93-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0#%ED%9A%8C%EA%B3%A0-%EB%B0%8F-%EB%8A%90%EB%82%80%EC%A0%90">
+      프로젝트 회고
+    </a>
+  </p>
 </div>
 
 ## 💻Skills
