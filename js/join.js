@@ -1,5 +1,5 @@
-import { ENDPOINT, LOGIN_PATH } from "./modules/path.js";
-import { HEADERS } from "./modules/constants.js";
+import { ENDPOINT, LOGIN_PATH } from "./common/path.js";
+import { HEADERS, NOT_CONNECTED } from "./common/constants.js";
 
 
 const joinSection = document.querySelector(".join");
@@ -71,17 +71,23 @@ async function emailValidator(event) {
       headers: HEADERS,
       body: JSON.stringify({ user })
     };
-    const res = await fetch(`${ENDPOINT}/user/emailvalid`, reqOption);
-    const json = await res.json();
 
-    // 사용이 불가한 이메일인 경우 처리
-    if (json.message !== "사용 가능한 이메일 입니다.") {
-      parentNode.classList.add("err");
-      const errMsg = parentNode.querySelector(".err-msg");
-      errMsg.textContent = `*${json.message}`;
-    } else {
-      parentNode.classList.remove("err");
+    try {
+      const res = await fetch(`${ENDPOINT}/user/emailvalid`, reqOption);
+      const json = await res.json();
+  
+      // 사용이 불가한 이메일인 경우 처리
+      if (json.message !== "사용 가능한 이메일 입니다.") {
+        parentNode.classList.add("err");
+        const errMsg = parentNode.querySelector(".err-msg");
+        errMsg.textContent = `*${json.message}`;
+      } else {
+        parentNode.classList.remove("err");
+      }
+    } catch {
+      alert(NOT_CONNECTED);
     }
+
   } else {
     const errMsg = parentNode.querySelector(".err-msg");
     errMsg.textContent = "*이메일 형식이 맞지 않습니다.";
@@ -117,13 +123,17 @@ nextBtn.addEventListener("click", (event) => {
 
 // 프로필 preview 설정 화면
 // 서버에 이미지 올리기
-async function uploadImage(formData) {
-  const res = await fetch(`${ENDPOINT}/image/uploadfile`, {
-      method: "POST",
-      body: formData
-  });
-  const json = await res.json();
-  return json.filename;
+async function uploadImage (formData) {
+  try {
+    const res = await fetch(`${ENDPOINT}/image/uploadfile`, {
+        method: "POST",
+        body: formData
+    });
+    const json = await res.json();
+    return json.filename;
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 // 사용자가 프로필 사진을 설정 안한 경우
@@ -185,14 +195,17 @@ async function createUser(event) {
     headers: HEADERS,
     body: JSON.stringify({user})
   }
-
-  const res = await fetch(`${ENDPOINT}/user`, reqOption);
-  const json = await res.json();
-
-  if (json.status) {
-    alert(json.message);
-  } else {
-    location.href = LOGIN_PATH;
+  try {
+    const res = await fetch(`${ENDPOINT}/user`, reqOption);
+    const json = await res.json();
+  
+    if (json.status) {
+      alert(json.message);
+    } else {
+      location.href = LOGIN_PATH;
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
 }
 

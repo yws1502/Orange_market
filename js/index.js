@@ -1,6 +1,11 @@
-import { SLIDE_MARGIN, SLIDE_WIDTH, HEADERS_AUTH } from "./modules/constants.js";
-import { ENDPOINT, POST_DETAIL_PATH, NOT_FOUND_PATH } from "./modules/path.js";
-import { accessCheck, transDateFormat, searchPage, showPage } from "./modules/utility.js";
+import {
+  SLIDE_MARGIN,
+  SLIDE_WIDTH,
+  HEADERS_AUTH,
+  NOT_CONNECTED,
+} from "./common/constants.js";
+import { ENDPOINT, POST_DETAIL_PATH, NOT_FOUND_PATH } from "./common/path.js";
+import { accessCheck, transDateFormat, searchPage, showPage } from "./common/utility.js";
 
 
 window.onload = async () => {
@@ -13,17 +18,21 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/post/feed?limit=40`, reqOption);
-  if (!res.ok) { location.href = NOT_FOUND_PATH; }
-  const json = await res.json();
-
-  if (json.posts.length === 0) {
-    // follow가 없는 경우
-    $hasFeed.classList.add("hidden");
-    $hasntFeed.classList.remove("hidden");
-  } else {
-    // follow가 있는 경우
-    paintPost(json.posts);
+  try {
+    const res = await fetch(`${ENDPOINT}/post/feed?limit=40`, reqOption);
+    if (!res.ok) { location.href = NOT_FOUND_PATH; }
+    const json = await res.json();
+  
+    if (json.posts.length === 0) {
+      // follow가 없는 경우
+      $hasFeed.classList.add("hidden");
+      $hasntFeed.classList.remove("hidden");
+    } else {
+      // follow가 있는 경우
+      paintPost(json.posts);
+    }
+  } catch {
+    location.href = NOT_FOUND_PATH;
   }
   showPage();
 };
@@ -156,11 +165,15 @@ async function heartAPI(route, method, postId, count) {
     method: method,
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/post/${postId}/${route}`, reqOption);
-  const json = await res.json();
-  if (json.status === 404) {
-    alert("존재하지 않는 게시글입니다.");
-    location.href = NOT_FOUND_PATH;
+  try {
+    const res = await fetch(`${ENDPOINT}/post/${postId}/${route}`, reqOption);
+    const json = await res.json();
+    if (json.status === 404) {
+      alert("존재하지 않는 게시글입니다.");
+      location.href = NOT_FOUND_PATH;
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
   const resultCount = (method === "POST") ? +count + 1 : +count - 1
   return resultCount

@@ -2,9 +2,9 @@ import {
   ENDPOINT,
   NOT_FOUND_PATH,
   PROFILE_DETAIL_PATH,
-} from "./modules/path.js";
-import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
+} from "./common/path.js";
+import { HEADERS_AUTH, NOT_CONNECTED } from "./common/constants.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./common/utility.js";
 
 
 accessCheck();
@@ -26,35 +26,43 @@ if (productId) {
       method: "GET",
       headers: HEADERS_AUTH,
     };
-    const res = await fetch(URL, reqData);
-    const json = await res.json();
-
-    // 예외 처리
-    if (json.status === "404") {
-      alert(json.message);
+    try {
+      const res = await fetch(URL, reqData);
+      const json = await res.json();
+  
+      // 예외 처리
+      if (json.status === "404") {
+        alert(json.message);
+        location.href = NOT_FOUND_PATH;
+      } else {
+        const { itemImage, itemName, price, link } = json.product;
+  
+        // 해당 product 값 뿌리기
+        $previewImage.src = itemImage;
+        $previewImage.classList.remove("hidden");
+        $inputList[1].value = itemName;
+        $inputList[2].value = price;
+        $inputList[3].value = link;
+      }
+    } catch {
       location.href = NOT_FOUND_PATH;
-    } else {
-      const { itemImage, itemName, price, link } = json.product;
-
-      // 해당 product 값 뿌리기
-      $previewImage.src = itemImage;
-      $previewImage.classList.remove("hidden");
-      $inputList[1].value = itemName;
-      $inputList[2].value = price;
-      $inputList[3].value = link;
     }
   }
 }
 showPage();
 
 // 서버에 이미지 올리기
-async function uploadImage(formData) {
-  const res = await fetch(`${ENDPOINT}/image/uploadfile`, {
+async function uploadImage (formData) {
+  try {
+    const res = await fetch(`${ENDPOINT}/image/uploadfile`, {
       method: "POST",
       body: formData
-  });
-  const data = await res.json();
-  return data.filename;
+    });
+    const data = await res.json();
+    return data.filename;
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 // prevImage 변경
@@ -108,16 +116,20 @@ async function productAPI(method, productId=false) {
     headers: HEADERS_AUTH,
     body: JSON.stringify({ product }),
   };
-  const res = await fetch(URL, reqData);
-  const json = await res.json();
-
-  if (res.ok) {
-    location.href = PROFILE_DETAIL_PATH;
-  } else {
-    const errMsg = (json)
-      ? json.message
-      : "파일전송에 실패했습니다.."
-    alert(errMsg);
+  try {
+    const res = await fetch(URL, reqData);
+    const json = await res.json();
+  
+    if (res.ok) {
+      location.href = PROFILE_DETAIL_PATH;
+    } else {
+      const errMsg = (json)
+        ? json.message
+        : "파일전송에 실패했습니다.."
+      alert(errMsg);
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
 }
 

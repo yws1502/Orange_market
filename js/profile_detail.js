@@ -9,20 +9,21 @@ import {
   POST_DETAIL_PATH,
   POST_PATH,
   LOGIN_PATH,
-} from "./modules/path.js";
+} from "./common/path.js";
 import {
   HEADERS_AUTH,
   MY_ACCOUNTNAME,
   SLIDE_WIDTH,
   SLIDE_MARGIN,
-} from "./modules/constants.js";
+  NOT_CONNECTED,
+} from "./common/constants.js";
 import {
   accessCheck,
   prevPage,
   searchParam,
   transDateFormat,
   showPage
-} from "./modules/utility.js";
+} from "./common/utility.js";
 
 
 accessCheck();
@@ -80,9 +81,13 @@ window.onload = async () => {
   }
   
   // 게시물 그리기
-  const postJson = await getProfileDataAPI("post", "userpost");
-  paintPostListView(postJson.post)
-  paintPostGridView(postJson.post)
+  try {
+    const postJson = await getProfileDataAPI("post", "userpost");
+    paintPostListView(postJson.post)
+    paintPostGridView(postJson.post)
+  } catch {
+    location.href = NOT_FOUND_PATH;
+  }
   showPage();
 }
 
@@ -175,10 +180,14 @@ async function followAPI(method, modePath) {
     method: method,
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/profile/${accountName}/${modePath}`, reqOption);
-  const json = await res.json();
-  failConnectCheck(res, json);
-  return json.profile.followerCount;
+  try {
+    const res = await fetch(`${ENDPOINT}/profile/${accountName}/${modePath}`, reqOption);
+    const json = await res.json();
+    failConnectCheck(res, json);
+    return json.profile.followerCount;
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 /* product view ----------------------------------------------------- */
@@ -261,9 +270,13 @@ async function deleteProduct(productId) {
     method: "DELETE",
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/product/${productId}`, reqOption);
-  const json = await res.json();
-  alert(json.message)
+  try {
+    const res = await fetch(`${ENDPOINT}/product/${productId}`, reqOption);
+    const json = await res.json();
+    alert(json.message);
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 /* post view ----------------------------------------------------- */
@@ -428,13 +441,17 @@ async function heartAPI(route, method, postId, count) {
 }
 
 
-async function paintHeart(Node, postId) {
-  const heartCount = (Node.className.includes("on"))
-    ? await heartAPI("unheart", "DELETE", postId, Node.textContent)
-    : await heartAPI("heart", "POST", postId, Node.textContent);
-
-  Node.classList.toggle("on");
-  Node.textContent = heartCount;
+async function paintHeart (Node, postId) {
+  try {
+    const heartCount = (Node.className.includes("on"))
+      ? await heartAPI("unheart", "DELETE", postId, Node.textContent)
+      : await heartAPI("heart", "POST", postId, Node.textContent);
+  
+    Node.classList.toggle("on");
+    Node.textContent = heartCount;
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 // 포스트 모드 선택 이벤트
@@ -500,9 +517,13 @@ async function deletePost(postId) {
     method: "DELETE",
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/post/${postId}`, reqOption);
-  const json = await res.json();
-  alert(json.message);
+  try {
+    const res = await fetch(`${ENDPOINT}/post/${postId}`, reqOption);
+    const json = await res.json();
+    alert(json.message);
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 $logoutBtn.addEventListener("click", () => {

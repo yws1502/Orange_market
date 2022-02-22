@@ -1,6 +1,11 @@
-import { ENDPOINT } from "./modules/path.js";
-import { MY_ACCOUNTNAME, HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, prevPage, showPage } from "./modules/utility.js";
+import { ENDPOINT } from "./common/path.js";
+import {
+  MY_ACCOUNTNAME,
+  HEADERS_AUTH,
+  NOT_CONNECTED,
+} from "./common/constants.js";
+import { accessCheck, prevPage, showPage } from "./common/utility.js";
+import { NOT_FOUND_PATH } from "./common/path.js";
 
 
 accessCheck();
@@ -21,14 +26,18 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-
-  const { username, accountname, image, intro } = json.profile;
-  $previewImage.src = image;
-  $totalInputList[1].value = username;
-  $totalInputList[2].value = accountname;
-  $totalInputList[3].value = intro;
+  try {
+    const res = await fetch(URL, reqOption);
+    const json = await res.json();
+  
+    const { username, accountname, image, intro } = json.profile;
+    $previewImage.src = image;
+    $totalInputList[1].value = username;
+    $totalInputList[2].value = accountname;
+    $totalInputList[3].value = intro;
+  } catch {
+    location.href = NOT_FOUND_PATH;
+  }
   showPage();
 }
 
@@ -65,10 +74,13 @@ async function setPreviewImage() {
   const formData = new FormData();
   formData.append("image", $imageInput.files[0]);
   
-  // 서버 통신으로 받은 이미지로 prev-image 변경
-  const imageData = await uploadImage(formData); // filename 반환
-  const imageUrl = `${ENDPOINT}/${imageData}`;
-  $previewImage.src = imageUrl;
+  try {
+    const imageData = await uploadImage(formData); // filename 반환
+    const imageUrl = `${ENDPOINT}/${imageData}`;
+    $previewImage.src = imageUrl;
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 $imageInput.addEventListener("change", setPreviewImage);
@@ -110,15 +122,19 @@ async function updateProfile(event) {
     body: JSON.stringify({ user }),
   };
 
-  const res = await fetch(`${ENDPOINT}/user`, reqOption);
-  const json = await res.json();
-  if (json.status) {
-    alert(json.message);
-  } else {
-    // 새로운 accountname 갱신
-    const newAccountName = json.user.accountname;
-    localStorage.setItem("ACCOUNTNAME", newAccountName);
-    location.href = PROFILE_DETAIL_PATH;
+  try {
+    const res = await fetch(`${ENDPOINT}/user`, reqOption);
+    const json = await res.json();
+    if (json.status) {
+      alert(json.message);
+    } else {
+      // 새로운 accountname 갱신
+      const newAccountName = json.user.accountname;
+      localStorage.setItem("ACCOUNTNAME", newAccountName);
+      location.href = PROFILE_DETAIL_PATH;
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
 }
 
