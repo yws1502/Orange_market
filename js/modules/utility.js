@@ -11,7 +11,7 @@ export async function accessCheck () {
   const json = await res.json();
   // 접근 금지!
   if (!json.isValid) {
-    location.href = LOGIN_PATH;
+    location.replace(LOGIN_PATH);
   }
 }
 

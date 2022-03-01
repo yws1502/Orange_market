@@ -14,7 +14,6 @@ window.onload = async () => {
     headers: HEADERS_AUTH,
   };
   const res = await fetch(`${ENDPOINT}/post/feed?limit=40`, reqOption);
-  if (!res.ok) { location.href = NOT_FOUND_PATH; }
   const json = await res.json();
 
   if (json.posts.length === 0) {
