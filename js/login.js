@@ -1,5 +1,5 @@
-import { ENDPOINT, JOIN_PATH } from "./modules/path.js";
-import { HEADERS } from "./modules/constants.js";
+import { ENDPOINT, JOIN_PATH } from "./common/path.js";
+import { HEADERS, NOT_CONNECTED } from "./common/constants.js";
 
 
 const selectLogin = document.querySelector(".select-login");
@@ -67,23 +67,27 @@ async function loginApi(event) {
     body: JSON.stringify({user})
   };
 
-  const res = await fetch(`${ENDPOINT}/user/login`, reqOption);
-  const json = await res.json();
-
-  if (json.status === 422) {
-    // 화면에 에러 메세지 동적 생성
-    const pwdWrap = document.querySelector(".pwd-wrap");
-    const errorMsg = pwdWrap.querySelector(".err-msg");
-    pwdWrap.classList.add("err");
-    errorMsg.classList.remove("hidden");
-    errorMsg.textContent = `*${json.message}`;
-    alert(json.message);
-  } else {
-    // 토큰 저장 후 메인 피드 화면으로 이동
-    localStorage.setItem("TOKEN", json.user.token);
-    localStorage.setItem("ACCOUNTNAME", json.user.accountname);
-    localStorage.setItem("PROFILE_IMAGE", json.user.image);
-    location.href = "/";
+  try {
+    const res = await fetch(`${ENDPOINT}/user/login`, reqOption);
+    const json = await res.json();
+  
+    if (json.status === 422) {
+      // 화면에 에러 메세지 동적 생성
+      const pwdWrap = document.querySelector(".pwd-wrap");
+      const errorMsg = pwdWrap.querySelector(".err-msg");
+      pwdWrap.classList.add("err");
+      errorMsg.classList.remove("hidden");
+      errorMsg.textContent = `*${json.message}`;
+      alert(json.message);
+    } else {
+      // 토큰 저장 후 메인 피드 화면으로 이동
+      localStorage.setItem("TOKEN", json.user.token);
+      localStorage.setItem("ACCOUNTNAME", json.user.accountname);
+      localStorage.setItem("PROFILE_IMAGE", json.user.image);
+      location.href = "/";
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
 };
 

@@ -5,19 +5,20 @@ import {
   prevPage,
   timeForToday,
   showPage
-} from "./modules/utility.js";
+} from "./common/utility.js";
 import {
   ENDPOINT,
   POST_DETAIL_PATH,
   PROFILE_DETAIL_PATH,
   NOT_FOUND_PATH,
-} from "./modules/path.js";
+} from "./common/path.js";
 import {
   MY_ACCOUNTNAME,
   HEADERS_AUTH,
   SLIDE_WIDTH,
   SLIDE_MARGIN,
-} from "./modules/constants.js";
+  NOT_CONNECTED,
+} from "./common/constants.js";
 
 
 const $homePost = document.querySelector(".home-post");
@@ -36,11 +37,16 @@ window.onload = async () => {
     method: "GET",
     headers: HEADERS_AUTH,
   };
-  const postJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}`, reqOption);
-  const commentsJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}/comments`, reqOption);
+  try {
+    const postJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}`, reqOption);
+    const commentsJson = await getDataAPI(`${ENDPOINT}/post/${POSTID}/comments`, reqOption);
+  
+    paintPost(postJson.post);
+    paintComments(commentsJson.comments);
+  } catch {
+    location.href = NOT_FOUND_PATH;
+  }
 
-  paintPost(postJson.post);
-  paintComments(commentsJson.comments);
   showPage();
 };
 
@@ -175,17 +181,22 @@ async function heartAPI(route, method, POSTID, count) {
     method: method,
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(`${ENDPOINT}/post/${POSTID}/${route}`, reqOption);
-  const json = await res.json();
-  if (json.status === 404) {
-    alert("존재하지 않는 게시글입니다.");
-    location.href = NOT_FOUND_PATH;
-  }
-  const resultCount = (method === "POST")
-    ? +count + 1
-    : +count - 1;
+  try {
+    const res = await fetch(`${ENDPOINT}/post/${POSTID}/${route}`, reqOption);
+    const json = await res.json();
+    if (json.status === 404) {
+      alert("존재하지 않는 게시글입니다.");
+      location.href = NOT_FOUND_PATH;
+    }
 
-  return resultCount
+    const resultCount = (method === "POST")
+      ? +count + 1
+      : +count - 1;
+    return resultCount
+  } catch {
+    alert(NOT_CONNECTED);
+  }
+
 }
 
 
@@ -258,13 +269,17 @@ $commentForm.addEventListener("submit", async (event) => {
     headers: HEADERS_AUTH,
     body: JSON.stringify({ comment }),
   };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-
-  if (res.ok) {
-    location.href = `${POST_DETAIL_PATH}?id=${POSTID}`;
-  } else {
-    alert(json.message)
+  try {
+    const res = await fetch(URL, reqOption);
+    const json = await res.json();
+  
+    if (res.ok) {
+      location.href = `${POST_DETAIL_PATH}?id=${POSTID}`;
+    } else {
+      alert(json.message);
+    }
+  } catch {
+    alert(NOT_CONNECTED);
   }
 });
 
@@ -309,10 +324,14 @@ async function commentAPI(method, commentId, lastUrl=false) {
     method: method,
     headers: HEADERS_AUTH,
   };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-
-  alert(json.message);
+  try {
+    const res = await fetch(URL, reqOption);
+    const json = await res.json();
+  
+    alert(json.message);
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 

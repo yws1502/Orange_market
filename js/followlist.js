@@ -1,6 +1,6 @@
-import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
-import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
+import { ENDPOINT, PROFILE_DETAIL_PATH, NOT_FOUND_PATH } from "./common/path.js";
+import { HEADERS_AUTH } from "./common/constants.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./common/utility.js";
 
 accessCheck();
 
@@ -17,39 +17,43 @@ const currentPage = (accessPage === "follower")
 $Title.textContent = currentPage;
 
 window.onload = async () => {
-  const URL = `${ENDPOINT}/profile/${accessAccount}/${accessPage}`;
-  const reqOption = {
-    method: "GET",
-    headers: HEADERS_AUTH,
-  };
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
+  try {
+    const URL = `${ENDPOINT}/profile/${accessAccount}/${accessPage}`;
+    const reqOption = {
+      method: "GET",
+      headers: HEADERS_AUTH,
+    };
+    const res = await fetch(URL, reqOption);
+    const json = await res.json();
+    // user list 그려주기
+    json.forEach((el) => {
+      $followList.innerHTML += `
+        <li id=follow-${el._id} class="user-follow">
+          <a href="${PROFILE_DETAIL_PATH}?id=${el.accountname}">
+            <img src=${el.image} alt="프로필 사진">
+            <p>
+              <strong>${el.username}</strong>
+              <span>@ ${el.accountname}</span>
+            </p>
+          </a>
+          <button
+            type="button"
+            name="follow-btn"
+            data-account=${el.accountname}
+            class="s-button">팔로우</button>
+        </li>
+      `;
+      // 나랑 팔로우가 되어있는 경우
+      if (el.isfollow) {
+        const followBtn = document.querySelector(`#follow-${el._id} button`);
+        followBtn.classList.add("on");
+        followBtn.textContent = "취소";
+      }
+    });
+  } catch {
+    location.href = NOT_FOUND_PATH;
+  }
   
-  // user list 그려주기
-  json.forEach((el) => {
-    $followList.innerHTML += `
-      <li id=follow-${el._id} class="user-follow">
-        <a href="${PROFILE_DETAIL_PATH}?id=${el.accountname}">
-          <img src=${el.image} alt="프로필 사진">
-          <p>
-            <strong>${el.username}</strong>
-            <span>@ ${el.accountname}</span>
-          </p>
-        </a>
-        <button
-          type="button"
-          name="follow-btn"
-          data-account=${el.accountname}
-          class="s-button">팔로우</button>
-      </li>
-    `;
-    // 나랑 팔로우가 되어있는 경우
-    if (el.isfollow) {
-      const followBtn = document.querySelector(`#follow-${el._id} button`);
-      followBtn.classList.add("on");
-      followBtn.textContent = "취소";
-    }
-  });
   showPage();
 }
 

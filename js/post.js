@@ -1,6 +1,7 @@
-import { ENDPOINT, PROFILE_DETAIL_PATH } from "./modules/path.js";
-import { HEADERS_AUTH } from "./modules/constants.js";
-import { accessCheck, searchParam, prevPage, showPage } from "./modules/utility.js";
+import { ENDPOINT, PROFILE_DETAIL_PATH } from "./common/path.js";
+import { HEADERS_AUTH, NOT_CONNECTED } from "./common/constants.js";
+import { accessCheck, searchParam, prevPage, showPage } from "./common/utility.js";
+import { NOT_FOUND_PATH } from "./common/path.js";
 
 // access check function
 
@@ -23,21 +24,25 @@ if (POSTID) {
       method: "GET",
       headers: HEADERS_AUTH,
     };
-    const res = await fetch(URL, reqOption);
-    const json = await res.json();
-
-    // 잘못된 접근인 경우 경고 후 뒤로 가기
-    if (json.status === 404) {
-      alert(json.message);
-      history.back();
+    try {
+      const res = await fetch(URL, reqOption);
+      const json = await res.json();
+  
+      // 잘못된 접근인 경우 경고 후 뒤로 가기
+      if (json.status === 404) {
+        alert(json.message);
+        history.back();
+      }
+      const content = json.post.content;
+      const stringImage = json.post.image;
+      const images = stringImage.split(",");
+  
+      $textInput.value = content;
+      resizeHeight($textInput); // 높이 맞춰주기
+      paintPreviewImage(images)
+    } catch {
+      location.href = NOT_FOUND_PATH;
     }
-    const content = json.post.content;
-    const stringImage = json.post.image;
-    const images = stringImage.split(",");
-
-    $textInput.value = content;
-    resizeHeight($textInput); // 높이 맞춰주기
-    paintPreviewImage(images)
   }
 }
 showPage();
@@ -73,11 +78,14 @@ async function uploadImages(formData) {
     method: "POST",
     body: formData
   };
-
-  const res = await fetch(URL, reqOption);
-  const json = await res.json();
-  const result = json.map((file) => `${ENDPOINT}/${file.filename}`);
-  return result.join(",");
+  try {
+    const res = await fetch(URL, reqOption);
+    const json = await res.json();
+    const result = json.map((file) => `${ENDPOINT}/${file.filename}`);
+    return result.join(",");
+  } catch {
+    alert(NOT_CONNECTED);
+  }
 }
 
 // 이미지 뿌려주기 함수
@@ -166,12 +174,16 @@ $form.addEventListener("submit", async (event) => {
     content: $textInput.value,
     image: stringImageUrl
   };
-  if (POSTID) {
-    await uploadPost("PUT", post, POSTID);
-  } else {
-    await uploadPost("POST", post);
+  try {
+    if (POSTID) {
+      await uploadPost("PUT", post, POSTID);
+    } else {
+      await uploadPost("POST", post);
+    }
+    location.href = PROFILE_DETAIL_PATH;
+  } catch {
+    alert(NOT_CONNECTED);
   }
-  location.href = PROFILE_DETAIL_PATH;
 });
 
 // 서버에 올리기
