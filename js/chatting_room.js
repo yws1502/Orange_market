@@ -1,5 +1,5 @@
-import { prevPage, accessCheck, showPage } from "./modules/utility.js";
-import { CHATTING_LIST_PATH } from "./modules/path.js"
+import { prevPage, accessCheck, showPage } from "./common/utility.js";
+import { CHATTING_LIST_PATH } from "./common/path.js"
 
 
 accessCheck();
